@@ -14,6 +14,10 @@
         }
 
         body {
+    font-family: 'Apple Garamond Light', serif;
+        }
+
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Apple Garamond Light', serif;
@@ -37,6 +41,11 @@
         .container {
             position: relative;
             z-index: 20;
+        }
+
+        .content {
+            position: absolute;
+            color: #fff;
         }
 
         h1 {
@@ -85,17 +94,27 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
+        <div class="video-container" muted>
+            <source src="untitled.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="content">
             <h1>welbye</h1>
             <p>explore 9/20/24 n/atural</p>
             <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|</a>
             <p>ti^cket</p>
         </div>
-        <!-- Video that will play as a background on hover -->
-        <video class="video-container" muted>
-            <source src="Untitled.mp4" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.content > *:not(a)');
+            elements.forEach(el => {
+                el.style.position = 'absolute';
+                el.style.left = `${Math.random() * 100}vw`;
+                el.style.top = `${Math.random() * 100}vh`;
+            });
+        });
+    </script>
 </body>
 </html>
