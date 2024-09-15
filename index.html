@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A refined, intuitive, and minimalist website with video on hover">
+    <title>Birth of September</title>
+    <style>
+        @font-face {
+            font-family: 'Apple Garamond Light';
+            src: url('fonts/AppleGaramond-Light.ttf') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Apple Garamond Light', serif;
+            background: url('images/retro-galaxy-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wrapper {
+            position: relative;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .container {
+            position: relative;
+            z-index: 20;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            position: relative;
+            z-index: 10;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #1abc9c;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Show video when hovering over the .wrapper */
+        .wrapper:hover .video-container {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>welbye</h1>
+            <p>explore 9/20/24 n/atural</p>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|</a>
+            <p>ti^cket</p>
+        </div>
+        <!-- Video that will play as a background on hover -->
+        <video class="video-container" muted>
+            <source src="background-video.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+</body>
+</html>
