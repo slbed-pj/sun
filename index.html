@@ -26,19 +26,21 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
+            text-align: center;
         }
 
         .wrapper {
             position: relative;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .content {
             position: relative;
             z-index: 10;
-            text-align: center;
             width: 100%;
             height: 100%;
         }
@@ -62,10 +64,24 @@
             font-weight: bold;
             display: inline-block;
             transition: color 0.3s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         a:hover {
             color: #1abc9c;
+        }
+
+        .shiny-red {
+            color: #e74c3c;
+            text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
+            font-size: 4em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .video-container {
@@ -98,9 +114,9 @@
             Your browser does not support HTML5 video.
         </div>
         <div class="content">
-            <h1>welbye</h1>
+            <div class="shiny-red">SAN-KIN-CHU</div>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|2</a>
             <p>explore 9/20/24 n/atural</p>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|1</a>
             <p>ti^cket</p>
         </div>
     </div>
