@@ -58,9 +58,9 @@
             will-change: transform;
         }
 
-        /* Ruby Text Effect for SAN·KIN·CHU */
+        /* Brighter Ruby Text Effect for SAN·KIN·CHU */
         .ruby-text {
-            color: #b22222; /* Deep red as a base color */
+            color: #e60012; /* Bright ruby red as a base color */
             font-size: calc(5em + 2vw);
             font-weight: bold;
             text-transform: uppercase;
@@ -70,14 +70,14 @@
             display: inline-block;
             text-align: center;
             white-space: nowrap;
-            background: linear-gradient(135deg, #8B0000, #FF2400, #FF6347); /* Ruby gradient */
+            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f); /* Brighter ruby gradient */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow:
                 0 1px 3px rgba(0, 0, 0, 0.4), /* Soft shadow for depth */
-                0 0 25px rgba(255, 0, 0, 0.6), /* Glow for ruby shine */
-                0 0 50px rgba(255, 0, 0, 0.6);
+                0 0 30px rgba(255, 0, 0, 0.8), /* Enhanced ruby shine */
+                0 0 60px rgba(255, 0, 0, 0.8);
             animation: ruby-glow 5s infinite linear;
         }
 
@@ -85,18 +85,18 @@
         @keyframes ruby-glow {
             0% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 25px rgba(255, 0, 0, 0.6),
-                             0 0 50px rgba(255, 0, 0, 0.6);
+                             0 0 30px rgba(255, 0, 0, 0.8),
+                             0 0 60px rgba(255, 0, 0, 0.8);
             }
             50% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 35px rgba(255, 100, 100, 0.9),
-                             0 0 60px rgba(255, 100, 100, 1);
+                             0 0 45px rgba(255, 100, 100, 0.9),
+                             0 0 70px rgba(255, 100, 100, 1);
             }
             100% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 25px rgba(255, 0, 0, 0.6),
-                             0 0 50px rgba(255, 0, 0, 0.6);
+                             0 0 30px rgba(255, 0, 0, 0.8),
+                             0 0 60px rgba(255, 0, 0, 0.8);
             }
         }
 
@@ -161,8 +161,10 @@
 
     <script>
         // Variables for text movement
-        const speed = 6; // Doubled speed for more dynamic movement
+        const speed = 4; // Adjusted speed for smoother movement
         const repulsionDistance = 100; // Distance at which texts repel each other
+        const gravity = 0.05; // Gravitational force
+        const sanKinChuRadius = 150; // Radius around 'SAN·KIN·CHU' to avoid overlap
         let counterValue = 0.059;
 
         // Initialize the movement of the text elements
@@ -183,36 +185,19 @@
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
+            const sanKinChu = document.getElementById('san-kin-chu');
+            const sanKinChuRect = sanKinChu.getBoundingClientRect();
+            const sanKinChuCenterX = sanKinChuRect.left + sanKinChuRect.width / 2;
+            const sanKinChuCenterY = sanKinChuRect.top + sanKinChuRect.height / 2;
+
             const textObjects = Array.from(elements).map(el => {
                 return {
                     element: el,
                     x: parseFloat(el.style.left),
                     y: parseFloat(el.style.top),
-                    vx: 0, // Start with no initial velocity
-                    vy: 0
+                    vx: Math.random() * speed * 2 - speed,
+                    vy: Math.random() * speed * 2 - speed
                 };
-            });
-
-            // Prevent overlap with "SAN·KIN·CHU"
-            const sanKinChu = document.getElementById('san-kin-chu');
-            const sanRect = sanKinChu.getBoundingClientRect();
-
-            textObjects.forEach(text => {
-                const textRect = text.element.getBoundingClientRect();
-                if (
-                    textRect.left < sanRect.right &&
-                    textRect.right > sanRect.left &&
-                    textRect.top < sanRect.bottom &&
-                    textRect.bottom > sanRect.top
-                ) {
-                    // Repel text from "SAN·KIN·CHU"
-                    text.vx = Math.random() * speed * 2 - speed;
-                    text.vy = Math.random() * speed * 2 - speed;
-                } else {
-                    // Randomly set velocity for text outside "SAN·KIN·CHU"
-                    text.vx = Math.random() * speed * 2 - speed;
-                    text.vy = Math.random() * speed * 2 - speed;
-                }
             });
 
             function updatePositions() {
@@ -220,12 +205,26 @@
                     text.x += text.vx;
                     text.y += text.vy;
 
-                    // Bounce off edges
+                    // Apply gravity towards the center of 'SAN·KIN·CHU'
+                    const dx = sanKinChuCenterX - text.x;
+                    const dy = sanKinChuCenterY - text.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < sanKinChuRadius) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (sanKinChuRadius - distance) / sanKinChuRadius;
+                        text.vx += force * gravity * Math.cos(angle);
+                        text.vy += force * gravity * Math.sin(angle);
+                    }
+
+                    // Bounce off edges and reinforce right edge boundary
                     if (text.x <= 0 || text.x >= screenWidth) {
                         text.vx *= -1;
+                        text.x = Math.max(0, Math.min(text.x, screenWidth));
                     }
                     if (text.y <= 0 || text.y >= screenHeight) {
                         text.vy *= -1;
+                        text.y = Math.max(0, Math.min(text.y, screenHeight));
                     }
 
                     // Update element positions
@@ -253,9 +252,11 @@
                         }
                     }
                 }
+
+                requestAnimationFrame(updatePositions);
             }
 
-            setInterval(updatePositions, 1000 / 60); // 60 fps
+            updatePositions();
         }
 
         function updateCounter() {
