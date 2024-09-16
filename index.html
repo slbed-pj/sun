@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A refined, intuitive, and minimalist website with video on hover">
+    <meta name="description" content="The Future">
     <title>Birth of September</title>
     <style>
         @font-face {
@@ -48,19 +48,23 @@
             align-items: center;
             flex-direction: column;
             position: relative;
+            overflow: hidden;
         }
 
         h1, p {
             position: absolute;
             color: #fff;
+            white-space: nowrap;
         }
 
         h1 {
             font-size: 2.5em;
+            margin: 0;
         }
 
         p {
             font-size: 1.2em;
+            margin: 0;
         }
 
         a {
@@ -71,6 +75,7 @@
             transition: color 0.3s;
             position: relative;
             z-index: 20;
+            margin: 20px;
         }
 
         a:hover {
@@ -100,9 +105,40 @@
             opacity: 1;
         }
 
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .shiny-red {
+                font-size: 3em;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+
         @media (max-width: 768px) {
-            .content {
-                text-align: center;
+            .shiny-red {
+                font-size: 2.5em;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shiny-red {
+                font-size: 2em;
+            }
+            h1 {
+                font-size: 1.2em;
+            }
+            p {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -114,10 +150,10 @@
             Your browser does not support HTML5 video.
         </div>
         <div class="content">
-            <div class="shiny-red">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|3</a>
-            <p>explore 9/20/24 n/atural</p>
-            <p>ti^cket</p>
+            <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|4</a>
+            <p id="p1">explore 9/20/24 n/atural</p>
+            <p id="p2">ti^cket</p>
         </div>
     </div>
 
