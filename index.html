@@ -54,28 +54,36 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            animation: float 10s ease-in-out infinite;
+            animation: float-bounce 10s ease-in-out infinite;
         }
 
         h1 {
             font-size: 2.5em;
             margin: 0;
+            z-index: 5; /* Ensure it's above other elements */
         }
 
         p {
             font-size: 1.2em;
             margin: 0;
+            z-index: 5; /* Ensure it's above other elements */
         }
 
-        @keyframes float {
+        @keyframes float-bounce {
             0% {
-                transform: translate(0, 0);
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(calc(10vw - 5%), calc(10vh - 5%)) scale(1.1);
             }
             50% {
-                transform: translate(calc(10vw - 5%), calc(10vh - 5%));
+                transform: translate(calc(-10vw + 5%), calc(-10vh + 5%)) scale(0.9);
+            }
+            75% {
+                transform: translate(calc(10vw - 5%), calc(10vh - 5%)) scale(1.1);
             }
             100% {
-                transform: translate(0, 0);
+                transform: translate(0, 0) scale(1);
             }
         }
 
@@ -85,6 +93,7 @@
             font-size: 4em;
             margin-bottom: 20px;
             position: relative;
+            z-index: 10; /* Ensure it's above other elements */
         }
 
         .video-container {
@@ -103,76 +112,25 @@
             opacity: 1;
         }
 
-        /* Floating Field Effect for SAN-KIN-CHU */
-        .shiny-red::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(231, 76, 60, 0.3);
-            border-radius: 50%;
-            animation: repel 10s ease-in-out infinite;
-            pointer-events: none;
+        /* Styling for the link */
+        a {
+            text-decoration: none; /* Remove underline */
+            color: #007FFF; /* Azure Dragon Blue */
+            font-weight: normal;
+            display: inline-block;
+            position: relative;
+            z-index: 20;
+            transition: color 0.3s;
         }
 
-        @keyframes repel {
-            0% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .shiny-red {
-                font-size: 3em;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            p {
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .shiny-red {
-                font-size: 2.5em;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            p {
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .shiny-red {
-                font-size: 2em;
-            }
-            h1 {
-                font-size: 1.2em;
-            }
-            p {
-                font-size: 0.8em;
-            }
+        a:hover {
+            color: #007FFF; /* Azure Dragon Blue */
+            text-shadow: 0 0 8px #00BFFF, 0 0 16px #00BFFF, 0 0 24px #00BFFF; /* Slight glow effect */
         }
 
         /* Specific Style for the New Paragraph */
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
-            animation: float 10s ease-in-out infinite;
         }
     </style>
 </head>
@@ -194,17 +152,21 @@
     </div>
 
     <script>
-        // Function to animate text like leaves in the wind
-        function animateText() {
-            const elements = document.querySelectorAll('.content > p:not(a), .shiny-red');
+        function scatterElements() {
+            const elements = document.querySelectorAll('.content > p:not(a)');
             elements.forEach(el => {
                 const duration = Math.random() * (12 - 8) + 8; // Random duration between 8s and 12s
-                el.style.animation = `float ${duration}s ease-in-out infinite`;
+                el.style.animation = `float-bounce ${duration}s ease-in-out infinite`;
+                el.style.left = `${Math.random() * 100}vw`;
+                el.style.top = `${Math.random() * 100}vh`;
             });
         }
 
-        // Initial animation setup
-        animateText();
+        // Scatter elements immediately on load
+        scatterElements();
+
+        // Change positions every 1111 milliseconds (approximately 1.111 seconds)
+        setInterval(scatterElements, 1111);
     </script>
 </body>
 </html>
