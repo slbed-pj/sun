@@ -102,6 +102,7 @@
         /* Specific Style for the New Paragraph */
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
+            font-size: calc(1em + 1vw); /* Responsive font size */
         }
 
         /* Counter Style */
@@ -140,7 +141,7 @@
             <p id="p2" class="text-moving">ti^cket</p>
             <p id="price" class="text-moving">$22.99</p>
             <p id="site-message" class="text-moving">the website is !*$#*&</p>
-            <p id="ticket-warning">no really the ticket website is bad</p>
+            <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
         </div>
     </div>
 
@@ -154,7 +155,7 @@
 
     <script>
         // Variables for text movement
-        const speed = 3; // Increased speed for more dynamic movement
+        const speed = 6; // Doubled speed for more dynamic movement
         const repulsionDistance = 100; // Distance at which texts repel each other
         let counterValue = 0.059;
 
@@ -233,9 +234,40 @@
             document.getElementById('counter').innerText = counterValue.toFixed(3);
         }
 
+        // Function to make the ticket warning move
+        function moveTicketWarning() {
+            const element = document.getElementById('ticket-warning');
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+            let vx = Math.random() * speed * 2 - speed;
+            let vy = Math.random() * speed * 2 - speed;
+
+            function updatePosition() {
+                x += vx;
+                y += vy;
+
+                // Bounce off edges
+                if (x <= 0 || x >= window.innerWidth) {
+                    vx *= -1;
+                }
+                if (y <= 0 || y >= window.innerHeight) {
+                    vy *= -1;
+                }
+
+                // Apply position to the element
+                element.style.left = `${x}px`;
+                element.style.top = `${y}px`;
+
+                requestAnimationFrame(updatePosition);
+            }
+
+            updatePosition();
+        }
+
         // Initialize and start the movement
         initializeText();
         moveText();
+        moveTicketWarning();
         setInterval(updateCounter, 1000); // Update the counter every second
     </script>
 </body>
