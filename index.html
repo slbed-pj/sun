@@ -54,16 +54,31 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
+            animation: float 6s ease-in-out infinite;
         }
 
         h1 {
             font-size: 2.5em;
             margin: 0;
+            animation: float 8s ease-in-out infinite; /* Slower floating for h1 */
         }
 
         p {
             font-size: 1.2em;
             margin: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
 
         a {
@@ -86,6 +101,22 @@
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
             font-size: 4em;
             margin-bottom: 20px;
+            animation: repel 1.5s ease-in-out infinite;
+        }
+
+        @keyframes repel {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
+            }
+            50% {
+                transform: scale(1.1);
+                text-shadow: 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c, 0 0 25px #e74c3c;
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
+            }
         }
 
         .video-container {
@@ -144,6 +175,7 @@
         /* Specific Style for the New Paragraph */
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
+            animation: float 6s ease-in-out infinite;
         }
     </style>
 </head>
