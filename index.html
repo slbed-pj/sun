@@ -115,20 +115,6 @@
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
         }
-
-        /* Animation for floating movement */
-        @keyframes float-move {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(calc(100vw - 100%), calc(100vh - 100%));
-            }
-        }
-
-        .text-move {
-            animation: float-move 20s linear infinite;
-        }
     </style>
 </head>
 <body>
@@ -139,7 +125,7 @@
         </div>
         <div class="content">
             <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TI|FLY|KIT</a>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TIKIT</a>
             <p id="p1" class="text-move">explore 9/20/24 n/atural</p>
             <p id="p2" class="text-move">ti^cket</p>
             <p id="price" class="text-move">$22.99</p>
@@ -208,9 +194,43 @@
             setInterval(repulse, 50);
         }
 
-        // Initialize text position, animation, and magnetic repulsion
+        function moveText() {
+            const elements = document.querySelectorAll('.text-move');
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            const speed = 0.5; // Speed of the movement
+
+            elements.forEach(el => {
+                let posX = parseFloat(el.style.left) || window.innerWidth / 2;
+                let posY = parseFloat(el.style.top) || window.innerHeight / 2;
+                let velocityX = Math.random() * speed * 2 - speed;
+                let velocityY = Math.random() * speed * 2 - speed;
+
+                function updatePosition() {
+                    posX += velocityX;
+                    posY += velocityY;
+
+                    // Bounce off edges
+                    if (posX <= 0 || posX >= screenWidth) {
+                        velocityX *= -1;
+                    }
+                    if (posY <= 0 || posY >= screenHeight) {
+                        velocityY *= -1;
+                    }
+
+                    el.style.left = `${posX}px`;
+                    el.style.top = `${posY}px`;
+                    requestAnimationFrame(updatePosition);
+                }
+
+                updatePosition();
+            });
+        }
+
+        // Initialize text position, animation, magnetic repulsion, and continuous movement
         initializeText();
         applyMagneticRepulsion();
+        moveText();
     </script>
 </body>
 </html>
