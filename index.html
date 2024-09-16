@@ -29,15 +29,6 @@
             text-align: center;
         }
 
-        .wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .content {
             position: relative;
             z-index: 10;
@@ -161,8 +152,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
     <script>
-        const { Engine, Render, World, Bodies, Body, Events } = Matter;
-        
+        const { Engine, Render, World, Bodies, Body, Events, Vector } = Matter;
+
         // Initialize the Matter.js engine and renderer
         const engine = Engine.create();
         const world = engine.world;
@@ -177,34 +168,37 @@
             }
         });
 
-        // Add text elements as Matter.js bodies
-        const texts = document.querySelectorAll('.text-moving');
-        const textBodies = Array.from(texts).map(text => {
-            const bounds = text.getBoundingClientRect();
+        // Function to create a Matter.js body for text
+        function createTextBody(textElement) {
+            const bounds = textElement.getBoundingClientRect();
             const body = Bodies.rectangle(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, bounds.width, bounds.height, {
                 isStatic: false,
+                friction: 0,
+                restitution: 1, // Perfect bounciness
                 render: {
                     sprite: {
-                        texture: text.dataset.img
+                        texture: '' // No texture needed, using text directly
                     }
                 }
             });
             World.add(world, body);
             return body;
-        });
+        }
+
+        // Create Matter.js bodies for each text element
+        const texts = document.querySelectorAll('.text-moving');
+        const textBodies = Array.from(texts).map(createTextBody);
+
+        // Disable gravity for the SAN·KIN·CHU text
+        const sanKinChuBody = createTextBody(document.getElementById('san-kin-chu'));
+        sanKinChuBody.isStatic = true; // Make it static so it doesn't move
 
         // Function to animate text like stars
         function animateStars() {
             gsap.to(texts, {
                 duration: 5,
-                scale: 0.1,
-                opacity: 1,
-                ease: "power1.inOut",
                 repeat: -1,
                 yoyo: true,
-                stagger: {
-                    amount: 1
-                },
                 onUpdate: function() {
                     texts.forEach((text, index) => {
                         const body = textBodies[index];
@@ -214,37 +208,24 @@
                 }
             });
 
-            gsap.to(texts, {
-                duration: 5,
-                scale: 1.5,
-                ease: "power1.inOut",
-                repeat: -1,
-                yoyo: true,
-                stagger: {
-                    amount: 1
-                }
+            // Add physics-based movement
+            textBodies.forEach(body => {
+                Body.setVelocity(body, {
+                    x: (Math.random() - 0.5) * 2,
+                    y: (Math.random() - 0.5) * 2
+                });
             });
 
-            gsap.to(texts, {
-                duration: 5,
-                color: "#f00",
-                scale: 2,
-                repeat: -1,
-                yoyo: true,
-                stagger: {
-                    amount: 1
-                }
-            });
-
-            gsap.to(texts, {
-                duration: 5,
-                opacity: 0,
-                scale: 0,
-                repeat: -1,
-                yoyo: true,
-                stagger: {
-                    amount: 1
-                }
+            // Check for boundary collision and bounce off edges
+            Events.on(engine, 'beforeUpdate', () => {
+                textBodies.forEach(body => {
+                    if (body.position.x <= 0 || body.position.x >= window.innerWidth) {
+                        Body.setVelocity(body, { x: -body.velocity.x, y: body.velocity.y });
+                    }
+                    if (body.position.y <= 0 || body.position.y >= window.innerHeight) {
+                        Body.setVelocity(body, { x: body.velocity.x, y: -body.velocity.y });
+                    }
+                });
             });
         }
 
