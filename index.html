@@ -88,8 +88,7 @@
         a {
             text-decoration: none; /* Remove underline */
             color: #00A1D8; /* Azure Dragon Blue */
-            font-weight: bold; /* Make the text bold for more emphasis */
-            font-size: 2em; /* Increase font size */
+            font-weight: normal;
             display: inline-block;
             position: relative;
             z-index: 20;
@@ -97,15 +96,13 @@
         }
 
         a:hover {
-            color: #00A1D8; /* Keep the text color consistent on hover */
-            text-shadow: 0 0 20px #00A1D8, 0 0 30px #00A1D8, 0 0 40px #00A1D8, 0 0 50px #00A1D8; /* Enhanced glow effect */
+            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8; /* Enhanced glow effect */
         }
 
         /* Specific Style for the New Paragraph */
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
             font-size: calc(1em + 1vw); /* Responsive font size */
-            position: absolute; /* Make sure it's absolutely positioned for movement */
         }
 
         /* Counter Style */
@@ -131,11 +128,7 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="video-container">
-            <!-- Your video source goes here -->
-            <video src="videos/your-video.mp4" autoplay muted loop></video>
-        </div>
+
         <div class="content">
             <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
             <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKETS</a>
@@ -148,6 +141,7 @@
     </div>
 
     <p id="counter">0.059</p>
+
 
     <script>
         // Variables for text movement
@@ -260,11 +254,11 @@
             updatePosition();
         }
 
-        // Initialize elements
+        // Initialize and start the movement
         initializeText();
         moveText();
-        setInterval(updateCounter, 50); // Update counter every 50 milliseconds
         moveTicketWarning();
+        setInterval(updateCounter, 1000); // Update the counter every second
     </script>
 </body>
 </html>
