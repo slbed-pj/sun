@@ -54,46 +54,29 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            animation: float 6s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
         }
 
         h1 {
             font-size: 2.5em;
             margin: 0;
-            animation: float 8s ease-in-out infinite; /* Slower floating for h1 */
         }
 
         p {
             font-size: 1.2em;
             margin: 0;
-            animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
             0% {
-                transform: translateY(0);
+                transform: translate(0, 0);
             }
             50% {
-                transform: translateY(-15px);
+                transform: translate(calc(10vw - 5%), calc(10vh - 5%));
             }
             100% {
-                transform: translateY(0);
+                transform: translate(0, 0);
             }
-        }
-
-        a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-            display: inline-block;
-            transition: color 0.3s;
-            position: relative;
-            z-index: 20;
-            margin: 20px;
-        }
-
-        a:hover {
-            color: #1abc9c;
         }
 
         .shiny-red {
@@ -101,22 +84,7 @@
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
             font-size: 4em;
             margin-bottom: 20px;
-            animation: repel 1.5s ease-in-out infinite;
-        }
-
-        @keyframes repel {
-            0% {
-                transform: scale(1);
-                text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
-            }
-            50% {
-                transform: scale(1.1);
-                text-shadow: 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c, 0 0 25px #e74c3c;
-            }
-            100% {
-                transform: scale(1);
-                text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
-            }
+            position: relative;
         }
 
         .video-container {
@@ -133,6 +101,35 @@
 
         .wrapper:hover .video-container {
             opacity: 1;
+        }
+
+        /* Floating Field Effect for SAN-KIN-CHU */
+        .shiny-red::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(231, 76, 60, 0.3);
+            border-radius: 50%;
+            animation: repel 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes repel {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
         }
 
         /* Responsive Design */
@@ -175,7 +172,7 @@
         /* Specific Style for the New Paragraph */
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
-            animation: float 6s ease-in-out infinite;
+            animation: float 10s ease-in-out infinite;
         }
     </style>
 </head>
@@ -187,31 +184,27 @@
         </div>
         <div class="content">
             <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|</a>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKET</a>
             <p id="p1">explore 9/20/24 n/atural</p>
             <p id="p2">ti^cket</p>
             <p id="price">$22.99</p>
             <p id="site-message">the website is !*$#*&</p>
-            <p id="ticket-warning">no really the ticket website is bad</p> <!-- New Paragraph -->
+            <p id="ticket-warning">no really the ticket website is bad</p>
         </div>
     </div>
 
     <script>
-        function scatterElements() {
-            const elements = document.querySelectorAll('.content > *:not(a)');
+        // Function to animate text like leaves in the wind
+        function animateText() {
+            const elements = document.querySelectorAll('.content > p:not(a), .shiny-red');
             elements.forEach(el => {
-                const newLeft = Math.min(Math.max(Math.random() * 100, 0), 95) + 'vw'; // Ensure it's within bounds
-                const newTop = Math.min(Math.max(Math.random() * 100, 0), 95) + 'vh'; // Ensure it's within bounds
-                el.style.left = newLeft;
-                el.style.top = newTop;
+                const duration = Math.random() * (12 - 8) + 8; // Random duration between 8s and 12s
+                el.style.animation = `float ${duration}s ease-in-out infinite`;
             });
         }
 
-        // Scatter elements immediately on load
-        scatterElements();
-
-        // Change positions every 1111 milliseconds (approximately 1.111 seconds)
-        setInterval(scatterElements, 1111);
+        // Initial animation setup
+        animateText();
     </script>
 </body>
 </html>
