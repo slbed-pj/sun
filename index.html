@@ -88,15 +88,17 @@
         a {
             text-decoration: none; /* Remove underline */
             color: #00A1D8; /* Azure Dragon Blue */
-            font-weight: normal;
+            font-weight: bold; /* Make text bolder */
             display: inline-block;
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
+            font-size: calc(2em + 1vw); /* Increase size for more prominence */
+            text-shadow: 0 0 5px #00A1D8, 0 0 10px #00A1D8, 0 0 15px #00A1D8, 0 0 20px #00A1D8; /* Glow effect */
         }
 
         a:hover {
-            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8; /* Enhanced glow effect */
+            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8, 0 0 40px #00A1D8; /* Enhanced glow effect */
         }
 
         /* Specific Style for the New Paragraph */
@@ -129,19 +131,17 @@
 </head>
 <body>
 
-        <div class="content">
-            <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKETS</a>
-            <p id="p1" class="text-moving">explore 9/20/24 n/atural</p>
-            <p id="p2" class="text-moving">ti^cket</p>
-            <p id="price" class="text-moving">$22.99</p>
-            <p id="site-message" class="text-moving">the website is !*$#*&</p>
-            <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
-        </div>
+    <div class="content">
+        <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
+        <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKETS</a>
+        <p id="p1" class="text-moving">explore 9/20/24 n/atural</p>
+        <p id="p2" class="text-moving">ti^cket</p>
+        <p id="price" class="text-moving">$22.99</p>
+        <p id="site-message" class="text-moving">the website is !*$#*&</p>
+        <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
     </div>
 
     <p id="counter">0.059</p>
-
 
     <script>
         // Variables for text movement
