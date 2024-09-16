@@ -25,7 +25,6 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            position: relative;
             text-align: center;
         }
 
@@ -47,7 +46,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            position: relative;
             overflow: hidden;
         }
 
@@ -87,6 +85,7 @@
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
             font-size: 4em;
             margin-bottom: 20px;
+            animation: move 5s infinite alternate;
         }
 
         .video-container {
@@ -105,41 +104,28 @@
             opacity: 1;
         }
 
+        @keyframes move {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(calc(100vw - 100%)) translateY(calc(100vh - 100%)); }
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
-            .shiny-red {
-                font-size: 3em;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            p {
-                font-size: 1em;
-            }
+            .shiny-red { font-size: 3em; }
+            h1 { font-size: 2em; }
+            p { font-size: 1em; }
         }
 
         @media (max-width: 768px) {
-            .shiny-red {
-                font-size: 2.5em;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            p {
-                font-size: 0.9em;
-            }
+            .shiny-red { font-size: 2.5em; }
+            h1 { font-size: 1.5em; }
+            p { font-size: 0.9em; }
         }
 
         @media (max-width: 480px) {
-            .shiny-red {
-                font-size: 2em;
-            }
-            h1 {
-                font-size: 1.2em;
-            }
-            p {
-                font-size: 0.8em;
-            }
+            .shiny-red { font-size: 2em; }
+            h1 { font-size: 1.2em; }
+            p { font-size: 0.8em; }
         }
     </style>
 </head>
@@ -150,10 +136,12 @@
             Your browser does not support HTML5 video.
         </div>
         <div class="content">
-            <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|4</a>
+            <h1 class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</h1>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKET</a>
             <p id="p1">explore 9/20/24 n/atural</p>
             <p id="p2">ti^cket</p>
+            <p id="price">$22.99</p>
+            <p id="website-status">the website is !*$#*&</p>
         </div>
     </div>
 
@@ -166,11 +154,21 @@
             });
         }
 
-        // Scatter elements immediately on load
-        scatterElements();
+        function startScattering() {
+            scatterElements(); // Initial scatter
+            let cycleCount = 0;
 
-        // Change positions every 1111 milliseconds (approximately 1.111 seconds)
-        setInterval(scatterElements, 1111);
+            setInterval(() => {
+                scatterElements();
+                cycleCount++;
+                if (cycleCount % 3 === 0) {
+                    const breakDuration = Math.random() * 3000 + 3000; // Between 3000ms and 6000ms
+                    setTimeout(scatterElements, breakDuration);
+                }
+            }, 1111);
+        }
+
+        startScattering();
     </script>
 </body>
 </html>
