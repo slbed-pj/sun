@@ -67,17 +67,19 @@
 
         a {
             text-decoration: none;
-            color: #3498db;
+            color: #f1c40f; /* Soft gold color */
             font-weight: bold;
             display: inline-block;
-            transition: color 0.3s;
+            transition: color 0.3s, text-shadow 0.3s;
             position: relative;
             z-index: 20;
             margin: 20px;
+            font-size: 1.5em;
         }
 
         a:hover {
-            color: #1abc9c;
+            color: #f39c12; /* Slightly darker gold for hover effect */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
         }
 
         .shiny-red {
@@ -158,14 +160,18 @@
             scatterElements(); // Initial scatter
             let cycleCount = 0;
 
-            setInterval(() => {
+            function cycle() {
                 scatterElements();
                 cycleCount++;
                 if (cycleCount % 3 === 0) {
                     const breakDuration = Math.random() * 3000 + 3000; // Between 3000ms and 6000ms
-                    setTimeout(scatterElements, breakDuration);
+                    setTimeout(cycle, breakDuration);
+                } else {
+                    setTimeout(cycle, 1111);
                 }
-            }, 1111);
+            }
+
+            cycle();
         }
 
         startScattering();
