@@ -54,43 +54,26 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            animation: float-bounce 10s ease-in-out infinite;
+            will-change: transform;
+            font-size: calc(1em + 1vw); /* Responsive font size */
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: calc(2em + 2vw);
             margin: 0;
             z-index: 5; /* Ensure it's above other elements */
         }
 
         p {
-            font-size: 1.2em;
+            font-size: calc(1em + 1vw);
             margin: 0;
             z-index: 5; /* Ensure it's above other elements */
-        }
-
-        @keyframes float-bounce {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(calc(10vw - 5%), calc(10vh - 5%)) scale(1.1);
-            }
-            50% {
-                transform: translate(calc(-10vw + 5%), calc(-10vh + 5%)) scale(0.9);
-            }
-            75% {
-                transform: translate(calc(10vw - 5%), calc(10vh - 5%)) scale(1.1);
-            }
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
         }
 
         .shiny-red {
             color: #e74c3c;
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
-            font-size: 4em;
+            font-size: calc(4em + 2vw); /* Responsive size */
             margin-bottom: 20px;
             position: relative;
             z-index: 10; /* Ensure it's above other elements */
@@ -156,20 +139,31 @@
             const elements = document.querySelectorAll('.content > p:not(a)');
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
+            const sanKinChu = document.getElementById('san-kin-chu');
+
             elements.forEach(el => {
-                // Initial scattering from the center
                 el.style.position = 'absolute';
                 el.style.left = `${centerX}px`;
                 el.style.top = `${centerY}px`;
-                el.style.transition = 'transform 2s ease-out';
-                
+                el.style.transform = `translate(-50%, -50%)`;
+
+                // Scattering effect
                 setTimeout(() => {
-                    el.style.transform = `translate(${(Math.random() - 0.5) * 100}vw, ${(Math.random() - 0.5) * 100}vh)`;
-                }, 100); // Delay for initial scattering
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distance = Math.random() * 50 + 50; // Random distance
+                    el.style.transition = 'transform 2s ease-out';
+                    el.style.transform = `translate(${centerX + distance * Math.cos(angle) - centerX}px, ${centerY + distance * Math.sin(angle) - centerY}px)`;
+                }, 100); // Initial scatter delay
 
                 // Controlled flow animation
-                el.style.animation = 'float-bounce 20s ease-in-out infinite';
+                setTimeout(() => {
+                    el.style.transition = 'transform 20s linear infinite';
+                    el.style.animation = 'float-bounce 20s linear infinite';
+                }, 2100); // Delay for smooth transition into controlled flow
             });
+
+            // Scaling SAN-KIN-CHU based on viewport size
+            sanKinChu.style.fontSize = `calc(4em + 2vw)`;
         }
 
         // Initialize text position and animation
