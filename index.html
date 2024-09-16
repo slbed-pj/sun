@@ -17,8 +17,9 @@
             margin: 0;
             padding: 0;
             font-family: 'Apple Garamond Light', serif;
-            background: linear-gradient(180deg, #2c003e, #5b2a77); /* Transition from purgatory to rebirth */
-            color: #fff;
+            background: url('images/smac.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -53,11 +54,11 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            font-size: calc(1.2em + 1vw);
+            font-size: calc(1.2em + 1vw); /* Enhanced responsive font size */
             will-change: transform;
-            transition: opacity 0.5s ease-in-out;
         }
 
+        /* Brighter Ruby Text Effect for SAN·KIN·CHU */
         .ruby-text {
             color: #e60012; /* Bright ruby red */
             font-size: calc(5em + 2vw);
@@ -69,13 +70,13 @@
             display: inline-block;
             text-align: center;
             white-space: nowrap;
-            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f); /* Glowing ruby gradient */
+            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f); /* Brighter ruby gradient */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.4), /* Depth */
-                0 0 20px rgba(255, 0, 0, 0.8), /* Ruby glow */
+                0 1px 3px rgba(0, 0, 0, 0.4), /* Soft shadow for depth */
+                0 0 20px rgba(255, 0, 0, 0.8), /* Enhanced ruby glow */
                 0 0 40px rgba(255, 0, 0, 0.8);
             animation: ruby-glow 5s infinite linear;
         }
@@ -98,163 +99,181 @@
             }
         }
 
+        /* Styling for the link */
         a {
-            text-decoration: none;
+            text-decoration: none; /* Remove underline */
             color: #00A1D8; /* Azure Dragon Blue */
-            font-weight: bold;
+            font-weight: bold; /* Make text bolder */
             display: inline-block;
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: calc(2em + 1vw);
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8; /* Jewel-like shine */
+            font-size: calc(2em + 1vw); /* Increase size for more prominence */
+            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8; /* Subtle jewel-like shine effect */
         }
 
         a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8; /* Enhanced shine on hover */
+            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8; /* Slightly enhanced shine on hover */
         }
 
+        /* Specific Style for the New Paragraph */
         #ticket-warning {
-            color: #dcdcdc; /* Lighter color */
-            font-size: calc(1em + 1vw);
+            color: #dcdcdc; /* Slightly lighter color */
+            font-size: calc(1em + 1vw); /* Responsive font size */
         }
 
-        .easter-egg {
-            display: none;
-            position: absolute;
-            color: #ff0;
-            font-size: calc(1em + 1vw);
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .easter-egg.active {
-            display: block;
-            opacity: 1;
-        }
-
+        /* Counter Style */
         #counter {
             position: fixed;
             bottom: 10px;
             left: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.5em;
-            color: #6c757d;
-            background: rgba(0, 0, 0, 0.7);
+            font-size: 1.5em; /* Enhanced size for clarity */
+            color: #6c757d; /* Grey military style */
+            background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
             padding: 10px;
             border-radius: 10px;
         }
 
+        /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em;
-                white-space: nowrap;
+                font-size: 3em; /* Adjust size for mobile */
+                white-space: nowrap; /* Prevent wrapping */
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <div class="content">
-            <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/">TICKETS HERE</a>
-            <p id="p1" class="text-moving">explore 9/20/24 n/atural</p>
-            <p id="p2" class="text-moving">click ti^ckets here</p>
-            <p id="price" class="text-moving">$22.99</p>
-            <p id="site-message" class="text-moving">the website is !*$#*&</p>
-            <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
-
-            <!-- Easter egg elements -->
-            <p id="easter-egg-1" class="easter-egg">Congratulations! You've discovered an Easter egg!</p>
-            <p id="easter-egg-2" class="easter-egg">Look closely at the text for hidden messages.</p>
-        </div>
+    <div class="content">
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
+        <a href="https://posh.vip/e/king-of-the-hill-showcase/">TICKETS HERE</a>
+        <p id="p1" class="text-moving">explore 9/20/24 n/atural</p>
+        <p id="p2" class="text-moving">click ti^ckets here</p>
+        <p id="price" class="text-moving">$22.99</p>
+        <p id="site-message" class="text-moving">the website is !*$#*&</p>
+        <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
     </div>
 
-    <p id="counter">0.000</p>
+    <p id="counter">0.059</p>
 
     <script>
-        // Variables
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        const sanKinChu = document.getElementById('san-kin-chu');
-        const sanKinChuRect = sanKinChu.getBoundingClientRect();
-        const sanKinChuCenterX = sanKinChuRect.left + sanKinChuRect.width / 2;
-        const sanKinChuCenterY = sanKinChuRect.top + sanKinChuRect.height / 2;
-        const repulsionDistance = 150;
-        const repulsionRadius = 100;
-        const textObjects = [];
+        // Variables for text movement
+        const speed = 4; // Adjusted speed for smoother movement
+        const repulsionDistance = 100; // Distance at which texts repel each other
+        const repulsionRadius = 150; // Radius for repulsion effect around 'SAN·KIN·CHU'
+        const gravity = 0.0; // Set gravity to 0 for repulsion only
+        let counterValue = 0.059;
 
-        // Initialize text objects
+        // Initialize the movement of the text elements
         function initializeText() {
-            const texts = document.querySelectorAll('.text-moving');
-            texts.forEach(text => {
-                const rect = text.getBoundingClientRect();
-                textObjects.push({
-                    element: text,
-                    x: rect.left + rect.width / 2,
-                    y: rect.top + rect.height / 2,
-                    vx: (Math.random() - 0.5) * 2,
-                    vy: (Math.random() - 0.5) * 2,
-                    width: rect.width,
-                    height: rect.height
-                });
+            const elements = document.querySelectorAll('.text-moving');
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            elements.forEach(el => {
+                el.style.left = `${centerX}px`;  // Center horizontally
+                el.style.top = `${centerY}px`;   // Center vertically
             });
         }
 
-        // Animate text movement
+        // Function to move text elements and handle edge bouncing
         function moveText() {
-            textObjects.forEach(obj => {
-                // Apply repulsion effect
-                const dx = obj.x - sanKinChuCenterX;
-                const dy = obj.y - sanKinChuCenterY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+            const elements = document.querySelectorAll('.text-moving');
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
 
-                if (distance < repulsionDistance) {
-                    const force = (repulsionDistance - distance) / repulsionRadius;
-                    obj.vx += (dx / distance) * force;
-                    obj.vy += (dy / distance) * force;
+            const sanKinChu = document.getElementById('san-kin-chu');
+            const sanKinChuRect = sanKinChu.getBoundingClientRect();
+            const sanKinChuCenterX = sanKinChuRect.left + sanKinChuRect.width / 2;
+            const sanKinChuCenterY = sanKinChuRect.top + sanKinChuRect.height / 2;
+
+            const textObjects = Array.from(elements).map(el => {
+                const rect = el.getBoundingClientRect();
+                return {
+                    element: el,
+                    x: rect.left + (rect.width / 2),
+                    y: rect.top + (rect.height / 2),
+                    width: rect.width,
+                    height: rect.height,
+                    vx: Math.random() * speed * 2 - speed,
+                    vy: Math.random() * speed * 2 - speed
+                };
+            });
+
+            function updatePositions() {
+                textObjects.forEach(text => {
+                    text.x += text.vx;
+                    text.y += text.vy;
+
+                    // Apply repulsion effect from SAN·KIN·CHU
+                    const dx = sanKinChuCenterX - text.x;
+                    const dy = sanKinChuCenterY - text.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < repulsionRadius) {
+                        const angle = Math.atan2(dy, dx);
+                        const force = (repulsionRadius - distance) / repulsionRadius;
+                        text.vx += force * gravity * Math.cos(angle);
+                        text.vy += force * gravity * Math.sin(angle);
+                    }
+
+                    // Bounce off edges and reinforce borders
+                    if (text.x - text.width / 2 <= 0 || text.x + text.width / 2 >= screenWidth) {
+                        text.vx *= -1;
+                        text.x = Math.max(text.width / 2, Math.min(text.x, screenWidth - text.width / 2));
+                    }
+                    if (text.y - text.height / 2 <= 0 || text.y + text.height / 2 >= screenHeight) {
+                        text.vy *= -1;
+                        text.y = Math.max(text.height / 2, Math.min(text.y, screenHeight - text.height / 2));
+                    }
+
+                    // Update element positions
+                    text.element.style.left = `${text.x - text.width / 2}px`;
+                    text.element.style.top = `${text.y - text.height / 2}px`;
+                });
+
+                // Handle repulsion between text elements
+                for (let i = 0; i < textObjects.length; i++) {
+                    for (let j = i + 1; j < textObjects.length; j++) {
+                        const text1 = textObjects[i];
+                        const text2 = textObjects[j];
+
+                        const dx = text2.x - text1.x;
+                        const dy = text2.y - text1.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < repulsionDistance) {
+                            const angle = Math.atan2(dy, dx);
+                            const force = 0.05 * (repulsionDistance - distance) / repulsionDistance;
+                            text1.vx -= force * Math.cos(angle);
+                            text1.vy -= force * Math.sin(angle);
+                            text2.vx += force * Math.cos(angle);
+                            text2.vy += force * Math.sin(angle);
+                        }
+                    }
                 }
 
-                // Update position
-                obj.x += obj.vx;
-                obj.y += obj.vy;
+                requestAnimationFrame(updatePositions);
+            }
 
-                // Bounce off edges
-                if (obj.x < 0 || obj.x > screenWidth) obj.vx *= -1;
-                if (obj.y < 0 || obj.y > screenHeight) obj.vy *= -1;
-
-                // Update element position
-                obj.element.style.left = `${obj.x - (obj.width / 2)}px`;
-                obj.element.style.top = `${obj.y - (obj.height / 2)}px`;
-            });
+            updatePositions();
         }
 
-        // Initialize and animate text
-        initializeText();
-        setInterval(moveText, 20);
-
-        // Handle Easter egg visibility
-        function checkEasterEggs() {
-            const easterEggs = document.querySelectorAll('.easter-egg');
-            easterEggs.forEach((egg, index) => {
-                if (Math.random() > 0.95) { // 5% chance of displaying an Easter egg
-                    egg.classList.add('active');
-                }
-            });
-        }
-
-        // Update the counter value
-        let counterValue = 0;
         function updateCounter() {
-            counterValue += 0.001;
-            document.getElementById('counter').textContent = counterValue.toFixed(3);
+            const counter = document.getElementById('counter');
+            counter.textContent = counterValue.toFixed(3); // Keep counter value to 3 decimal places
+            counterValue += 0.001; // Increment counter value
+            setTimeout(updateCounter, 1000); // Update counter every second
         }
 
-        // Initialize Easter eggs and counter update
-        setInterval(() => {
-            checkEasterEggs();
-            updateCounter();
-        }, 5000);
+        // Initialization
+        initializeText();
+        moveText();
+        updateCounter();
     </script>
 </body>
 </html>
+
+
