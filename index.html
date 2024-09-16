@@ -146,8 +146,9 @@
 
     <script>
         // Variables for text movement
-        const speed = 2; // Speed of the text movement
-        const repulsionDistance = 100; // Distance at which texts repel each other
+        const speedMultiplier = 5; // Increased speed
+        const repulsionDistance = 150; // Increased repulsion distance
+        const repulsionStrength = 0.3; // Increased repulsion strength
         let counterValue = 0.059;
 
         // Initialize the movement of the text elements
@@ -170,8 +171,8 @@
                     element: el,
                     x: parseFloat(el.style.left),
                     y: parseFloat(el.style.top),
-                    vx: Math.random() * speed * 2 - speed,
-                    vy: Math.random() * speed * 2 - speed
+                    vx: (Math.random() * 2 - 1) * speedMultiplier,
+                    vy: (Math.random() * 2 - 1) * speedMultiplier
                 };
             });
 
@@ -193,7 +194,7 @@
                     text.element.style.top = `${text.y}px`;
                 });
 
-                // Repel each other
+                // Repel each other with stronger force
                 textObjects.forEach(text1 => {
                     textObjects.forEach(text2 => {
                         if (text1 !== text2) {
@@ -203,7 +204,7 @@
 
                             if (distance < repulsionDistance) {
                                 const angle = Math.atan2(dy, dx);
-                                const force = (repulsionDistance - distance) / repulsionDistance;
+                                const force = (repulsionDistance - distance) * repulsionStrength;
                                 text1.vx += force * Math.cos(angle);
                                 text1.vy += force * Math.sin(angle);
                                 text2.vx -= force * Math.cos(angle);
