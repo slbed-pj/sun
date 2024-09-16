@@ -60,7 +60,7 @@
 
         /* Brighter Ruby Text Effect for SAN·KIN·CHU */
         .ruby-text {
-            color: #e60012; /* Bright ruby red as a base color */
+            color: #e60012; /* Bright ruby red */
             font-size: calc(5em + 2vw);
             font-weight: bold;
             text-transform: uppercase;
@@ -76,27 +76,26 @@
             color: transparent;
             text-shadow:
                 0 1px 3px rgba(0, 0, 0, 0.4), /* Soft shadow for depth */
-                0 0 30px rgba(255, 0, 0, 0.8), /* Enhanced ruby shine */
-                0 0 60px rgba(255, 0, 0, 0.8);
+                0 0 20px rgba(255, 0, 0, 0.8), /* Enhanced ruby glow */
+                0 0 40px rgba(255, 0, 0, 0.8);
             animation: ruby-glow 5s infinite linear;
         }
 
-        /* Adding a shine animation */
         @keyframes ruby-glow {
             0% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 30px rgba(255, 0, 0, 0.8),
-                             0 0 60px rgba(255, 0, 0, 0.8);
+                             0 0 20px rgba(255, 0, 0, 0.8),
+                             0 0 40px rgba(255, 0, 0, 0.8);
             }
             50% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 45px rgba(255, 100, 100, 0.9),
-                             0 0 70px rgba(255, 100, 100, 1);
+                             0 0 30px rgba(255, 100, 100, 0.9),
+                             0 0 60px rgba(255, 100, 100, 1);
             }
             100% {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 30px rgba(255, 0, 0, 0.8),
-                             0 0 60px rgba(255, 0, 0, 0.8);
+                             0 0 20px rgba(255, 0, 0, 0.8),
+                             0 0 40px rgba(255, 0, 0, 0.8);
             }
         }
 
@@ -163,8 +162,8 @@
         // Variables for text movement
         const speed = 4; // Adjusted speed for smoother movement
         const repulsionDistance = 100; // Distance at which texts repel each other
-        const gravity = 0.05; // Gravitational force
-        const sanKinChuRadius = 150; // Radius around 'SAN·KIN·CHU' to avoid overlap
+        const repulsionRadius = 150; // Radius for repulsion effect around 'SAN·KIN·CHU'
+        const gravity = 0.0; // Set gravity to 0 for repulsion only
         let counterValue = 0.059;
 
         // Initialize the movement of the text elements
@@ -191,10 +190,13 @@
             const sanKinChuCenterY = sanKinChuRect.top + sanKinChuRect.height / 2;
 
             const textObjects = Array.from(elements).map(el => {
+                const rect = el.getBoundingClientRect();
                 return {
                     element: el,
-                    x: parseFloat(el.style.left),
-                    y: parseFloat(el.style.top),
+                    x: rect.left + (rect.width / 2),
+                    y: rect.top + (rect.height / 2),
+                    width: rect.width,
+                    height: rect.height,
                     vx: Math.random() * speed * 2 - speed,
                     vy: Math.random() * speed * 2 - speed
                 };
@@ -205,31 +207,31 @@
                     text.x += text.vx;
                     text.y += text.vy;
 
-                    // Apply gravity towards the center of 'SAN·KIN·CHU'
+                    // Apply repulsion effect from SAN·KIN·CHU
                     const dx = sanKinChuCenterX - text.x;
                     const dy = sanKinChuCenterY - text.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < sanKinChuRadius) {
+                    if (distance < repulsionRadius) {
                         const angle = Math.atan2(dy, dx);
-                        const force = (sanKinChuRadius - distance) / sanKinChuRadius;
+                        const force = (repulsionRadius - distance) / repulsionRadius;
                         text.vx += force * gravity * Math.cos(angle);
                         text.vy += force * gravity * Math.sin(angle);
                     }
 
-                    // Bounce off edges and reinforce right edge boundary
-                    if (text.x <= 0 || text.x >= screenWidth) {
+                    // Bounce off edges and reinforce borders
+                    if (text.x - text.width / 2 <= 0 || text.x + text.width / 2 >= screenWidth) {
                         text.vx *= -1;
-                        text.x = Math.max(0, Math.min(text.x, screenWidth));
+                        text.x = Math.max(text.width / 2, Math.min(text.x, screenWidth - text.width / 2));
                     }
-                    if (text.y <= 0 || text.y >= screenHeight) {
+                    if (text.y - text.height / 2 <= 0 || text.y + text.height / 2 >= screenHeight) {
                         text.vy *= -1;
-                        text.y = Math.max(0, Math.min(text.y, screenHeight));
+                        text.y = Math.max(text.height / 2, Math.min(text.y, screenHeight - text.height / 2));
                     }
 
                     // Update element positions
-                    text.element.style.left = `${text.x}px`;
-                    text.element.style.top = `${text.y}px`;
+                    text.element.style.left = `${text.x - text.width / 2}px`;
+                    text.element.style.top = `${text.y - text.height / 2}px`;
                 });
 
                 // Handle repulsion between text elements
