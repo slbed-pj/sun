@@ -168,9 +168,12 @@
         // Initialize the movement of the text elements
         function initializeText() {
             const elements = document.querySelectorAll('.text-moving');
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
             elements.forEach(el => {
-                el.style.left = `${Math.random() * window.innerWidth}px`;
-                el.style.top = `${Math.random() * window.innerHeight}px`;
+                el.style.left = `${centerX}px`;  // Center horizontally
+                el.style.top = `${centerY}px`;   // Center vertically
             });
         }
 
@@ -185,9 +188,31 @@
                     element: el,
                     x: parseFloat(el.style.left),
                     y: parseFloat(el.style.top),
-                    vx: Math.random() * speed * 2 - speed,
-                    vy: Math.random() * speed * 2 - speed
+                    vx: 0, // Start with no initial velocity
+                    vy: 0
                 };
+            });
+
+            // Prevent overlap with "SAN·KIN·CHU"
+            const sanKinChu = document.getElementById('san-kin-chu');
+            const sanRect = sanKinChu.getBoundingClientRect();
+
+            textObjects.forEach(text => {
+                const textRect = text.element.getBoundingClientRect();
+                if (
+                    textRect.left < sanRect.right &&
+                    textRect.right > sanRect.left &&
+                    textRect.top < sanRect.bottom &&
+                    textRect.bottom > sanRect.top
+                ) {
+                    // Repel text from "SAN·KIN·CHU"
+                    text.vx = Math.random() * speed * 2 - speed;
+                    text.vy = Math.random() * speed * 2 - speed;
+                } else {
+                    // Randomly set velocity for text outside "SAN·KIN·CHU"
+                    text.vx = Math.random() * speed * 2 - speed;
+                    text.vy = Math.random() * speed * 2 - speed;
+                }
             });
 
             function updatePositions() {
@@ -203,40 +228,47 @@
                         text.vy *= -1;
                     }
 
-                    // Apply position to the element
+                    // Update element positions
                     text.element.style.left = `${text.x}px`;
                     text.element.style.top = `${text.y}px`;
                 });
 
-                // Repel each other
-                textObjects.forEach(text1 => {
-                    textObjects.forEach(text2 => {
-                        if (text1 !== text2) {
-                            const dx = text1.x - text2.x;
-                            const dy = text1.y - text2.y;
-                            const distance = Math.sqrt(dx * dx + dy * dy);
+                // Handle repulsion between text elements
+                for (let i = 0; i < textObjects.length; i++) {
+                    for (let j = i + 1; j < textObjects.length; j++) {
+                        const text1 = textObjects[i];
+                        const text2 = textObjects[j];
 
-                            if (distance < repulsionDistance) {
-                                const angle = Math.atan2(dy, dx);
-                                const force = (repulsionDistance - distance) / repulsionDistance;
-                                text1.vx += force * Math.cos(angle);
-                                text1.vy += force * Math.sin(angle);
-                                text2.vx -= force * Math.cos(angle);
-                                text2.vy -= force * Math.sin(angle);
-                            }
+                        const dx = text2.x - text1.x;
+                        const dy = text2.y - text1.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < repulsionDistance) {
+                            const angle = Math.atan2(dy, dx);
+                            const force = 0.05 * (repulsionDistance - distance) / repulsionDistance;
+                            text1.vx -= force * Math.cos(angle);
+                            text1.vy -= force * Math.sin(angle);
+                            text2.vx += force * Math.cos(angle);
+                            text2.vy += force * Math.sin(angle);
                         }
-                    });
-                });
-
-                requestAnimationFrame(updatePositions);
+                    }
+                }
             }
 
-            updatePositions();
+            setInterval(updatePositions, 1000 / 60); // 60 fps
         }
 
-        // Initialize text positions and start movement
+        function updateCounter() {
+            const counter = document.getElementById('counter');
+            counter.textContent = counterValue.toFixed(3); // Keep counter value to 3 decimal places
+            counterValue += 0.001; // Increment counter value
+            setTimeout(updateCounter, 1000); // Update counter every second
+        }
+
+        // Initialization
         initializeText();
         moveText();
+        updateCounter();
     </script>
 </body>
 </html>
