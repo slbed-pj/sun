@@ -43,6 +43,11 @@
             z-index: 10;
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
         }
 
         h1, p {
@@ -64,10 +69,8 @@
             font-weight: bold;
             display: inline-block;
             transition: color 0.3s;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            z-index: 20;
         }
 
         a:hover {
@@ -78,10 +81,7 @@
             color: #e74c3c;
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
             font-size: 4em;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-bottom: 20px;
         }
 
         .video-container {
@@ -115,20 +115,26 @@
         </div>
         <div class="content">
             <div class="shiny-red">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|2</a>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|3</a>
             <p>explore 9/20/24 n/atural</p>
             <p>ti^cket</p>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function scatterElements() {
             const elements = document.querySelectorAll('.content > *:not(a)');
             elements.forEach(el => {
                 el.style.left = `${Math.random() * 100}vw`;
                 el.style.top = `${Math.random() * 100}vh`;
             });
-        });
+        }
+
+        // Scatter elements immediately on load
+        scatterElements();
+
+        // Change positions every 1111 milliseconds (approximately 1.111 seconds)
+        setInterval(scatterElements, 1111);
     </script>
 </body>
 </html>
