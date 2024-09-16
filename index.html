@@ -67,7 +67,7 @@
 
         a {
             text-decoration: none;
-            color: #f1c40f; /* Soft gold color */
+            color: #3498db; /* Original link color */
             font-weight: bold;
             display: inline-block;
             transition: color 0.3s, text-shadow 0.3s;
@@ -78,8 +78,8 @@
         }
 
         a:hover {
-            color: #f39c12; /* Slightly darker gold for hover effect */
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6);
+            color: #1abc9c; /* Slightly darker color for hover effect */
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
         }
 
         .shiny-red {
@@ -87,7 +87,7 @@
             text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
             font-size: 4em;
             margin-bottom: 20px;
-            animation: move 5s infinite alternate;
+            /* Removed animation for "SAN-KIN-CHU" */
         }
 
         .video-container {
@@ -104,11 +104,6 @@
 
         .wrapper:hover .video-container {
             opacity: 1;
-        }
-
-        @keyframes move {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(calc(100vw - 100%)) translateY(calc(100vh - 100%)); }
         }
 
         /* Responsive Design */
