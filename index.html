@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Future">
     <title>Birth of September</title>
     <style>
         @font-face {
@@ -141,54 +142,6 @@
                 white-space: nowrap; /* Prevent wrapping */
             }
         }
-
-        /* Purgatory and Rebirth Animation */
-        .element {
-            position: absolute;
-            color: #fff;
-            font-family: 'Apple Garamond Light', serif;
-            font-size: 5em;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 2s, transform 2s;
-        }
-
-        .element.rebirth {
-            color: #ff6f6f; /* Bright color for rebirth */
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        @keyframes decay {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-        }
-
-        @keyframes rebirth {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        #purgatory {
-            animation: decay 10s infinite;
-        }
-
-        #rebirth {
-            animation: rebirth 10s infinite;
-            animation-delay: 5s; /* Delay to start after purgatory */
-        }
     </style>
 </head>
 <body>
@@ -200,119 +153,116 @@
         <p id="price" class="text-moving">$22.99</p>
         <p id="site-message" class="text-moving">the website is !*$#*&</p>
         <p id="ticket-warning" class="text-moving">no really the ticket website is bad</p>
-
-        <!-- Purgatory and Rebirth Elements -->
-        <div id="purgatory" class="element">Purgatory</div>
-        <div id="rebirth" class="element">Rebirth</div>
     </div>
 
     <p id="counter">0.059</p>
 
+    <!-- Include GSAP and Matter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
     <script>
-        // Variables for text movement
-        const speed = 4; // Adjusted speed for smoother movement
-        const repulsionDistance = 100; // Distance at which texts repel each other
-        const repulsionRadius = 150; // Radius for repulsion effect around 'SAN·KIN·CHU'
-        const gravity = 0.0; // Set gravity to 0 for repulsion only
-        let counterValue = 0.059;
+        const { Engine, Render, World, Bodies, Body, Events } = Matter;
+        
+        // Initialize the Matter.js engine and renderer
+        const engine = Engine.create();
+        const world = engine.world;
+        const render = Render.create({
+            element: document.body,
+            engine: engine,
+            options: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                wireframes: false,
+                background: 'transparent'
+            }
+        });
 
-        // Initialize the movement of the text elements
-        function initializeText() {
-            const elements = document.querySelectorAll('.text-moving');
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
+        // Add text elements as Matter.js bodies
+        const texts = document.querySelectorAll('.text-moving');
+        const textBodies = Array.from(texts).map(text => {
+            const bounds = text.getBoundingClientRect();
+            const body = Bodies.rectangle(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, bounds.width, bounds.height, {
+                isStatic: false,
+                render: {
+                    sprite: {
+                        texture: text.dataset.img
+                    }
+                }
+            });
+            World.add(world, body);
+            return body;
+        });
 
-            elements.forEach(el => {
-                el.style.left = `${Math.random() * 100}vw`;
-                el.style.top = `${Math.random() * 100}vh`;
-
-                el.dataset.vx = (Math.random() - 0.5) * speed;
-                el.dataset.vy = (Math.random() - 0.5) * speed;
+        // Function to animate text like stars
+        function animateStars() {
+            gsap.to(texts, {
+                duration: 5,
+                scale: 0.1,
+                opacity: 1,
+                ease: "power1.inOut",
+                repeat: -1,
+                yoyo: true,
+                stagger: {
+                    amount: 1
+                },
+                onUpdate: function() {
+                    texts.forEach((text, index) => {
+                        const body = textBodies[index];
+                        text.style.left = `${body.position.x - text.offsetWidth / 2}px`;
+                        text.style.top = `${body.position.y - text.offsetHeight / 2}px`;
+                    });
+                }
             });
 
-            function updatePositions() {
-                elements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const x = rect.left + rect.width / 2;
-                    const y = rect.top + rect.height / 2;
+            gsap.to(texts, {
+                duration: 5,
+                scale: 1.5,
+                ease: "power1.inOut",
+                repeat: -1,
+                yoyo: true,
+                stagger: {
+                    amount: 1
+                }
+            });
 
-                    let vx = parseFloat(el.dataset.vx);
-                    let vy = parseFloat(el.dataset.vy);
+            gsap.to(texts, {
+                duration: 5,
+                color: "#f00",
+                scale: 2,
+                repeat: -1,
+                yoyo: true,
+                stagger: {
+                    amount: 1
+                }
+            });
 
-                    // Apply repulsion from other texts
-                    elements.forEach(other => {
-                        if (other !== el) {
-                            const otherRect = other.getBoundingClientRect();
-                            const ox = otherRect.left + otherRect.width / 2;
-                            const oy = otherRect.top + otherRect.height / 2;
-
-                            const dx = x - ox;
-                            const dy = y - oy;
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-
-                            if (distance < repulsionDistance) {
-                                const force = (repulsionDistance - distance) / repulsionDistance;
-                                vx += (dx / distance) * force * speed;
-                                vy += (dy / distance) * force * speed;
-                            }
-                        }
-                    });
-
-                    // Apply repulsion from 'SAN·KIN·CHU'
-                    const sanKinChuRect = document.querySelector('.ruby-text').getBoundingClientRect();
-                    const sanKinChuX = sanKinChuRect.left + sanKinChuRect.width / 2;
-                    const sanKinChuY = sanKinChuRect.top + sanKinChuRect.height / 2;
-
-                    const dxSanKinChu = x - sanKinChuX;
-                    const dySanKinChu = y - sanKinChuY;
-                    const distanceSanKinChu = Math.sqrt(dxSanKinChu * dxSanKinChu + dySanKinChu * dySanKinChu);
-
-                    if (distanceSanKinChu < repulsionRadius) {
-                        const forceSanKinChu = (repulsionRadius - distanceSanKinChu) / repulsionRadius;
-                        vx += (dxSanKinChu / distanceSanKinChu) * forceSanKinChu * speed;
-                        vy += (dySanKinChu / distanceSanKinChu) * forceSanKinChu * speed;
-                    }
-
-                    el.dataset.vx = vx;
-                    el.dataset.vy = vy;
-
-                    // Update position
-                    let newX = parseFloat(el.style.left) + vx;
-                    let newY = parseFloat(el.style.top) + vy;
-
-                    if (newX < 0) {
-                        newX = 0;
-                        el.dataset.vx *= -1;
-                    } else if (newX > window.innerWidth) {
-                        newX = window.innerWidth;
-                        el.dataset.vx *= -1;
-                    }
-
-                    if (newY < 0) {
-                        newY = 0;
-                        el.dataset.vy *= -1;
-                    } else if (newY > window.innerHeight) {
-                        newY = window.innerHeight;
-                        el.dataset.vy *= -1;
-                    }
-
-                    el.style.left = `${newX}px`;
-                    el.style.top = `${newY}px`;
-                });
-                requestAnimationFrame(updatePositions);
-            }
-            updatePositions();
+            gsap.to(texts, {
+                duration: 5,
+                opacity: 0,
+                scale: 0,
+                repeat: -1,
+                yoyo: true,
+                stagger: {
+                    amount: 1
+                }
+            });
         }
 
-        initializeText();
+        animateStars();
 
-        // Update the counter every second
-        function updateCounter() {
-            counterValue = (counterValue + 0.001) % 1; // Increment and wrap around at 1
-            document.getElementById('counter').textContent = counterValue.toFixed(3);
-        }
+        // Update Matter.js engine and render
+        (function animate() {
+            requestAnimationFrame(animate);
+            Engine.update(engine);
+            Render.update(render);
+        })();
 
-        setInterval(updateCounter, 1000);
+        // Handle resizing
+        window.addEventListener('resize', () => {
+            render.options.width = window.innerWidth;
+            render.options.height = window.innerHeight;
+            Render.setSize(render, window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
