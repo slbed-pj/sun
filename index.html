@@ -54,18 +54,29 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            font-size: calc(1.2em + 1vw); /* Enhanced responsive font size */
+            font-size: calc(1.2em + 1vw);
             will-change: transform;
         }
 
         .shiny-red {
-            color: #e74c3c;
-            text-shadow: 0 0 10px #e74c3c, 0 0 20px #e74c3c, 0 0 30px #e74c3c, 0 0 40px #e74c3c;
-            font-size: calc(5em + 2vw); /* Enhanced responsive size */
+            color: #00A1D8; /* Azure Dragon Blue */
+            background: linear-gradient(135deg, #00f, #0ff, #0f0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: calc(5em + 2vw);
+            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8;
             margin-bottom: 20px;
             position: relative;
-            z-index: 10; /* Ensure it's above other elements */
-            white-space: nowrap; /* Prevent text wrapping */
+            z-index: 10;
+            white-space: nowrap;
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .video-container {
@@ -84,28 +95,32 @@
             opacity: 1;
         }
 
-        
         /* Styling for the link */
         a {
-            text-decoration: none; /* Remove underline */
+            text-decoration: none;
             color: #00A1D8; /* Azure Dragon Blue */
-            font-weight: bold; /* Make text bolder */
+            font-weight: bold;
             display: inline-block;
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: calc(2em + 1vw); /* Increase size for more prominence */
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8; /* Subtle jewel-like shine effect */
+            font-size: calc(2em + 1vw);
+            text-shadow: 0 0 5px #00A1D8, 0 0 10px #00A1D8, 0 0 15px #00A1D8;
+            background: linear-gradient(135deg, #00f, #0ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shine 4s infinite linear;
         }
 
         a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8; /* Slightly enhanced shine on hover */
+            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8;
         }
 
         /* Specific Style for the New Paragraph */
         #ticket-warning {
-            color: #dcdcdc; /* Slightly lighter color */
-            font-size: calc(1em + 1vw); /* Responsive font size */
+            color: #dcdcdc;
+            font-size: calc(1em + 1vw);
         }
 
         /* Counter Style */
@@ -114,9 +129,9 @@
             bottom: 10px;
             left: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.5em; /* Enhanced size for clarity */
-            color: #6c757d; /* Grey military style */
-            background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
+            font-size: 1.5em;
+            color: #6c757d;
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
         }
@@ -124,8 +139,8 @@
         /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .shiny-red {
-                font-size: 3em; /* Adjust size for mobile */
-                white-space: nowrap; /* Prevent wrapping */
+                font-size: 3em;
+                white-space: nowrap;
             }
         }
     </style>
@@ -146,11 +161,10 @@
 
     <script>
         // Variables for text movement
-        const speed = 6; // Doubled speed for more dynamic movement
-        const repulsionDistance = 100; // Distance at which texts repel each other
+        const speed = 6;
+        const repulsionDistance = 100;
         let counterValue = 0.059;
 
-        // Initialize the movement of the text elements
         function initializeText() {
             const elements = document.querySelectorAll('.text-moving');
             elements.forEach(el => {
@@ -159,7 +173,6 @@
             });
         }
 
-        // Function to move text elements and handle edge bouncing
         function moveText() {
             const elements = document.querySelectorAll('.text-moving');
             const screenWidth = window.innerWidth;
@@ -180,7 +193,6 @@
                     text.x += text.vx;
                     text.y += text.vy;
 
-                    // Bounce off edges
                     if (text.x <= 0 || text.x >= screenWidth) {
                         text.vx *= -1;
                     }
@@ -188,12 +200,10 @@
                         text.vy *= -1;
                     }
 
-                    // Apply position to the element
                     text.element.style.left = `${text.x}px`;
                     text.element.style.top = `${text.y}px`;
                 });
 
-                // Repel each other
                 textObjects.forEach(text1 => {
                     textObjects.forEach(text2 => {
                         if (text1 !== text2) {
@@ -219,13 +229,11 @@
             updatePositions();
         }
 
-        // Function to update the counter
         function updateCounter() {
             counterValue += 0.001;
             document.getElementById('counter').innerText = counterValue.toFixed(3);
         }
 
-        // Function to make the ticket warning move
         function moveTicketWarning() {
             const element = document.getElementById('ticket-warning');
             let x = Math.random() * window.innerWidth;
@@ -237,7 +245,6 @@
                 x += vx;
                 y += vy;
 
-                // Bounce off edges
                 if (x <= 0 || x >= window.innerWidth) {
                     vx *= -1;
                 }
@@ -245,7 +252,6 @@
                     vy *= -1;
                 }
 
-                // Apply position to the element
                 element.style.left = `${x}px`;
                 element.style.top = `${y}px`;
 
@@ -255,11 +261,10 @@
             updatePosition();
         }
 
-        // Initialize and start the movement
         initializeText();
         moveText();
         moveTicketWarning();
-        setInterval(updateCounter, 1000); // Update the counter every second
+        setInterval(updateCounter, 1000);
     </script>
 </body>
 </html>
