@@ -142,7 +142,7 @@
         </div>
         <div class="content">
             <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
-            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TICKET</a>
+            <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">hover |fly?|</a>
             <p id="p1">explore 9/20/24 n/atural</p>
             <p id="p2">ti^cket</p>
             <p id="price">$22.99</p>
@@ -152,21 +152,28 @@
     </div>
 
     <script>
-        function scatterElements() {
+        function initializeText() {
             const elements = document.querySelectorAll('.content > p:not(a)');
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
             elements.forEach(el => {
-                const duration = Math.random() * (12 - 8) + 8; // Random duration between 8s and 12s
-                el.style.animation = `float-bounce ${duration}s ease-in-out infinite`;
-                el.style.left = `${Math.random() * 100}vw`;
-                el.style.top = `${Math.random() * 100}vh`;
+                // Initial scattering from the center
+                el.style.position = 'absolute';
+                el.style.left = `${centerX}px`;
+                el.style.top = `${centerY}px`;
+                el.style.transition = 'transform 2s ease-out';
+                
+                setTimeout(() => {
+                    el.style.transform = `translate(${(Math.random() - 0.5) * 100}vw, ${(Math.random() - 0.5) * 100}vh)`;
+                }, 100); // Delay for initial scattering
+
+                // Controlled flow animation
+                el.style.animation = 'float-bounce 20s ease-in-out infinite';
             });
         }
 
-        // Scatter elements immediately on load
-        scatterElements();
-
-        // Change positions every 1111 milliseconds (approximately 1.111 seconds)
-        setInterval(scatterElements, 1111);
+        // Initialize text position and animation
+        initializeText();
     </script>
 </body>
 </html>
