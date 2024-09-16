@@ -54,17 +54,18 @@
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            font-size: calc(1em + 1vw); /* Responsive font size */
+            font-size: calc(1.2em + 1vw); /* Enhanced responsive font size */
             will-change: transform;
         }
 
         .shiny-red {
             color: #e74c3c;
-            text-shadow: 0 0 5px #e74c3c, 0 0 10px #e74c3c, 0 0 15px #e74c3c, 0 0 20px #e74c3c;
-            font-size: calc(4em + 2vw); /* Responsive size */
+            text-shadow: 0 0 10px #e74c3c, 0 0 20px #e74c3c, 0 0 30px #e74c3c, 0 0 40px #e74c3c;
+            font-size: calc(5em + 2vw); /* Enhanced responsive size */
             margin-bottom: 20px;
             position: relative;
             z-index: 10; /* Ensure it's above other elements */
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         .video-container {
@@ -86,17 +87,16 @@
         /* Styling for the link */
         a {
             text-decoration: none; /* Remove underline */
-            color: #007FFF; /* Azure Dragon Blue */
+            color: #00A1D8; /* Azure Dragon Blue */
             font-weight: normal;
             display: inline-block;
             position: relative;
             z-index: 20;
-            transition: color 0.3s;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         a:hover {
-            color: #007FFF; /* Azure Dragon Blue */
-            text-shadow: 0 0 8px #00BFFF, 0 0 16px #00BFFF, 0 0 24px #00BFFF; /* Slight glow effect */
+            text-shadow: 0 0 10px #00A1D8, 0 0 20px #00A1D8, 0 0 30px #00A1D8; /* Enhanced glow effect */
         }
 
         /* Specific Style for the New Paragraph */
@@ -110,11 +110,19 @@
             bottom: 10px;
             left: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.2em;
+            font-size: 1.5em; /* Enhanced size for clarity */
             color: #6c757d; /* Grey military style */
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
-            padding: 5px;
-            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
+        @media (max-width: 768px) {
+            .shiny-red {
+                font-size: 3em; /* Adjust size for mobile */
+                white-space: nowrap; /* Prevent wrapping */
+            }
         }
     </style>
 </head>
@@ -146,9 +154,8 @@
 
     <script>
         // Variables for text movement
-        const speedMultiplier = 5; // Increased speed
-        const repulsionDistance = 150; // Increased repulsion distance
-        const repulsionStrength = 0.3; // Increased repulsion strength
+        const speed = 3; // Increased speed for more dynamic movement
+        const repulsionDistance = 100; // Distance at which texts repel each other
         let counterValue = 0.059;
 
         // Initialize the movement of the text elements
@@ -171,8 +178,8 @@
                     element: el,
                     x: parseFloat(el.style.left),
                     y: parseFloat(el.style.top),
-                    vx: (Math.random() * 2 - 1) * speedMultiplier,
-                    vy: (Math.random() * 2 - 1) * speedMultiplier
+                    vx: Math.random() * speed * 2 - speed,
+                    vy: Math.random() * speed * 2 - speed
                 };
             });
 
@@ -194,7 +201,7 @@
                     text.element.style.top = `${text.y}px`;
                 });
 
-                // Repel each other with stronger force
+                // Repel each other
                 textObjects.forEach(text1 => {
                     textObjects.forEach(text2 => {
                         if (text1 !== text2) {
@@ -204,7 +211,7 @@
 
                             if (distance < repulsionDistance) {
                                 const angle = Math.atan2(dy, dx);
-                                const force = (repulsionDistance - distance) * repulsionStrength;
+                                const force = (repulsionDistance - distance) / repulsionDistance;
                                 text1.vx += force * Math.cos(angle);
                                 text1.vy += force * Math.sin(angle);
                                 text2.vx -= force * Math.cos(angle);
