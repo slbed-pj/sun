@@ -50,24 +50,12 @@
             overflow: hidden;
         }
 
-        h1, p {
+        .text-moving {
             position: absolute;
             color: #fff;
             white-space: nowrap;
-            will-change: transform;
             font-size: calc(1em + 1vw); /* Responsive font size */
-        }
-
-        h1 {
-            font-size: calc(2em + 2vw);
-            margin: 0;
-            z-index: 5; /* Ensure it's above other elements */
-        }
-
-        p {
-            font-size: calc(1em + 1vw);
-            margin: 0;
-            z-index: 5; /* Ensure it's above other elements */
+            will-change: transform;
         }
 
         .shiny-red {
@@ -115,6 +103,19 @@
         #ticket-warning {
             color: #dcdcdc; /* Slightly lighter color */
         }
+
+        /* Counter Style */
+        #counter {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            color: #6c757d; /* Grey military style */
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for visibility */
+            padding: 5px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -126,111 +127,101 @@
         <div class="content">
             <div class="shiny-red" id="san-kin-chu">SAN-KIN-CHU</div>
             <a href="https://posh.vip/e/king-of-the-hill-showcase/checkout?cartId=66e74e7719265a27e4c90fc7">TIKIT</a>
-            <p id="p1" class="text-move">explore 9/20/24 n/atural</p>
-            <p id="p2" class="text-move">ti^cket</p>
-            <p id="price" class="text-move">$22.99</p>
-            <p id="site-message" class="text-move">the website is !*$#*&</p>
+            <p id="p1" class="text-moving">explore 9/20/24 n/atural</p>
+            <p id="p2" class="text-moving">ti^cket</p>
+            <p id="price" class="text-moving">$22.99</p>
+            <p id="site-message" class="text-moving">the website is !*$#*&</p>
             <p id="ticket-warning">no really the ticket website is bad</p>
         </div>
     </div>
 
+    <p id="counter">0.059</p>
+
     <script>
+        // Variables for text movement
+        const speed = 2; // Speed of the text movement
+        const repulsionDistance = 100; // Distance at which texts repel each other
+        let counterValue = 0.059;
+
+        // Initialize the movement of the text elements
         function initializeText() {
-            const elements = document.querySelectorAll('.content > p:not(a)');
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const sanKinChu = document.getElementById('san-kin-chu');
-
+            const elements = document.querySelectorAll('.text-moving');
             elements.forEach(el => {
-                el.style.position = 'absolute';
-                el.style.left = `${centerX}px`;
-                el.style.top = `${centerY}px`;
-                el.style.transform = `translate(-50%, -50%)`;
-
-                // Initial scattering effect
-                setTimeout(() => {
-                    const angle = Math.random() * 2 * Math.PI;
-                    const distance = Math.random() * 50 + 50; // Random distance
-                    el.style.transition = 'transform 2s ease-out';
-                    el.style.transform = `translate(${centerX + distance * Math.cos(angle) - centerX}px, ${centerY + distance * Math.sin(angle) - centerY}px)`;
-                }, 100); // Initial scatter delay
-
-                // Start continuous movement
-                setTimeout(() => {
-                    el.style.transition = 'none'; // Remove transition for continuous animation
-                    el.classList.add('text-move');
-                }, 2100); // Delay for smooth transition into continuous movement
+                el.style.left = `${Math.random() * window.innerWidth}px`;
+                el.style.top = `${Math.random() * window.innerHeight}px`;
             });
-
-            // Scaling SAN-KIN-CHU based on viewport size
-            sanKinChu.style.fontSize = `calc(4em + 2vw)`;
         }
 
-        function applyMagneticRepulsion() {
-            const elements = document.querySelectorAll('.text-move');
-            const repulsionDistance = 100; // Distance at which repulsion starts
+        // Function to move text elements and handle edge bouncing
+        function moveText() {
+            const elements = document.querySelectorAll('.text-moving');
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
 
-            function repulse() {
-                elements.forEach((el1) => {
-                    const rect1 = el1.getBoundingClientRect();
-                    elements.forEach((el2) => {
-                        if (el1 !== el2) {
-                            const rect2 = el2.getBoundingClientRect();
-                            const dx = (rect1.left + rect1.width / 2) - (rect2.left + rect2.width / 2);
-                            const dy = (rect1.top + rect1.height / 2) - (rect2.top + rect2.height / 2);
+            const textObjects = Array.from(elements).map(el => {
+                return {
+                    element: el,
+                    x: parseFloat(el.style.left),
+                    y: parseFloat(el.style.top),
+                    vx: Math.random() * speed * 2 - speed,
+                    vy: Math.random() * speed * 2 - speed
+                };
+            });
+
+            function updatePositions() {
+                textObjects.forEach(text => {
+                    text.x += text.vx;
+                    text.y += text.vy;
+
+                    // Bounce off edges
+                    if (text.x <= 0 || text.x >= screenWidth) {
+                        text.vx *= -1;
+                    }
+                    if (text.y <= 0 || text.y >= screenHeight) {
+                        text.vy *= -1;
+                    }
+
+                    // Apply position to the element
+                    text.element.style.left = `${text.x}px`;
+                    text.element.style.top = `${text.y}px`;
+                });
+
+                // Repel each other
+                textObjects.forEach(text1 => {
+                    textObjects.forEach(text2 => {
+                        if (text1 !== text2) {
+                            const dx = text1.x - text2.x;
+                            const dy = text1.y - text2.y;
                             const distance = Math.sqrt(dx * dx + dy * dy);
-                            
+
                             if (distance < repulsionDistance) {
                                 const angle = Math.atan2(dy, dx);
-                                const repulsionForce = (repulsionDistance - distance) / repulsionDistance;
-                                el2.style.transform = `translate(${parseFloat(el2.style.transform.split('translate(')[1].split('px')[0]) + repulsionForce * Math.cos(angle)}px, ${parseFloat(el2.style.transform.split('translate(')[1].split('px')[0]) + repulsionForce * Math.sin(angle)}px)`;
+                                const force = (repulsionDistance - distance) / repulsionDistance;
+                                text1.vx += force * Math.cos(angle);
+                                text1.vy += force * Math.sin(angle);
+                                text2.vx -= force * Math.cos(angle);
+                                text2.vy -= force * Math.sin(angle);
                             }
                         }
                     });
                 });
+
+                requestAnimationFrame(updatePositions);
             }
 
-            // Call the repulsion function periodically
-            setInterval(repulse, 50);
+            updatePositions();
         }
 
-        function moveText() {
-            const elements = document.querySelectorAll('.text-move');
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
-            const speed = 0.5; // Speed of the movement
-
-            elements.forEach(el => {
-                let posX = parseFloat(el.style.left) || window.innerWidth / 2;
-                let posY = parseFloat(el.style.top) || window.innerHeight / 2;
-                let velocityX = Math.random() * speed * 2 - speed;
-                let velocityY = Math.random() * speed * 2 - speed;
-
-                function updatePosition() {
-                    posX += velocityX;
-                    posY += velocityY;
-
-                    // Bounce off edges
-                    if (posX <= 0 || posX >= screenWidth) {
-                        velocityX *= -1;
-                    }
-                    if (posY <= 0 || posY >= screenHeight) {
-                        velocityY *= -1;
-                    }
-
-                    el.style.left = `${posX}px`;
-                    el.style.top = `${posY}px`;
-                    requestAnimationFrame(updatePosition);
-                }
-
-                updatePosition();
-            });
+        // Function to update the counter
+        function updateCounter() {
+            counterValue += 0.001;
+            document.getElementById('counter').innerText = counterValue.toFixed(3);
         }
 
-        // Initialize text position, animation, magnetic repulsion, and continuous movement
+        // Initialize and start the movement
         initializeText();
-        applyMagneticRepulsion();
         moveText();
+        setInterval(updateCounter, 1000); // Update the counter every second
     </script>
 </body>
 </html>
