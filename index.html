@@ -167,35 +167,8 @@
                 white-space: nowrap; /* Prevent wrapping */
             }
         }
-    </style>
-</head>
-<body>
-    <!-- Background image -->
-    <div class="background-image"></div>
 
-    <!-- Video background -->
-    <video autoplay muted loop class="video-background">
-        <source src="images/sanvid3.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Full page clickable link -->
-    <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
-
-    <div class="content">
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
-        <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="p2" class="text-moving">click ti^ckets here</p>
-        <p id="price" class="text-moving">$22.99</p>
-    </div>
-
-    <p id="counter">0.059</p>
-
-    <!-- Include GSAP and Matter.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
-    <script>
-        const { Engine, Render, World, Bodies, Body, Events, Vector } = Matter;
-
-        // Initialize the Matter.js engine and renderer
-        const engine = Engine
+        /* Orbit container */
+        .orbit-container {
+            position: absolute;
+            top:
