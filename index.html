@@ -69,17 +69,36 @@
             width: 100%;
             height: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             overflow: hidden;
         }
 
-        .text-moving {
+        /* Position the price at the top of the page */
+        #price {
             position: absolute;
+            top: 10px; /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
             color: #fff;
+            font-size: calc(2em + 1vw);
+            z-index: 15;
+        }
+
+        /* Position the moving text at the bottom of the page */
+        #moving-text {
+            position: absolute;
+            bottom: 10px; /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: calc(1.2em + 1vw);
+            z-index: 15;
+        }
+
+        .text-moving {
             white-space: nowrap;
-            font-size: calc(1.2em + 1vw); /* Enhanced responsive font size */
             will-change: transform;
         }
 
@@ -215,10 +234,10 @@
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
 
     <div class="content">
+        <div id="price">$22.99</div> <!-- Price at the top -->
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="p2" class="text-moving">click ti^ckets here</p>
-        <p id="price" class="text-moving">$22.99</p>
+        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
     </div>
 
     <p id="counter">0.059</p>
