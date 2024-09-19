@@ -35,16 +35,8 @@
             width: 100%;
             height: 100%;
             background: url('images/spiral.png') no-repeat center center;
-            background-size: cover;
-            z-index: -2;
-        }
-
-        /* Container for the video and orbiting text */
-        .video-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
+            background-size: cover; /* Ensures the image covers the entire screen */
+            z-index: -2; /* Place behind the video */
         }
 
         /* Full page video background */
@@ -54,51 +46,21 @@
             left: 50%;
             width: 100vw;
             height: 100vh;
-            object-fit: cover;
-            transform: translate(-50%, -50%) scale(0.51);
-            border-radius: 50%;
-            z-index: 0;
+            object-fit: cover; /* Ensures the video covers the entire screen */
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
+            z-index: -1; /* Places the video behind other content */
         }
 
-        /* Orbit container centered with video */
-        .orbit-container {
+        /* Full page clickable area */
+        .clickable-area {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            transform: translate(-50%, -50%);
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .orbit-text {
-            position: absolute;
-            text-align: center;
-            color: #fff;
-            font-size: calc(1em + 1vw);
-            transform-origin: center;
-        }
-
-        .orbit-text:nth-child(1) {
-            animation: orbit 10s linear infinite;
-            font-size: calc(1.2em + 1vw);
-            transform: rotate(0deg) translateX(200px) rotate(0deg);
-        }
-
-        .orbit-text:nth-child(2) {
-            animation: orbit 15s linear infinite;
-            font-size: calc(1.5em + 1vw);
-            transform: rotate(0deg) translateX(250px) rotate(0deg);
-        }
-
-        @keyframes orbit {
-            0% {
-                transform: rotate(0deg) translateX(200px) rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg) translateX(200px) rotate(-360deg);
-            }
+            z-index: 5; /* Ensure it's behind content but still clickable */
+            display: block;
         }
 
         .content {
@@ -113,9 +75,17 @@
             overflow: hidden;
         }
 
+        .text-moving {
+            position: absolute;
+            color: #fff;
+            white-space: nowrap;
+            font-size: calc(1.2em + 1vw); /* Enhanced responsive font size */
+            will-change: transform;
+        }
+
         /* Brighter Ruby Text Effect for SAN·KIN·CHU */
         .ruby-text {
-            color: #e60012;
+            color: #e60012; /* Bright ruby red */
             font-size: calc(5em + 2vw);
             font-weight: bold;
             text-transform: uppercase;
@@ -125,13 +95,13 @@
             display: inline-block;
             text-align: center;
             white-space: nowrap;
-            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f);
+            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f); /* Brighter ruby gradient */
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.4),
-                0 0 20px rgba(255, 0, 0, 0.8),
+                0 1px 3px rgba(0, 0, 0, 0.4), /* Soft shadow for depth */
+                0 0 20px rgba(255, 0, 0, 0.8), /* Enhanced ruby glow */
                 0 0 40px rgba(255, 0, 0, 0.8);
             animation: ruby-glow 5s infinite linear;
         }
@@ -156,25 +126,25 @@
 
         /* Styling for the link */
         a {
-            text-decoration: none;
-            color: #00A1D8;
-            font-weight: bold;
+            text-decoration: none; /* Remove underline */
+            color: #00A1D8; /* Azure Dragon Blue */
+            font-weight: bold; /* Make text bolder */
             display: inline-block;
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: calc(2em + 1vw);
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
+            font-size: calc(2em + 1vw); /* Increase size for more prominence */
+            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8; /* Subtle jewel-like shine effect */
         }
 
         a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
+            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8; /* Slightly enhanced shine on hover */
         }
 
         /* Specific Style for the New Paragraph */
         #ticket-warning {
-            color: #dcdcdc;
-            font-size: calc(1em + 1vw);
+            color: #dcdcdc; /* Slightly lighter color */
+            font-size: calc(1em + 1vw); /* Responsive font size */
         }
 
         /* Counter Style */
@@ -183,9 +153,9 @@
             bottom: 10px;
             left: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.5em;
-            color: #6c757d;
-            background: rgba(0, 0, 0, 0.7);
+            font-size: 1.5em; /* Enhanced size for clarity */
+            color: #6c757d; /* Grey military style */
+            background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
             padding: 10px;
             border-radius: 10px;
         }
@@ -193,8 +163,8 @@
         /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em;
-                white-space: nowrap;
+                font-size: 3em; /* Adjust size for mobile */
+                white-space: nowrap; /* Prevent wrapping */
             }
         }
     </style>
@@ -203,20 +173,11 @@
     <!-- Background image -->
     <div class="background-image"></div>
 
-    <!-- Container for video and orbiting text -->
-    <div class="video-container">
-        <!-- Full page video background -->
-        <video autoplay muted loop class="video-background">
-            <source src="images/sanvid3.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-
-        <!-- Orbit container centered with video -->
-        <div class="orbit-container">
-            <p class="orbit-text" id="p2">click ti^ckets here</p>
-            <p class="orbit-text" id="price">$22.99</p>
-        </div>
-    </div>
+    <!-- Video background -->
+    <video autoplay muted loop class="video-background">
+        <source src="images/sanvid3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Full page clickable link -->
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
@@ -224,6 +185,8 @@
     <div class="content">
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
+        <p id="p2" class="text-moving">click ti^ckets here</p>
+        <p id="price" class="text-moving">$22.99</p>
     </div>
 
     <p id="counter">0.059</p>
@@ -234,4 +197,5 @@
     <script>
         const { Engine, Render, World, Bodies, Body, Events, Vector } = Matter;
 
-       
+        // Initialize the Matter.js engine and renderer
+        const engine = Engine
