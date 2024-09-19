@@ -34,24 +34,16 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Center the video or image */
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video or image and apply scaling */
             border-radius: 50%; /* Create a circular mask */
             z-index: -1; /* Place behind other content */
         }
 
-        /* Ensure circular shape for video background */
-        .video-background {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-        }
-
-        /* Ensure circular shape for fallback image */
         .fallback-image {
             display: none; /* Hide the fallback image by default */
-            width: 80vmin; /* Circular shape based on the smaller screen dimension */
-            height: 80vmin; /* Ensures it is a perfect circle */
-            object-fit: cover;
         }
 
         /* Full page clickable area */
@@ -209,13 +201,6 @@
             #counter {
                 font-size: 0.8em;
             }
-
-            /* Ensure fallback image is visible on smaller screens */
-            .fallback-image {
-                display: block; /* Ensure the fallback image is shown on small screens */
-                width: 100vw; /* Ensure the image takes up the full viewport width */
-                height: 100vw; /* Ensure the image takes up the full viewport height */
-            }
         }
     </style>
 </head>
@@ -252,22 +237,22 @@
             const fallbackImage = document.getElementById('fallback-image');
 
             // Check if the video can play
-            const canPlay = video.canPlayType('video/mp4');
+            const canPlayVideo = !!video.canPlayType('video/mp4');
 
-            if (canPlay === '') {
-                // Video is not supported
+            if (!canPlayVideo || window.innerWidth < 768) {
+                // Hide the video and show the fallback image
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
             } else {
-                // Video is supported
-                fallbackImage.style.display = 'none';
+                // Show the video and hide the fallback image
                 video.style.display = 'block';
+                fallbackImage.style.display = 'none';
             }
         }
 
-        window.onload = checkVideoSupport;
-        window.onresize = checkVideoSupport;
+        // Run the check on page load
+        document.addEventListener('DOMContentLoaded', checkVideoSupport);
+        window.addEventListener('resize', checkVideoSupport);
     </script>
 </body>
 </html>
- 
