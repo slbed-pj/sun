@@ -210,6 +210,13 @@
             #counter {
                 font-size: 0.8em;
             }
+
+            /* Ensure fallback image is visible on smaller screens */
+            .fallback-image {
+                display: block; /* Ensure the fallback image is shown on small screens */
+                width: 100vw; /* Ensure the image takes up the full viewport width */
+                height: 100vw; /* Ensure the image takes up the full viewport height */
+            }
         }
     </style>
 </head>
@@ -245,26 +252,22 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            // Check if the video can be played
-            if (video.canPlayType) {
-                const canPlay = video.canPlayType('video/mp4');
-                if (canPlay === '') {
-                    // Video is not supported
-                    video.style.display = 'none';
-                    fallbackImage.style.display = 'block';
-                } else {
-                    // Video is supported
-                    fallbackImage.style.display = 'none';
-                    video.style.display = 'block';
-                }
-            } else {
+            // Check if the video can play
+            const canPlay = video.canPlayType('video/mp4');
+
+            if (canPlay === '') {
                 // Video is not supported
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
+            } else {
+                // Video is supported
+                fallbackImage.style.display = 'none';
+                video.style.display = 'block';
             }
         }
 
         window.onload = checkVideoSupport;
+        window.onresize = checkVideoSupport;
     </script>
 </body>
 </html>
