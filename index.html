@@ -27,29 +27,17 @@
             text-align: center;
         }
 
-        /* Background image behind the video */
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/spiral.png') no-repeat center center;
-            background-size: cover; /* Ensures the image covers the entire screen */
-            z-index: -2; /* Place behind the video */
-        }
-
-        /* Full page video background */
-        .video-background {
+        /* Video background and fallback image styles */
+        .video-background, .fallback-image {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* Ensures the video covers the entire screen */
-            transform: translate(-50%, -50%) scale(0.51); /* Center the video and apply scaling */
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video or image and apply scaling */
             border-radius: 50%; /* Create a circular mask */
-            z-index: -1; /* Places the video behind other content */
+            z-index: -1; /* Place behind other content */
         }
 
         /* Full page clickable area */
@@ -59,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 5; /* Ensure it's behind content but still clickable */
+            z-index: 5;
             display: block;
         }
 
@@ -78,7 +66,7 @@
         /* Position the price at the top of the page */
         #price {
             position: absolute;
-            top: 10px; /* Adjust as needed */
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
@@ -89,7 +77,7 @@
         /* Position the moving text at the bottom of the page */
         #moving-text {
             position: absolute;
-            bottom: 10px; /* Adjust as needed */
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             color: #fff;
@@ -104,7 +92,7 @@
 
         /* Brighter Ruby Text Effect for SAN·KIN·CHU */
         .ruby-text {
-            color: #e60012; /* Bright ruby red */
+            color: #e60012;
             font-size: calc(5em + 2vw);
             font-weight: bold;
             text-transform: uppercase;
@@ -114,13 +102,13 @@
             display: inline-block;
             text-align: center;
             white-space: nowrap;
-            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f); /* Brighter ruby gradient */
+            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.4), /* Soft shadow for depth */
-                0 0 20px rgba(255, 0, 0, 0.8), /* Enhanced ruby glow */
+                0 1px 3px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(255, 0, 0, 0.8),
                 0 0 40px rgba(255, 0, 0, 0.8);
             animation: ruby-glow 5s infinite linear;
         }
@@ -145,25 +133,25 @@
 
         /* Styling for the link */
         a {
-            text-decoration: none; /* Remove underline */
-            color: #00A1D8; /* Azure Dragon Blue */
-            font-weight: bold; /* Make text bolder */
+            text-decoration: none;
+            color: #00A1D8;
+            font-weight: bold;
             display: inline-block;
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: calc(2em + 1vw); /* Increase size for more prominence */
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8; /* Subtle jewel-like shine effect */
+            font-size: calc(2em + 1vw);
+            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
         }
 
         a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8; /* Slightly enhanced shine on hover */
+            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
         }
 
         /* Specific Style for the New Paragraph */
         #ticket-warning {
-            color: #dcdcdc; /* Slightly lighter color */
-            font-size: calc(1em + 1vw); /* Responsive font size */
+            color: #dcdcdc;
+            font-size: calc(1em + 1vw);
         }
 
         /* Counter Style */
@@ -172,9 +160,9 @@
             bottom: 10px;
             left: 10px;
             font-family: 'Courier New', monospace;
-            font-size: 1.5em; /* Enhanced size for clarity */
-            color: #6c757d; /* Grey military style */
-            background: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background for better contrast */
+            font-size: 1.5em;
+            color: #6c757d;
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
         }
@@ -182,50 +170,46 @@
         /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em; /* Adjust size for mobile */
-                white-space: nowrap; /* Prevent wrapping */
+                font-size: 3em;
+                white-space: nowrap;
             }
 
-            /* Adjust text moving for smaller screens */
             .text-moving {
-                font-size: calc(1em + 2vw); /* Increase responsiveness */
+                font-size: calc(1em + 2vw);
             }
 
-            /* Ensure clickable areas are easy to tap */
             .clickable-area {
-                padding: 20px; /* Increase padding for touch devices */
+                padding: 20px;
             }
 
-            /* Adjust the counter size for mobile */
             #counter {
-                font-size: 1em; /* Scale down for mobile */
-                bottom: 5px; /* Adjust positioning */
-                left: 5px; /* Adjust positioning */
+                font-size: 1em;
+                bottom: 5px;
+                left: 5px;
             }
         }
 
-        /* For very small devices */
         @media (max-width: 480px) {
             .ruby-text {
-                font-size: 2.5em; /* Further adjust size for very small screens */
+                font-size: 2.5em;
             }
 
             .text-moving {
-                font-size: calc(0.8em + 2vw); /* Further scale down */
+                font-size: calc(0.8em + 2vw);
             }
 
             #counter {
-                font-size: 0.8em; /* Further scale down */
+                font-size: 0.8em;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background image -->
-    <div class="background-image"></div>
+    <!-- Fallback image -->
+    <img id="fallback-image" class="fallback-image" src="images/sankin.jpg" alt="Fallback Image">
 
     <!-- Video background -->
-    <video autoplay muted loop playsinline class="video-background">
+    <video id="video-background" autoplay muted loop playsinline class="video-background">
         <source src="images/sanvid3.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -245,5 +229,24 @@
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
+
+    <!-- Check for video support -->
+    <script>
+        function checkVideoSupport() {
+            const video = document.getElementById('video-background');
+            const fallbackImage = document.getElementById('fallback-image');
+
+            if (!video.canPlayType('video/mp4')) {
+                // Video format not supported
+                video.style.display = 'none';
+                fallbackImage.style.display = 'block';
+            } else {
+                // Video format supported
+                fallbackImage.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkVideoSupport);
+    </script>
 </body>
 </html>
