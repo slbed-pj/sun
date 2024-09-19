@@ -149,8 +149,8 @@
         /* Ruby text styles */
         .ruby-text {
             font-size: 5em; /* Default size for computers */
-            color: #b71c1c; /* Darker ruby red color */
-            text-shadow: 0 0 5px #b71c1c, 0 0 10px #b71c1c, 0 0 15px #b71c1c; /* Enhanced ruby red effect */
+            color: #4a0d0d; /* Darker ruby red color */
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
         }
 
         /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
@@ -248,6 +248,19 @@
         // Run the check on page load
         document.addEventListener('DOMContentLoaded', checkVideoSupport);
         window.addEventListener('resize', checkVideoSupport);
+    </script>
+
+    <!-- Counter script -->
+    <script>
+        let counterValue = 0.059;
+        const counterElement = document.getElementById('counter');
+
+        function updateCounter() {
+            counterValue += 0.001;
+            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
+        }
+
+        setInterval(updateCounter, 200); // Update every 200 milliseconds
     </script>
 </body>
 </html>
