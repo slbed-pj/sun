@@ -25,7 +25,8 @@
             overflow: hidden;
             position: relative;
             text-align: center;
-            background-color: #000; /* Set a dark background color */
+            background: url('images/spiral.png') no-repeat center center;
+            background-size: cover; /* Ensure spiral image covers the entire background */
         }
 
         /* Video background and fallback image styles */
@@ -251,6 +252,7 @@
 
         // Run the check on page load
         document.addEventListener('DOMContentLoaded', checkVideoSupport);
+        window.addEventListener('resize', checkVideoSupport);
     </script>
 </body>
 </html>
