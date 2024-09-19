@@ -69,71 +69,60 @@
             overflow: hidden;
         }
 
-        /* Position the price at the top of the page */
-        #price {
+        /* Positioning for orbiting elements */
+        .orbit {
             position: absolute;
-            top: 40px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-size: calc(2em + 1vw);
-            z-index: 15;
+            width: 300px; /* Adjust the size of the donut */
+            height: 300px; /* Adjust the size of the donut */
+            border: 10px solid rgba(255, 255, 255, 0.5); /* Transparent donut */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            animation: orbit 10s linear infinite; /* Orbit animation */
+            pointer-events: none; /* Prevent interaction */
         }
 
-        /* Position the moving text at the bottom of the page */
-        #moving-text {
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #fff;
-            font-size: calc(1.2em + 1vw);
-            z-index: 15;
-        }
-
-        .text-moving {
-            white-space: nowrap;
-            will-change: transform;
-        }
-
-        /* Brighter Ruby Text Effect for SAN·KIN·CHU */
-        .ruby-text {
-            color: #e60012;
-            font-size: calc(5em + 2vw);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 10;
-            display: inline-block;
-            text-align: center;
-            white-space: nowrap;
-            background: linear-gradient(135deg, #d50032, #ff4d4d, #ff6f6f);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow:
-                0 1px 3px rgba(0, 0, 0, 0.4),
-                0 0 20px rgba(255, 0, 0, 0.8),
-                0 0 40px rgba(255, 0, 0, 0.8);
-            animation: ruby-glow 5s infinite linear;
-        }
-
-        @keyframes ruby-glow {
+        @keyframes orbit {
             0% {
-                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 20px rgba(255, 0, 0, 0.8),
-                             0 0 40px rgba(255, 0, 0, 0.8);
-            }
-            50% {
-                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 30px rgba(255, 100, 100, 0.9),
-                             0 0 60px rgba(255, 100, 100, 1);
+                transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg);
             }
             100% {
-                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4),
-                             0 0 20px rgba(255, 0, 0, 0.8),
-                             0 0 40px rgba(255, 0, 0, 0.8);
+                transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+
+        /* Position the price and moving text */
+        #price, #moving-text {
+            position: absolute;
+            font-size: calc(2em + 1vw);
+            color: #fff;
+            z-index: 15;
+            animation: orbit-text 10s linear infinite; /* Orbit text animation */
+        }
+
+        /* Positioning the price at the top of the donut */
+        #price {
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Positioning the moving text at the bottom of the donut */
+        #moving-text {
+            bottom: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Text orbit animation */
+        @keyframes orbit-text {
+            0% {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
             }
         }
 
@@ -231,6 +220,8 @@
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
         <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
     </div>
+
+    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
 
     <p id="counter">0.059</p>
 
