@@ -17,8 +17,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Apple Garamond Light', serif;
-            background: url('images/smac.png') no-repeat center center fixed;
-            background-size: cover;
             color: #333;
             display: flex;
             justify-content: center;
@@ -27,6 +25,17 @@
             overflow: hidden;
             position: relative;
             text-align: center;
+        }
+
+        /* Full page video background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the entire screen */
+            z-index: -1; /* Places the video behind other content */
         }
 
         /* Full page clickable area */
@@ -147,6 +156,12 @@
     </style>
 </head>
 <body>
+    <!-- Video background -->
+    <video autoplay muted loop class="video-background">
+        <source src="images/sanvid" type="video/quicktime">
+        Your browser does not support the video tag.
+    </video>
+
     <!-- Full page clickable link -->
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
 
@@ -202,24 +217,4 @@
 
         // Disable gravity for the SAN·KIN·CHU text
         const sanKinChuBody = createTextBody(document.getElementById('san-kin-chu'));
-        sanKinChuBody.isStatic = true; // Make it static so it doesn't move
-
-        // Function to animate text like stars
-        function animateStars() {
-            gsap.to('.text-moving', {
-                duration: 5,
-                repeat: -1,
-                x: 'random(-100, 100)',
-                y: 'random(-100, 100)',
-                ease: 'none',
-                yoyo: true
-            });
-        }
-
-        // Start the Matter.js engine and the animation
-        Engine.run(engine);
-        Render.run(render);
-        animateStars();
-    </script>
-</body>
-</html>
+        sanKinChuBody
