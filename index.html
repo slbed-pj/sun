@@ -95,24 +95,24 @@
         #price {
             top: 50%;
             left: 50%;
-            transform: translate(-70%, -70%) rotate(0deg) translateX(220px) rotate(0deg);
+            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
             animation: orbit-text 50s linear infinite;
         }
 
         #moving-text {
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) translateX(220px) rotate(-180deg);
+            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
             animation: orbit-text 10s linear infinite;
         }
 
         /* Text orbit animation */
         @keyframes orbit-text {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
+                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg);
+                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
             }
         }
 
@@ -125,7 +125,7 @@
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: calc(2em + 1vw);
+            font-size: 3em; /* Increased size */
             text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
         }
 
@@ -149,7 +149,7 @@
         /* Ensure 'SAN-KIN-CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em;
+                font-size: 4em; /* Increased size */
                 white-space: nowrap;
             }
 
@@ -170,7 +170,7 @@
 
         @media (max-width: 480px) {
             .ruby-text {
-                font-size: 2.5em;
+                font-size: 3em; /* Adjust as needed */
             }
 
             .text-moving {
