@@ -35,10 +35,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.51); /* Center the video or image and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
             z-index: -1; /* Place behind other content */
         }
 
-        /* Updated fallback image to ensure circular shape */
+        /* Ensure circular shape for video background */
+        .video-background {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        /* Ensure circular shape for fallback image */
         .fallback-image {
             display: none; /* Hide the fallback image by default */
             width: 80vmin; /* Circular shape based on the smaller screen dimension */
@@ -237,23 +245,26 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            // Check if the video can play
-            const canPlayVideo = !!video.canPlayType('video/mp4');
-
-            if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
+            // Check if the video can be played
+            if (video.canPlayType) {
+                const canPlay = video.canPlayType('video/mp4');
+                if (canPlay === '') {
+                    // Video is not supported
+                    video.style.display = 'none';
+                    fallbackImage.style.display = 'block';
+                } else {
+                    // Video is supported
+                    fallbackImage.style.display = 'none';
+                    video.style.display = 'block';
+                }
+            } else {
+                // Video is not supported
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
-            } else {
-                // Show the video and hide the fallback image
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
             }
         }
 
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
+        window.onload = checkVideoSupport;
     </script>
 </body>
 </html>
