@@ -42,13 +42,13 @@
         /* Full page video background */
         .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover; /* Ensures the video covers the entire screen */
-            transform: scale(0.51); /* Adjust the scale value as needed */
-            transform-origin: center; /* Ensure scaling is centered */
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
             z-index: -1; /* Places the video behind other content */
         }
 
@@ -198,43 +198,4 @@
         const { Engine, Render, World, Bodies, Body, Events, Vector } = Matter;
 
         // Initialize the Matter.js engine and renderer
-        const engine = Engine.create();
-        const world = engine.world;
-        const render = Render.create({
-            element: document.body,
-            engine: engine,
-            options: {
-                width: window.innerWidth,
-                height: window.innerHeight,
-                wireframes: false,
-                background: 'transparent'
-            }
-        });
-
-        // Function to create a Matter.js body for text
-        function createTextBody(textElement) {
-            const bounds = textElement.getBoundingClientRect();
-            const body = Bodies.rectangle(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, bounds.width, bounds.height, {
-                isStatic: false,
-                friction: 0,
-                restitution: 1, // Perfect bounciness
-                render: {
-                    sprite: {
-                        texture: '' // No texture needed, using text directly
-                    }
-                }
-            });
-            World.add(world, body);
-            return body;
-        }
-
-        // Create Matter.js bodies for each text element
-        const texts = document.querySelectorAll('.text-moving');
-        const textBodies = Array.from(texts).map(createTextBody);
-
-        // Disable gravity for the SAN·KIN·CHU text
-        const sanKinChuBody = createTextBody(document.getElementById('san-kin-chu'));
-        sanKinChuBody
-    </script>
-</body>
-</html>
+        const engine = Engine
