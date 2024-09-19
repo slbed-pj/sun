@@ -69,31 +69,20 @@
             overflow: hidden;
         }
 
-        /* Positioning for orbiting elements */
+        /* Orbiting donut */
         .orbit {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 300px; /* Adjust the size of the donut */
-            height: 300px; /* Adjust the size of the donut */
+            width: 400px; /* Adjust the size of the donut */
+            height: 400px; /* Adjust the size of the donut */
             border: 10px solid rgba(255, 255, 255, 0.5); /* Transparent donut */
             border-radius: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Center the donut */
             z-index: 5;
-            animation: orbit 10s linear infinite; /* Orbit animation */
-            pointer-events: none; /* Prevent interaction */
         }
 
-        @keyframes orbit {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(150px) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
-            }
-        }
-
-        /* Position the price and moving text */
+        /* Positioning for orbiting elements */
         #price, #moving-text {
             position: absolute;
             font-size: calc(2em + 1vw);
@@ -102,27 +91,28 @@
             animation: orbit-text 10s linear infinite; /* Orbit text animation */
         }
 
-        /* Positioning the price at the top of the donut */
+        /* Positioning the price and moving text around the donut */
         #price {
-            top: 20%;
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
+            animation: orbit-text 10s linear infinite;
         }
 
-        /* Positioning the moving text at the bottom of the donut */
         #moving-text {
-            bottom: 20%;
+            top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) rotate(180deg) translateX(180px) rotate(-180deg);
+            animation: orbit-text 10s linear infinite;
         }
 
         /* Text orbit animation */
         @keyframes orbit-text {
             0% {
-                transform: rotate(0deg) translateX(150px) rotate(0deg);
+                transform: translate(-50%, -50%) rotate(0deg) translateX(180px) rotate(0deg);
             }
             100% {
-                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+                transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg);
             }
         }
 
