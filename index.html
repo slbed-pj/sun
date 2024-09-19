@@ -166,6 +166,38 @@
                 font-size: 3em; /* Adjust size for mobile */
                 white-space: nowrap; /* Prevent wrapping */
             }
+
+            /* Adjust text moving for smaller screens */
+            .text-moving {
+                font-size: calc(1em + 2vw); /* Increase responsiveness */
+            }
+
+            /* Ensure clickable areas are easy to tap */
+            .clickable-area {
+                padding: 20px; /* Increase padding for touch devices */
+            }
+
+            /* Adjust the counter size for mobile */
+            #counter {
+                font-size: 1em; /* Scale down for mobile */
+                bottom: 5px; /* Adjust positioning */
+                left: 5px; /* Adjust positioning */
+            }
+        }
+
+        /* For very small devices */
+        @media (max-width: 480px) {
+            .ruby-text {
+                font-size: 2.5em; /* Further adjust size for very small screens */
+            }
+
+            .text-moving {
+                font-size: calc(0.8em + 2vw); /* Further scale down */
+            }
+
+            #counter {
+                font-size: 0.8em; /* Further scale down */
+            }
         }
     </style>
 </head>
@@ -193,9 +225,4 @@
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
-    <script>
-        const { Engine, Render, World, Bodies, Body, Events, Vector } = Matter;
-
-        // Initialize the Matter.js engine and renderer
-        const engine = Engine
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script
