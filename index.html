@@ -25,30 +25,26 @@
             overflow: hidden;
             position: relative;
             text-align: center;
+            background: url('images/spiral.png') no-repeat center center;
+            background-size: cover; /* Ensure spiral image covers the entire background */
         }
 
-        /* Fullscreen BLINK background video */
-        .blink-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -2;
-        }
-
-        /* Circular video and fallback image styles */
+        /* Video background and fallback image styles */
         .video-background, .fallback-image {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 50vw; /* Smaller size for circular video */
-            height: 50vw;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
-            transform: translate(-50%, -50%);
-            border-radius: 50%; /* Create circular shape */
-            z-index: -1;
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video or image and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
+            z-index: -1; /* Place behind other content */
+        }
+
+        .video-background {
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
         }
 
         .fallback-image {
@@ -84,14 +80,14 @@
             top: 50%;
             left: 50%;
             width: 800px; /* Adjust the size of the donut */
-            height: 800px;
+            height: 800px; /* Adjust the size of the donut */
             border: .000001px solid rgba(255, 255, 255, 0.3); /* Transparent donut */
             border-radius: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Center the donut */
             z-index: 5;
         }
 
-        /* Orbiting text */
+        /* Positioning for orbiting elements */
         #price, #moving-text {
             position: absolute;
             font-size: calc(2em + 1vw);
@@ -100,26 +96,28 @@
             animation: orbit-text 10s linear infinite; /* Orbit text animation */
         }
 
+        /* Positioning the price and moving text around the donut */
         #price {
             top: 50%;
             left: 50%;
-            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg);
+            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
             animation: orbit-text 30s linear infinite;
         }
 
         #moving-text {
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg);
+            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
             animation: orbit-text 10s linear infinite;
         }
 
+        /* Text orbit animation */
         @keyframes orbit-text {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg);
+                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg);
+                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
             }
         }
 
@@ -155,29 +153,35 @@
 
         /* Ruby text styles */
         .ruby-text {
-            font-size: 5em;
-            color: #4a0d0d;
-            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d;
+            font-size: 5em; /* Default size for computers */
+            color: #4a0d0d; /* Darker ruby red color */
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
         }
 
-        /* Adjust styles for mobile */
+        /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em;
+                font-size: 3em; /* Slightly smaller on mobile devices */
             }
 
             .text-moving {
                 font-size: calc(1em + 2vw);
             }
 
+            .clickable-area {
+                padding: 20px;
+            }
+
             #counter {
                 font-size: 1em;
+                bottom: 5px;
+                left: 5px;
             }
         }
 
         @media (max-width: 888px) {
             .ruby-text {
-                font-size: 4em;
+                font-size: 4em; /* Adjust as needed */
             }
 
             .text-moving {
@@ -188,28 +192,23 @@
                 font-size: 0.8em;
             }
 
+            /* Mobile-specific styles for circular fallback image and video background */
             .video-background, .fallback-image {
                 width: 100vw;
-                height: 100vw;
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
+                height: 100vw; /* Ensure height is equal to width for circular shape */
+                border-radius: 50%; /* Circular shape */
+                transform: translate(-50%, -50%); /* Center the element */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Fullscreen background video -->
-    <video class="blink-background" autoplay muted loop playsinline>
-        <source src="BLINK.mp4" type="video/mp4">
-        <source src="BLINK.webm" type="video/webm">
-        <source src="BLINK.ogg" type="video/ogg">
-        Your browser does not support the video tag.
-    </video>
+    <!-- Fallback image -->
+    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
 
-    <!-- Circular video -->
+    <!-- Video background -->
     <video id="video-background" autoplay muted loop playsinline class="video-background">
-        <source src="sanvid3.mp4" type="video/mp4">
-        <source src="sanvid3.webm" type="video/webm">
+        <source src="images/sanvid3.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -217,43 +216,56 @@
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
 
     <div class="content">
-        <div id="price">$22.99</div>
+        <div id="price">$22.99</div> <!-- Price at the top -->
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="moving-text" class="text-moving">click ti^ckets here</p>
+        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
     </div>
 
-    <div class="orbit"></div>
+    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
 
     <p id="counter">0.059</p>
 
+    <!-- Include GSAP and Matter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
+
+    <!-- Check for video support -->
     <script>
         function checkVideoSupport() {
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
+
+            // Check if the video can play
             const canPlayVideo = !!video.canPlayType('video/mp4');
 
             if (!canPlayVideo || window.innerWidth < 768) {
+                // Hide the video and show the fallback image
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
             } else {
+                // Show the video and hide the fallback image
                 video.style.display = 'block';
                 fallbackImage.style.display = 'none';
             }
         }
 
+        // Run the check on page load
         document.addEventListener('DOMContentLoaded', checkVideoSupport);
         window.addEventListener('resize', checkVideoSupport);
+    </script>
 
+    <!-- Counter script -->
+    <script>
         let counterValue = 0.059;
         const counterElement = document.getElementById('counter');
 
         function updateCounter() {
             counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3);
+            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
         }
 
-        setInterval(updateCounter, 200);
+        setInterval(updateCounter, 200); // Update every 200 milliseconds
     </script>
 </body>
 </html>
