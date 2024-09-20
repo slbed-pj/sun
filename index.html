@@ -30,35 +30,21 @@
         }
 
         /* Video background and fallback image styles */
-        .video-background-wrapper {
+        .video-background, .fallback-image {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
-            transform: translate(-50%, -50%);
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(0.51); /* Center the video or image and apply scaling */
             border-radius: 50%; /* Create a circular mask */
-            overflow: hidden; /* Hide overflow to ensure circular clipping */
             z-index: -1; /* Place behind other content */
         }
 
         .video-background {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-background-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
-            pointer-events: none; /* Ensure this layer doesn’t block interaction */
-            z-index: 1; /* Place above the video */
-            border-radius: 50%; /* Ensure the gradient matches the circular video */
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
         }
 
         .fallback-image {
@@ -207,17 +193,11 @@
             }
 
             /* Mobile-specific styles for circular fallback image and video background */
-            .video-background-wrapper {
+            .video-background, .fallback-image {
                 width: 100vw;
                 height: 100vw; /* Ensure height is equal to width for circular shape */
-            }
-
-            .video-background {
                 border-radius: 50%; /* Circular shape */
-            }
-
-            .video-background-wrapper::before {
-                border-radius: 50%; /* Circular gradient */
+                transform: translate(-50%, -50%); /* Center the element */
             }
         }
     </style>
@@ -227,12 +207,10 @@
     <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
 
     <!-- Video background -->
-    <div class="video-background-wrapper">
-        <video id="video-background" autoplay muted loop playsinline class="video-background">
-            <source src="images/sanvid3.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
+    <video id="video-background" autoplay muted loop playsinline class="video-background">
+        <source src="images/sanvid3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Full page clickable link -->
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
