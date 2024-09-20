@@ -25,7 +25,8 @@
             overflow: hidden;
             position: relative;
             text-align: center;
-            background-color: #000; /* Added fallback background color */
+            background: url('images/fallback-image.jpg') no-repeat center center;
+            background-size: cover; /* Ensure fallback image covers the entire background */
         }
 
         /* Video background and fallback image styles */
@@ -36,18 +37,19 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            transform: translate(-50%, -50%) scale(0.42);
-            border-radius: 50%;
-            z-index: -1;
+            transform: translate(-50%, -50%) scale(0.42); /* Center the video or image and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
+            z-index: -1; /* Place behind other content */
         }
 
         .video-background {
-            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            /* Disable mask-image for troubleshooting */
+            /* mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
+            /* -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
         }
 
         .fallback-image {
-            display: none;
+            display: none; /* Hide the fallback image by default */
         }
 
         /* Full page clickable area */
@@ -78,45 +80,49 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 800px;
-            height: 800px;
-            border: 0.000001px solid rgba(255, 255, 255, 0.3);
+            width: 800px; /* Adjust the size of the donut */
+            height: 800px; /* Adjust the size of the donut */
+            border: .000001px solid rgba(255, 255, 255, 0.3); /* Transparent donut */
             border-radius: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Center the donut */
             z-index: 5;
         }
 
+        /* Positioning for orbiting elements */
         #price, #moving-text {
             position: absolute;
             font-size: calc(2em + 1vw);
             color: #fff;
             z-index: 15;
-            animation: orbit-text 10s linear infinite;
+            animation: orbit-text 10s linear infinite; /* Orbit text animation */
         }
 
+        /* Positioning the price and moving text around the donut */
         #price {
             top: 50%;
             left: 50%;
-            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg);
+            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
             animation: orbit-text 23s linear infinite;
         }
 
         #moving-text {
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg);
+            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
             animation: orbit-text 7s linear infinite;
         }
 
+        /* Text orbit animation */
         @keyframes orbit-text {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg);
+                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg);
+                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
             }
         }
 
+        /* Styling for the link */
         a {
             text-decoration: none;
             color: #00A1D8;
@@ -125,7 +131,7 @@
             position: relative;
             z-index: 20;
             transition: color 0.3s, text-shadow 0.3s;
-            font-size: 3em;
+            font-size: 3em; /* Increased size */
             text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
         }
 
@@ -133,6 +139,7 @@
             text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
         }
 
+        /* Counter Style */
         #counter {
             position: fixed;
             bottom: 10px;
@@ -145,15 +152,17 @@
             border-radius: 10px;
         }
 
+        /* Ruby text styles */
         .ruby-text {
-            font-size: 5em;
-            color: #4a0d0d;
-            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d;
+            font-size: 5em; /* Default size for computers */
+            color: #4a0d0d; /* Darker ruby red color */
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
         }
 
+        /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em;
+                font-size: 3em; /* Slightly smaller on mobile devices */
             }
 
             .text-moving {
@@ -173,7 +182,7 @@
 
         @media (max-width: 888px) {
             .ruby-text {
-                font-size: 4em;
+                font-size: 4em; /* Adjust as needed */
             }
 
             .text-moving {
@@ -184,21 +193,22 @@
                 font-size: 0.8em;
             }
 
+            /* Mobile-specific styles for circular fallback image and video background */
             .video-background, .fallback-image {
                 width: 100vw;
-                height: 100vw;
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
+                height: 100vw; /* Ensure height is equal to width for circular shape */
+                border-radius: 50%; /* Circular shape */
+                transform: translate(-50%, -50%); /* Center the element */
             }
         }
     </style>
 </head>
 <body>
     <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
+    <img id="fallback-image" class="fallback-image" src="images/fallback-image.jpg" alt="Fallback Image">
 
     <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background" onerror="console.log('Video failed to load')">
+    <video id="video-background" autoplay muted loop playsinline class="video-background" poster="images/fallback-image.jpg">
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -207,15 +217,19 @@
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
 
     <div class="content">
-        <div id="price">$22.99</div>
+        <div id="price">$22.99</div> <!-- Price at the top -->
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="moving-text" class="text-moving">click ti^ckets here</p>
+        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
     </div>
 
-    <div class="orbit"></div>
+    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
 
     <p id="counter">0.058</p>
+
+    <!-- Include GSAP and Matter.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
 
     <!-- Check for video support -->
     <script>
@@ -223,32 +237,19 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            const canPlayVideo = !!video.canPlayType('video/mp4');
+            // Check if the video can play
+            video.onerror = function() {
+                video.style.display = 'none'; // Hide the video if it cannot play
+                fallbackImage.style.display = 'block'; // Show fallback image
+            };
 
-            if (!canPlayVideo || window.innerWidth < 768) {
-                video.style.display = 'none';
-                fallbackImage.style.display = 'block';
-            } else {
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
-            }
+            // If the video loads, hide the fallback image
+            video.oncanplay = function() {
+                fallbackImage.style.display = 'none'; // Hide fallback image when video is ready
+            };
         }
 
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
-
-    <!-- Counter script -->
-    <script>
-        let counterValue = 0.059;
-        const counterElement = document.getElementById('counter');
-
-        function updateCounter() {
-            counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3);
-        }
-
-        setInterval(updateCounter, 200);
+        checkVideoSupport();
     </script>
 </body>
 </html>
