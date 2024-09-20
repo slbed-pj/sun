@@ -25,29 +25,32 @@
             overflow: hidden;
             position: relative;
             text-align: center;
-            /* Removed the spiral background */
         }
 
-        /* Video background styles */
-        .video-background, .fallback-image {
+        /* Full background video */
+        .blink-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2; /* Behind all content */
+        }
+
+        /* Circular video (sanvid3.mp4) */
+        .video-background {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: -2; /* Ensures it's behind other content */
-        }
-
-        .fallback-image {
-            display: none; /* Hide the fallback image by default */
-        }
-
-        /* Added blink video background */
-        .blink-background {
-            z-index: -3; /* Ensures BLINK.mp4 is even further back */
-            opacity: 0.8; /* Add transparency if needed */
+            transform: translate(-50%, -50%) scale(0.51); /* Center and scale the video */
+            border-radius: 50%; /* Create a circular shape */
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            z-index: -1; /* Behind other content but in front of BLINK.mp4 */
         }
 
         .clickable-area {
@@ -72,70 +75,153 @@
             overflow: hidden;
         }
 
-        /* Remaining styles unchanged... */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            border: .000001px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        #price, #moving-text {
+            position: absolute;
+            font-size: calc(2em + 1vw);
+            color: #fff;
+            z-index: 15;
+            animation: orbit-text 10s linear infinite;
+        }
+
+        #price {
+            top: 50%;
+            left: 50%;
+            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg);
+            animation: orbit-text 30s linear infinite;
+        }
+
+        #moving-text {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg);
+            animation: orbit-text 10s linear infinite;
+        }
+
+        @keyframes orbit-text {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #00A1D8;
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+            z-index: 20;
+            transition: color 0.3s, text-shadow 0.3s;
+            font-size: 3em;
+            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
+        }
+
+        a:hover {
+            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
+        }
+
+        #counter {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5em;
+            color: #6c757d;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .ruby-text {
+            font-size: 5em;
+            color: #4a0d0d;
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d;
+        }
+
+        @media (max-width: 768px) {
+            .ruby-text {
+                font-size: 3em;
+            }
+
+            .text-moving {
+                font-size: calc(1em + 2vw);
+            }
+
+            .clickable-area {
+                padding: 20px;
+            }
+
+            #counter {
+                font-size: 1em;
+                bottom: 5px;
+                left: 5px;
+            }
+        }
+
+        @media (max-width: 888px) {
+            .ruby-text {
+                font-size: 4em;
+            }
+
+            .text-moving {
+                font-size: calc(0.8em + 2vw);
+            }
+
+            #counter {
+                font-size: 0.8em;
+            }
+
+            .video-background, .fallback-image {
+                width: 100vw;
+                height: 100vw;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
-
-    <!-- BLINK video background (new video) -->
-    <video id="blink-background" autoplay muted loop playsinline class="video-background blink-background">
+    <!-- BLINK background video -->
+    <video id="blink-background" autoplay muted loop playsinline class="blink-background">
         <source src="videos/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Video background for SAN video -->
+    <!-- SAN video background -->
     <video id="video-background" autoplay muted loop playsinline class="video-background">
         <source src="videos/sanvid3.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Full page clickable link -->
     <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
 
     <div class="content">
-        <div id="price">$22.99</div> <!-- Price at the top -->
+        <div id="price">$22.99</div>
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
+        <p id="moving-text" class="text-moving">click ti^ckets here</p>
     </div>
 
-    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
+    <div class="orbit"></div>
 
     <p id="counter">0.059</p>
 
-    <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
-
-    <!-- Check for video support -->
-    <script>
-        function checkVideoSupport() {
-            const video = document.getElementById('video-background');
-            const blinkVideo = document.getElementById('blink-background');
-            const fallbackImage = document.getElementById('fallback-image');
-
-            // Check if the video can play
-            const canPlayVideo = !!video.canPlayType('video/mp4');
-
-            if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
-                video.style.display = 'none';
-                blinkVideo.style.display = 'none';
-                fallbackImage.style.display = 'block';
-            } else {
-                // Show the video and hide the fallback image
-                video.style.display = 'block';
-                blinkVideo.style.display = 'block';
-                fallbackImage.style.display = 'none';
-            }
-        }
-
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
 
     <!-- Counter script -->
     <script>
@@ -144,10 +230,10 @@
 
         function updateCounter() {
             counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
+            counterElement.textContent = counterValue.toFixed(3);
         }
 
-        setInterval(updateCounter, 200); // Update every 200 milliseconds
+        setInterval(updateCounter, 200);
     </script>
 </body>
 </html>
