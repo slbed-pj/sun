@@ -88,7 +88,7 @@
         }
 
         /* Positioning for orbiting elements */
-        #price, #moving-text {
+        #price, #moving-text, #whats-next {
             position: absolute;
             font-size: calc(2em + 1vw);
             color: #fff;
@@ -111,6 +111,18 @@
             animation: orbit-text 10s linear infinite;
         }
 
+        /* Add new div for 'WHATS NEXT' */
+        #whats-next {
+            position: absolute;
+            font-size: calc(2em + 1vw);
+            color: #fff;
+            z-index: 15;
+            animation: orbit-whats-next 15s linear infinite; /* Set the orbit animation */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg) translateX(300px) rotate(-90deg); /* Adjusted radius and rotation */
+        }
+
         /* Text orbit animation */
         @keyframes orbit-text {
             0% {
@@ -118,6 +130,16 @@
             }
             100% {
                 transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
+            }
+        }
+
+        /* Orbit animation for 'WHATS NEXT' */
+        @keyframes orbit-whats-next {
+            0% {
+                transform: translate(-50%, -50%) rotate(90deg) translateX(300px) rotate(-90deg); /* Adjusted for increased radius */
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(450deg) translateX(300px) rotate(-450deg); /* Full circle rotation */
             }
         }
 
@@ -220,6 +242,7 @@
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
         <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8">?????????</a>
         <p id="moving-text" class="text-moving">$%5#@0&!0*^</p> <!-- Text at the bottom -->
+        <div id="whats-next">WHATS NEXT</div> <!-- New orbiting text -->
     </div>
 
     <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
