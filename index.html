@@ -121,11 +121,13 @@
         .floating-text {
             position: absolute;
             font-size: 2.2em;
-            color: #00A1D8;
+            color: #ff7700;
             transform-origin: 300px 300px; /* Origin at the center of the orbit */
             animation: orbit 10s linear infinite;
+            text-shadow: 0 0 10px #ff7700, 0 0 20px #ff7700, 0 0 30px #ff7700; /* Jewel glow effect */
         }
 
+        /* Adjust different speeds for different texts */
         #price {
             animation-duration: 20s; /* Slower orbit */
         }
@@ -141,10 +143,10 @@
         /* Orbiting Animation */
         @keyframes orbit {
             0% {
-                transform: rotate(0deg) translateX(300px);
+                transform: rotate(0deg) translateX(300px); /* Circle path around the center */
             }
             100% {
-                transform: rotate(360deg) translateX(300px);
+                transform: rotate(360deg) translateX(300px); /* Complete rotation */
             }
         }
 
@@ -223,7 +225,7 @@
     <!-- Orbiting Donut -->
     <div class="orbit"></div>
 
-    <!-- Orbiting Text -->
+    <!-- Orbiting Text with Orange Jewel Glow -->
     <div id="price" class="floating-text">S$A&N</div>
     <div id="custom" class="floating-text">$%5#@0&!0*^</div>
     <div id="whats-next" class="floating-text">WHAT'S NEXT?</div>
