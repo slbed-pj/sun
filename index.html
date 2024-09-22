@@ -10,14 +10,14 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Apple Garamond Light', serif; /* Keep your custom font */
-            color: #fff; /* Text color white to contrast the dark background */
+            font-family: 'Apple Garamond Light', serif;
+            color: #fff;
             display: flex;
             flex-direction: column;
             height: 100vh;
             justify-content: center;
             align-items: center;
-            background-color: #121212; /* Dark background */
+            background-color: #121212;
             overflow: hidden;
         }
 
@@ -25,7 +25,7 @@
         .navbar {
             width: 100%;
             padding: 20px 40px;
-            background-color: rgba(0, 0, 0, 0.9); /* Darker nav background */
+            background-color: rgba(0, 0, 0, 0.9);
             position: fixed;
             top: 0;
             left: 0;
@@ -36,7 +36,7 @@
         }
 
         .navbar a {
-            color: #fff; /* Keep links white */
+            color: #fff;
             font-size: 1.2em;
             margin: 0 20px;
             text-decoration: none;
@@ -45,23 +45,22 @@
         }
 
         .navbar a:hover {
-            color: #00A1D8; /* Highlight effect on hover */
+            color: #00A1D8;
         }
 
         /* Video background and fallback image styles */
         .video-background, .fallback-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            transform: translate(-50%, -50%); /* Center the video or image */
-            z-index: -1; /* Place behind other content */
+            z-index: -1;
         }
 
         .fallback-image {
-            display: none; /* Hide the fallback image by default */
+            display: none;
         }
 
         /* Centered Content */
@@ -70,7 +69,7 @@
             z-index: 10;
             text-align: center;
             max-width: 1000px;
-            background: rgba(18, 18, 18, 0.9); /* Darker semi-transparent background for better readability */
+            background: rgba(18, 18, 18, 0.9);
             padding: 50px;
             border-radius: 15px;
         }
@@ -79,19 +78,19 @@
             font-family: 'Apple Garamond Light', serif;
             font-size: 4em;
             margin: 0.5em 0;
-            color: #e63946; /* Ruby red text */
+            color: #e63946;
             text-shadow: 0 0 5px #e63946, 0 0 10px #e63946;
         }
 
         .content p {
             font-size: 1.4em;
-            color: #f8f9fa; /* Light grey to contrast with dark background */
+            color: #f8f9fa;
             line-height: 1.6;
         }
 
         /* Dark Mode Button Styling */
         .button {
-            background-color: #00A1D8; /* Vibrant blue for contrast */
+            background-color: #00A1D8;
             border: none;
             padding: 15px 30px;
             color: white;
@@ -103,14 +102,14 @@
         }
 
         .button:hover {
-            background-color: #007bb5; /* Slightly darker on hover */
+            background-color: #007bb5;
         }
 
         /* Orbiting Donut Styling */
         .orbit {
             width: 600px;
             height: 600px;
-            border: 2px solid rgba(255, 255, 255, 0.1); /* Subtle orbit circle */
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             position: absolute;
             top: 50%;
@@ -122,27 +121,30 @@
         .floating-text {
             position: absolute;
             font-size: 2.2em;
+            color: #00A1D8;
+            transform-origin: 300px 300px; /* Origin at the center of the orbit */
             animation: orbit 10s linear infinite;
-            color: #00A1D8; /* Blue for a modern, sleek look */
         }
 
         #price {
-            top: -100px;
-            animation: orbit 30s linear infinite;
+            animation-duration: 20s; /* Slower orbit */
         }
 
         #custom {
-            bottom: -100px;
-            animation: orbit 20s linear infinite reverse;
+            animation-duration: 15s; /* Medium-speed orbit */
+        }
+
+        #whats-next {
+            animation-duration: 25s; /* Slowest orbit */
         }
 
         /* Orbiting Animation */
         @keyframes orbit {
-            from {
-                transform: rotate(0deg) translateX(300px) rotate(0deg);
+            0% {
+                transform: rotate(0deg) translateX(300px);
             }
-            to {
-                transform: rotate(360deg) translateX(300px) rotate(-360deg);
+            100% {
+                transform: rotate(360deg) translateX(300px);
             }
         }
 
@@ -153,7 +155,7 @@
             right: 10px;
             font-family: 'Courier New', monospace;
             font-size: 1.5em;
-            background-color: rgba(0, 0, 0, 0.8); /* Transparent dark background */
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             border-radius: 10px;
             color: white;
@@ -170,13 +172,26 @@
                 height: 400px;
             }
 
-            .button {
-                font-size: 1em;
-                padding: 10px 20px;
+            .floating-text {
+                transform-origin: 200px 200px;
+                animation: orbit 10s linear infinite;
             }
 
             #counter {
                 font-size: 1em;
+            }
+        }
+
+        /* Ensure video/image works on mobile */
+        @media (max-width: 480px) {
+            .video-background, .fallback-image {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+            }
+
+            .floating-text {
+                transform-origin: 150px 150px;
             }
         }
     </style>
@@ -207,8 +222,11 @@
 
     <!-- Orbiting Donut -->
     <div class="orbit"></div>
+
+    <!-- Orbiting Text -->
     <div id="price" class="floating-text">S$A&N</div>
     <div id="custom" class="floating-text">$%5#@0&!0*^</div>
+    <div id="whats-next" class="floating-text">WHAT'S NEXT?</div>
 
     <!-- Counter -->
     <p id="counter">0.059</p>
