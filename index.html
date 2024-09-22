@@ -13,11 +13,15 @@
             font-style: italic;
         }
 
+        /* Apply font to html and body for inheritance */
+        html, body {
+            font-family: 'Apple Garamond', serif;
+        }
+
         /* Dark Mode Styling */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Apple Garamond', serif; /* Use the custom font */
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -167,10 +171,6 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            body {
-                font-family: 'Apple Garamond', serif; /* Ensure font for mobile */
-            }
-
             .ruby-text {
                 font-size: 3em; /* Adjust size for mobile */
             }
