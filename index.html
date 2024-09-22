@@ -18,8 +18,6 @@
             justify-content: center;
             align-items: center;
             background-color: #121212; /* Dark background */
-            background: url('images/smac.png') no-repeat center center;
-            background-size: cover;
             overflow: hidden;
         }
 
@@ -48,6 +46,22 @@
 
         .navbar a:hover {
             color: #00A1D8; /* Highlight effect on hover */
+        }
+
+        /* Video background and fallback image styles */
+        .video-background, .fallback-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%); /* Center the video or image */
+            z-index: -1; /* Place behind other content */
+        }
+
+        .fallback-image {
+            display: none; /* Hide the fallback image by default */
         }
 
         /* Centered Content */
@@ -175,6 +189,15 @@
         <a href="#contact">Contact</a>
     </div>
 
+    <!-- Fallback image -->
+    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
+
+    <!-- Video background -->
+    <video id="video-background" autoplay muted loop playsinline class="video-background">
+        <source src="images/BLINK.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <!-- Main Content -->
     <div class="content">
         <h1>SAN·KIN·CHU</h1>
@@ -193,6 +216,31 @@
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
+
+    <!-- Check for video support -->
+    <script>
+        function checkVideoSupport() {
+            const video = document.getElementById('video-background');
+            const fallbackImage = document.getElementById('fallback-image');
+
+            // Check if the video can play
+            const canPlayVideo = !!video.canPlayType('video/mp4');
+
+            if (!canPlayVideo || window.innerWidth < 768) {
+                // Hide the video and show the fallback image
+                video.style.display = 'none';
+                fallbackImage.style.display = 'block';
+            } else {
+                // Show the video and hide the fallback image
+                video.style.display = 'block';
+                fallbackImage.style.display = 'none';
+            }
+        }
+
+        // Run the check on page load
+        document.addEventListener('DOMContentLoaded', checkVideoSupport);
+        window.addEventListener('resize', checkVideoSupport);
+    </script>
 
     <!-- Counter Script -->
     <script>
