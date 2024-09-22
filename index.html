@@ -25,8 +25,8 @@
             overflow: hidden;
             position: relative;
             text-align: center;
-            background: url('images/spiral.png') no-repeat center center;
-            background-size: cover; /* Ensure spiral image covers the entire background */
+            background: url('images/fallback-image.jpg') no-repeat center center;
+            background-size: cover; /* Ensure fallback image covers the entire background */
         }
 
         /* Video background and fallback image styles */
@@ -43,8 +43,9 @@
         }
 
         .video-background {
-            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            /* Disable mask-image for troubleshooting */
+            /* mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
+            /* -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
         }
 
         .fallback-image {
@@ -101,14 +102,14 @@
             top: 50%;
             left: 50%;
             transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
-            animation: orbit-text 30s linear infinite;
+            animation: orbit-text 23s linear infinite;
         }
 
         #moving-text {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
-            animation: orbit-text 10s linear infinite;
+            animation: orbit-text 7s linear infinite;
         }
 
         /* Text orbit animation */
@@ -204,10 +205,10 @@
 </head>
 <body>
     <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
+    <img id="fallback-image" class="fallback-image" src="images/fallback-image.jpg" alt="Fallback Image">
 
     <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background">
+    <video id="video-background" autoplay muted loop playsinline class="video-background" poster="images/fallback-image.jpg">
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -224,7 +225,7 @@
 
     <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
 
-    <p id="counter">0.059</p>
+    <p id="counter">0.058</p>
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
@@ -237,35 +238,18 @@
             const fallbackImage = document.getElementById('fallback-image');
 
             // Check if the video can play
-            const canPlayVideo = !!video.canPlayType('video/mp4');
+            video.onerror = function() {
+                video.style.display = 'none'; // Hide the video if it cannot play
+                fallbackImage.style.display = 'block'; // Show fallback image
+            };
 
-            if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
-                video.style.display = 'none';
-                fallbackImage.style.display = 'block';
-            } else {
-                // Show the video and hide the fallback image
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
-            }
+            // If the video loads, hide the fallback image
+            video.oncanplay = function() {
+                fallbackImage.style.display = 'none'; // Hide fallback image when video is ready
+            };
         }
 
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
-
-    <!-- Counter script -->
-    <script>
-        let counterValue = 0.059;
-        const counterElement = document.getElementById('counter');
-
-        function updateCounter() {
-            counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
-        }
-
-        setInterval(updateCounter, 200); // Update every 200 milliseconds
+        checkVideoSupport();
     </script>
 </body>
 </html>
