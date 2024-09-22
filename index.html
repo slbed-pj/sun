@@ -47,6 +47,14 @@
             border-radius: 15px;
         }
 
+        /* Ruby Text Styling */
+        .ruby-text {
+            font-size: 5em; /* Default size */
+            color: #b22222; /* Dark red */
+            text-shadow: 0 0 10px #b22222, 0 0 20px #b22222, 0 0 30px #ff4500; /* Glowing ruby effect */
+            margin: 20px 0;
+        }
+
         /* Orbiting Donut Styling */
         .orbit {
             width: 600px;
@@ -63,7 +71,7 @@
         .floating-text {
             position: absolute;
             font-size: 2.2em;
-            color: #ff7700;
+            color: #ff7700; /* Orange glow */
             text-shadow: 0 0 10px #ff7700, 0 0 20px #ff7700, 0 0 30px #ff7700; /* Jewel glow effect */
             transform-origin: 300px 0; /* Set origin for orbiting */
             animation: orbit 20s linear infinite; /* Default orbit speed */
@@ -107,8 +115,8 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .content h1 {
-                font-size: 2.5em;
+            .ruby-text {
+                font-size: 3em; /* Adjust size for mobile */
             }
 
             .orbit {
@@ -151,7 +159,7 @@
 
     <!-- Main Content -->
     <div class="content">
-        <h1>SAN·KIN·CHU</h1>
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
         <p>Welcome to the future, a new world awaits. Discover the sound.</p>
         <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="button">Explore Sound</a>
     </div>
