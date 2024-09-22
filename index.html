@@ -5,23 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Future">
     <title>Birth of September</title>
+    <link rel="stylesheet" href="path/to/apple_garamond/AppleGaramond-LightItalic.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <style>
-        @font-face {
-            font-family: 'Apple Garamond';
-            src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        /* Apply font to html and body for inheritance */
-        html, body {
-            font-family: 'Apple Garamond', serif;
-        }
-
         /* Dark Mode Styling */
         body {
             margin: 0;
             padding: 0;
+            font-family: 'Apple Garamond Light Italic', serif;
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -77,21 +67,6 @@
             background: rgba(18, 18, 18, 0.9);
             padding: 50px;
             border-radius: 15px;
-        }
-
-        /* Contact Info Styling */
-        .contact-info {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 20; /* Higher than main content */
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            background: rgba(255, 255, 255, 0.1); /* Transparent white background */
         }
 
         /* Ruby Text Styling */
@@ -169,14 +144,23 @@
             color: white;
         }
 
+        /* Contact Info Styling */
+        .contact-info {
+            display: none;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.2); /* Transparent white background */
+            padding: 50px;
+            border-radius: 15px;
+            align-self: center; /* Center the content */
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .ruby-text {
                 font-size: 3em; /* Adjust size for mobile */
-            }
-
-            .emerald-text {
-                font-size: 1.5em; /* Adjust size for mobile */
             }
 
             .orbit {
@@ -190,6 +174,10 @@
 
             #counter {
                 font-size: 1em;
+            }
+
+            .content, .contact-info {
+                padding: 30px; /* Smaller padding for mobile */
             }
         }
 
@@ -231,13 +219,11 @@
 
     <!-- Contact Information -->
     <div class="contact-info" id="contact-info">
-        <div class="content">
-            <div class="ruby-text">Contact Info</div>
-            <div style="margin-top: 20px;">
-                <a href="https://www.instagram.com/sankinchu/" class="emerald-text">INSTAGRAM HERE</a>
-                <br>
-                <a href="https://twitter.com/sankinchu" class="emerald-text">TWITTER HERE</a>
-            </div>
+        <div class="ruby-text">Contact Info</div>
+        <div style="margin-top: 20px;">
+            <a href="https://www.instagram.com/sankinchu/" class="emerald-text">INSTAGRAM HERE</a>
+            <br>
+            <a href="https://twitter.com/sankinchu" class="emerald-text">TWITTER HERE</a>
         </div>
     </div>
 
@@ -276,52 +262,7 @@
             }
         }
 
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
-
-    <!-- Counter Script -->
-    <script>
-        let counterValue = 0.059;
-        const counterElement = document.getElementById('counter');
-
-        function updateCounter() {
-            counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
-        }
-
-        setInterval(updateCounter, 200); // Update every 200 milliseconds
-    </script>
-
-    <!-- Navigation Script -->
-    <script>
-        const contactLink = document.getElementById('contact-link');
-        const homeLink = document.getElementById('home-link');
-        const mainContent = document.getElementById('main-content');
-        const contactInfo = document.getElementById('contact-info');
-
-        // Check local storage to set initial page
-        if (localStorage.getItem('currentPage') === 'contact') {
-            mainContent.style.display = 'none';
-            contactInfo.style.display = 'flex'; // Use flex display for centering
-        } else {
-            contactInfo.style.display = 'none';
-        }
-
-        contactLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            mainContent.style.display = 'none'; // Hide main content
-            contactInfo.style.display = 'flex'; // Show contact info
-            localStorage.setItem('currentPage', 'contact'); // Store current page
-        });
-
-        homeLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            contactInfo.style.display = 'none'; // Hide contact info
-            mainContent.style.display = 'block'; // Show main content
-            localStorage.removeItem('currentPage'); // Clear stored page
-        });
+        window.onload = checkVideoSupport;
     </script>
 </body>
 </html>
