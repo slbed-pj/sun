@@ -135,11 +135,11 @@
 
         /* Adjust different speeds for different texts */
         #price {
-            animation-duration: 20s; /* Slower orbit */
+            animation-duration: 10s; /* Slower orbit */
         }
 
         #custom {
-            animation-duration: 15s; /* Medium-speed orbit */
+            animation-duration: 20s; /* Medium-speed orbit */
         }
 
         #whats-next {
@@ -250,7 +250,7 @@
     <div id="whats-next" class="floating-text">WHAT'S NEXT?</div>
 
     <!-- Counter -->
-    <p id="counter">0.059</p>
+    <p id="counter">0.055</p>
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
@@ -283,7 +283,7 @@
 
     <!-- Counter Script -->
     <script>
-        let counterValue = 0.059;
+        let counterValue = 0.055;
         const counterElement = document.getElementById('counter');
 
         function updateCounter() {
