@@ -6,279 +6,192 @@
     <meta name="description" content="The Future">
     <title>Birth of September</title>
     <style>
-        @font-face {
-            font-family: 'Apple Garamond Light';
-            src: url('fonts/AppleGaramond-Light.ttf') format('truetype');
-            font-weight: normal;
-            font-style: italic;
-        }
-
+        /* Cleaned-up Fonts and Styling */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Apple Garamond Light', serif;
+            font-family: 'Roboto', sans-serif; /* Professional, clean font */
             color: #333;
             display: flex;
+            flex-direction: column;
+            height: 100vh;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            text-align: center;
             background: url('images/smac.png') no-repeat center center;
-            background-size: cover; /* Ensure spiral image covers the entire background */
+            background-size: cover;
         }
 
-        /* Video background and fallback image styles */
-        .video-background, .fallback-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            transform: translate(-50%, -50%) scale(0.42); /* Center the video or image and apply scaling */
-            border-radius: 50%; /* Create a circular mask */
-            z-index: -1; /* Place behind other content */
-        }
-
-        .video-background {
-            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-        }
-
-        .fallback-image {
-            display: none; /* Hide the fallback image by default */
-        }
-
-        /* Full page clickable area */
-        .clickable-area {
-            position: absolute;
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: #222;
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5;
-            display: block;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .navbar a {
+            color: #fff;
+            font-size: 1.2em;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Central Content */
         .content {
             position: relative;
             z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            text-align: center;
+            padding: 100px 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Light background for readability */
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: auto;
         }
 
-        /* Orbiting donut */
+        .content h1 {
+            font-family: 'Apple Garamond Light', serif; /* Keep your custom font */
+            font-size: 4em;
+            margin: 0.5em 0;
+            color: #4a0d0d;
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Styled Buttons */
+        .button {
+            background-color: #00A1D8;
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 1em;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #007bb5;
+        }
+
+        /* Orbiting Donut Styling */
         .orbit {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px; /* Adjust the size of the donut */
-            height: 800px; /* Adjust the size of the donut */
-            border: .000001px solid rgba(255, 255, 255, 0.3); /* Transparent donut */
+            width: 600px;
+            height: 600px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            transform: translate(-50%, -50%); /* Center the donut */
-            z-index: 5;
-        }
-
-        /* Positioning for orbiting elements */
-        #price, #custom, #whats-next {
             position: absolute;
-            font-size: calc(2em + 1vw);
-            color: #fff;
-            z-index: 15;
-            animation: orbit-text 10s linear infinite; /* Orbit text animation */
-        }
-
-        /* Positioning the price and custom around the donut */
-        #price {
             top: 50%;
             left: 50%;
-            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
-            animation: orbit-text 30s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Floating Text */
+        .floating-text {
+            position: absolute;
+            font-size: 2em;
+            animation: orbit 10s linear infinite;
+            color: #fff;
+        }
+
+        #price {
+            top: -100px;
+            animation: orbit 30s linear infinite;
         }
 
         #custom {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
-            animation: orbit-text 10s linear infinite;
+            bottom: -100px;
+            animation: orbit 20s linear infinite reverse;
         }
 
-        /* Add new div for 'WHATS NEXT' */
-        #whats-next {
-            position: absolute;
-            font-size: calc(2em + 1vw);
-            color: #fff;
-            z-index: 15;
-            animation: orbit-whats-next 15s linear infinite; /* Set the orbit animation */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(90deg) translateX(300px) rotate(-90deg); /* Adjusted radius and rotation */
-        }
-
-        /* Text orbit animation */
-        @keyframes orbit-text {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
+        /* Orbiting Animation */
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg) translateX(300px) rotate(0deg);
             }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
+            to {
+                transform: rotate(360deg) translateX(300px) rotate(-360deg);
             }
-        }
-
-        /* Orbit animation for 'WHATS NEXT' */
-        @keyframes orbit-whats-next {
-            0% {
-                transform: translate(-50%, -50%) rotate(90deg) translateX(300px) rotate(-90deg); /* Adjusted for increased radius */
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(450deg) translateX(300px) rotate(-450deg); /* Full circle rotation */
-            }
-        }
-
-        /* Styling for the link */
-        a {
-            text-decoration: none;
-            color: #00A1D8;
-            font-weight: bold;
-            display: inline-block;
-            position: relative;
-            z-index: 20;
-            transition: color 0.3s, text-shadow 0.3s;
-            font-size: 3em; /* Increased size */
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
-        }
-
-        a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
         }
 
         /* Counter Style */
         #counter {
             position: fixed;
             bottom: 10px;
-            left: 10px;
+            right: 10px;
             font-family: 'Courier New', monospace;
             font-size: 1.5em;
-            color: #6c757d;
-            background: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
+            color: white;
         }
 
-        /* Ruby text styles */
-        .ruby-text {
-            font-size: 5em; /* Default size for computers */
-            color: #4a0d0d; /* Darker ruby red color */
-            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
-        }
-
-        /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .ruby-text {
-                font-size: 3em; /* Slightly smaller on mobile devices */
+            .content h1 {
+                font-size: 2.5em;
             }
 
-            .text-moving {
-                font-size: calc(1em + 2vw);
+            .orbit {
+                width: 400px;
+                height: 400px;
             }
 
-            .clickable-area {
-                padding: 20px;
+            .button {
+                font-size: 1em;
+                padding: 10px 20px;
             }
 
             #counter {
                 font-size: 1em;
-                bottom: 5px;
-                left: 5px;
-            }
-        }
-
-        @media (max-width: 888px) {
-            .ruby-text {
-                font-size: 4em; /* Adjust as needed */
-            }
-
-            .text-moving {
-                font-size: calc(0.8em + 2vw);
-            }
-
-            #counter {
-                font-size: 0.8em;
-            }
-
-            /* Mobile-specific styles for circular fallback image and video background */
-            .video-background, .fallback-image {
-                width: 100vw;
-                height: 100vw; /* Ensure height is equal to width for circular shape */
-                border-radius: 50%; /* Circular shape */
-                transform: translate(-50%, -50%); /* Center the element */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
-
-    <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background">
-        <source src="images/BLINK.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Full page clickable link -->
-    <a href="https://soundcloud.com/sankinchu?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" class="clickable-area"></a>
-
-    <div class="content">
-        <div id="price">S$A&N</div> <!-- Price at the top -->
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
-        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8">?????????</a>
-        <p id="custom" class="custom">$%5#@0&!0*^</p> <!-- Text at the bottom -->
-        <div id="whats-next">WHAT?S NEXT?</div> <!-- New orbiting text -->
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
     </div>
 
-    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
+    <!-- Main Content -->
+    <div class="content">
+        <h1>SAN·KIN·CHU</h1>
+        <p>Welcome to the future, a new world awaits.</p>
+        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="button">Explore Sound</a>
+    </div>
 
+    <!-- Orbiting Donut -->
+    <div class="orbit"></div>
+    <div id="price" class="floating-text">S$A&N</div>
+    <div id="custom" class="floating-text">$%5#@0&!0*^</div>
+
+    <!-- Counter -->
     <p id="counter">0.059</p>
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
 
-    <!-- Check for video support -->
-    <script>
-        function checkVideoSupport() {
-            const video = document.getElementById('video-background');
-            const fallbackImage = document.getElementById('fallback-image');
-
-            // Check if the video can play
-            const canPlayVideo = !!video.canPlayType('video/mp4');
-
-            if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
-                video.style.display = 'none';
-                fallbackImage.style.display = 'block';
-            } else {
-                // Show the video and hide the fallback image
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
-            }
-        }
-
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
-
-    <!-- Counter script -->
+    <!-- Counter Script -->
     <script>
         let counterValue = 0.059;
         const counterElement = document.getElementById('counter');
