@@ -5,205 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Future">
     <title>Birth of September</title>
-    <link rel="stylesheet" href="path/to/apple_garamond/AppleGaramond-LightItalic.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <style>
-        /* Dark Mode Styling */
+        @font-face {
+            font-family: 'Apple Garamond Light';
+            src: url('fonts/AppleGaramond-Light.ttf') format('truetype');
+            font-weight: normal;
+            font-style: italic;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Apple Garamond Light Italic', serif;
-            color: #fff;
+            font-family: 'Apple Garamond Light', serif;
+            color: #333;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            justify-content: center;
-            align-items: center;
-            background-color: #121212;
             overflow: hidden;
-        }
-
-        /* Top Bar Styling */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            color: #fff;
-        }
-
-        .top-bar a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 20px;
+            position: relative;
+            text-align: center;
+            background: url('images/spiral.png') no-repeat center center;
+            background-size: cover; /* Ensure spiral image covers the entire background */
         }
 
         /* Video background and fallback image styles */
         .video-background, .fallback-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        .fallback-image {
-            display: none;
-        }
-
-        /* Centered Content */
-        .content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 1000px;
-            background: rgba(18, 18, 18, 0.9);
-            padding: 50px;
-            border-radius: 15px;
-        }
-
-        /* Ruby Text Styling */
-        .ruby-text {
-            font-size: 5em; /* Default size */
-            color: #b22222; /* Dark red */
-            text-shadow: 0 0 10px #b22222, 0 0 20px #b22222, 0 0 30px #ff4500; /* Glowing ruby effect */
-            margin: 20px 0;
-        }
-
-        /* Emerald Text Styling */
-        .emerald-text {
-            font-size: 2.2em; /* Adjust size as needed */
-            color: #50C878; /* Emerald green color */
-            text-shadow: 0 0 10px #50C878, 0 0 20px #50C878, 0 0 30px #50C878; /* Glowing emerald effect */
-            text-decoration: none; /* Remove underline */
-            margin-top: 20px; /* Space between texts */
-        }
-
-        /* Orbiting Donut Styling */
-        .orbit {
-            width: 600px;
-            height: 600px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(0.42); /* Center the video or image and apply scaling */
+            border-radius: 50%; /* Create a circular mask */
+            z-index: -1; /* Place behind other content */
         }
 
-        /* Floating Text Styling */
-        .floating-text {
+        .video-background {
+            mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+        }
+
+        .fallback-image {
+            display: none; /* Hide the fallback image by default */
+        }
+
+        /* Full page clickable area */
+        .clickable-area {
             position: absolute;
-            font-size: 2.2em;
-            color: #006400; /* Dark emerald green */
-            text-shadow: 0 0 10px #006400, 0 0 20px #006400, 0 0 30px #50C878; /* Glowing effect */
-            transform-origin: 300px 0; /* Set origin for orbiting */
-            animation: orbit 20s linear infinite; /* Default orbit speed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: block;
         }
 
-        /* Adjust different speeds for different texts */
+        .content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Orbiting donut */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px; /* Adjust the size of the donut */
+            height: 800px; /* Adjust the size of the donut */
+            border: .000001px solid rgba(255, 255, 255, 0.3); /* Transparent donut */
+            border-radius: 50%;
+            transform: translate(-50%, -50%); /* Center the donut */
+            z-index: 5;
+        }
+
+        /* Positioning for orbiting elements */
+        #price, #moving-text {
+            position: absolute;
+            font-size: calc(2em + 1vw);
+            color: #fff;
+            z-index: 15;
+            animation: orbit-text 10s linear infinite; /* Orbit text animation */
+        }
+
+        /* Positioning the price and moving text around the donut */
         #price {
-            animation-duration: 20s; /* Slower orbit */
+            top: 50%;
+            left: 50%;
+            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
+            animation: orbit-text 30s linear infinite;
         }
 
-        #custom {
-            animation-duration: 15s; /* Medium-speed orbit */
+        #moving-text {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
+            animation: orbit-text 10s linear infinite;
         }
 
-        #whats-next {
-            animation-duration: 25s; /* Slowest orbit */
-        }
-
-        /* Orbiting Animation */
-        @keyframes orbit {
+        /* Text orbit animation */
+        @keyframes orbit-text {
             0% {
-                transform: rotate(0deg) translateX(300px) rotate(0deg); /* Orbit around center */
+                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
             }
             100% {
-                transform: rotate(360deg) translateX(300px) rotate(-360deg); /* Complete rotation */
+                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
             }
         }
 
-        /* Counter Styling */
+        /* Styling for the link */
+        a {
+            text-decoration: none;
+            color: #00A1D8;
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+            z-index: 20;
+            transition: color 0.3s, text-shadow 0.3s;
+            font-size: 3em; /* Increased size */
+            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
+        }
+
+        a:hover {
+            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
+        }
+
+        /* Counter Style */
         #counter {
             position: fixed;
             bottom: 10px;
-            right: 10px;
+            left: 10px;
             font-family: 'Courier New', monospace;
             font-size: 1.5em;
-            background-color: rgba(0, 0, 0, 0.8);
+            color: #6c757d;
+            background: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 10px;
-            color: white;
         }
 
-        /* Contact Info Styling */
-        .contact-info {
-            display: none;
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 1000px;
-            background: rgba(255, 255, 255, 0.2); /* Transparent white background */
-            padding: 50px;
-            border-radius: 15px;
-            align-self: center; /* Center the content */
+        /* Ruby text styles */
+        .ruby-text {
+            font-size: 5em; /* Default size for computers */
+            color: #4a0d0d; /* Darker ruby red color */
+            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
         }
 
-        /* Responsive Design */
+        /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em; /* Adjust size for mobile */
+                font-size: 3em; /* Slightly smaller on mobile devices */
             }
 
-            .orbit {
-                width: 400px;
-                height: 400px;
+            .text-moving {
+                font-size: calc(1em + 2vw);
             }
 
-            .floating-text {
-                transform-origin: 200px 0; /* Adjust for smaller screens */
+            .clickable-area {
+                padding: 20px;
             }
 
             #counter {
                 font-size: 1em;
-            }
-
-            .content, .contact-info {
-                padding: 30px; /* Smaller padding for mobile */
+                bottom: 5px;
+                left: 5px;
             }
         }
 
-        /* Ensure video/image works on mobile */
-        @media (max-width: 480px) {
-            .video-background, .fallback-image {
-                width: 100vw;
-                height: 100vh;
-                object-fit: cover;
+        @media (max-width: 888px) {
+            .ruby-text {
+                font-size: 4em; /* Adjust as needed */
             }
 
-            .floating-text {
-                transform-origin: 150px 0; /* Adjust for smaller screens */
+            .text-moving {
+                font-size: calc(0.8em + 2vw);
+            }
+
+            #counter {
+                font-size: 0.8em;
+            }
+
+            /* Mobile-specific styles for circular fallback image and video background */
+            .video-background, .fallback-image {
+                width: 100vw;
+                height: 100vw; /* Ensure height is equal to width for circular shape */
+                border-radius: 50%; /* Circular shape */
+                transform: translate(-50%, -50%); /* Center the element */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <a href="#" id="home-link">Home</a>
-        <a href="#" id="contact-link">Contact</a>
-    </div>
-
     <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
+    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
 
     <!-- Video background -->
     <video id="video-background" autoplay muted loop playsinline class="video-background">
@@ -211,31 +212,18 @@
         Your browser does not support the video tag.
     </video>
 
-    <!-- Main Content -->
-    <div class="content" id="main-content">
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
-        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?????????</a> <!-- Glowing emerald Link -->
+    <!-- Full page clickable link -->
+    <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
+
+    <div class="content">
+        <div id="price">$22.99</div> <!-- Price at the top -->
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
+        <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
+        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
     </div>
 
-    <!-- Contact Information -->
-    <div class="contact-info" id="contact-info">
-        <div class="ruby-text">Contact Info</div>
-        <div style="margin-top: 20px;">
-            <a href="https://www.instagram.com/sankinchu/" class="emerald-text">INSTAGRAM HERE</a>
-            <br>
-            <a href="https://twitter.com/sankinchu" class="emerald-text">TWITTER HERE</a>
-        </div>
-    </div>
+    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
 
-    <!-- Orbiting Donut -->
-    <div class="orbit"></div>
-
-    <!-- Orbiting Text with Dark Emerald Glow -->
-    <div id="price" class="floating-text">S$A&N</div>
-    <div id="custom" class="floating-text">$%5#@0&!0*^</div>
-    <div id="whats-next" class="floating-text">WHAT'S NEXT?</div>
-
-    <!-- Counter -->
     <p id="counter">0.059</p>
 
     <!-- Include GSAP and Matter.js -->
@@ -262,7 +250,22 @@
             }
         }
 
-        window.onload = checkVideoSupport;
+        // Run the check on page load
+        document.addEventListener('DOMContentLoaded', checkVideoSupport);
+        window.addEventListener('resize', checkVideoSupport);
+    </script>
+
+    <!-- Counter script -->
+    <script>
+        let counterValue = 0.059;
+        const counterElement = document.getElementById('counter');
+
+        function updateCounter() {
+            counterValue += 0.001;
+            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
+        }
+
+        setInterval(updateCounter, 200); // Update every 200 milliseconds
     </script>
 </body>
 </html>
