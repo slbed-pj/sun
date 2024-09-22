@@ -78,10 +78,13 @@
         /* Contact Info Styling */
         .contact-info {
             display: none;
-            position: relative;
-            z-index: 10;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20; /* Higher than main content */
             text-align: center;
-            max-width: 1000px;
             background: rgba(255, 255, 255, 0.1); /* Transparent white background */
             padding: 50px;
             border-radius: 15px;
