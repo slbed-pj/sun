@@ -133,17 +133,20 @@
             animation: orbit 10s linear infinite; /* Default orbit speed */
         }
 
-        /* Adjust different speeds for different texts */
+        /* Adjust different speeds and starting points for different texts */
         #price {
             animation-duration: 20s; /* Slower orbit */
+            animation-delay: 0s; /* Start immediately */
         }
 
         #custom {
             animation-duration: 15s; /* Medium-speed orbit */
+            animation-delay: 5s; /* Start 5 seconds later */
         }
 
         #whats-next {
             animation-duration: 30s; /* Slowest orbit */
+            animation-delay: 10s; /* Start 10 seconds later */
         }
 
         /* Orbiting Animation */
