@@ -137,6 +137,18 @@
             color: white;
         }
 
+        /* Contact Info Styling */
+        .contact-info {
+            display: none;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            background: rgba(18, 18, 18, 0.9);
+            padding: 50px;
+            border-radius: 15px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .ruby-text {
@@ -174,11 +186,11 @@
 <body>
     <!-- Top Bar -->
     <div class="top-bar">
-        <a href="#" style="color: #fff; text-decoration: none;">Contact</a>
+        <a href="#" id="contact-link" style="color: #fff; text-decoration: none;">Contact</a>
     </div>
 
     <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
+    <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
 
     <!-- Video background -->
     <video id="video-background" autoplay muted loop playsinline class="video-background">
@@ -187,9 +199,16 @@
     </video>
 
     <!-- Main Content -->
-    <div class="content">
+    <div class="content" id="main-content">
         <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
         <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?????????</a> <!-- Glowing emerald Link -->
+    </div>
+
+    <!-- Contact Information -->
+    <div class="contact-info" id="contact-info">
+        <div class="ruby-text">Contact Information</div>
+        <p style="color: #fff;">Email: example@example.com</p>
+        <p style="color: #fff;">Phone: (123) 456-7890</p>
     </div>
 
     <!-- Orbiting Donut -->
@@ -244,5 +263,19 @@
 
         setInterval(updateCounter, 200); // Update every 200 milliseconds
     </script>
+
+    <!-- Contact Link Script -->
+    <script>
+        const contactLink = document.getElementById('contact-link');
+        const mainContent = document.getElementById('main-content');
+        const contactInfo = document.getElementById('contact-info');
+
+        contactLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            mainContent.style.display = 'none'; // Hide main content
+            contactInfo.style.display = 'block'; // Show contact info
+        });
+    </script>
 </body>
 </html>
+
