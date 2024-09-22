@@ -21,33 +21,6 @@
             overflow: hidden;
         }
 
-        /* Dark, minimalist navigation bar */
-        .navbar {
-            width: 100%;
-            padding: 20px 40px;
-            background-color: rgba(0, 0, 0, 0.9);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .navbar a {
-            color: #fff;
-            font-size: 1.2em;
-            margin: 0 20px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .navbar a:hover {
-            color: #00A1D8;
-        }
-
         /* Video background and fallback image styles */
         .video-background, .fallback-image {
             position: fixed;
@@ -74,37 +47,6 @@
             border-radius: 15px;
         }
 
-        .content h1 {
-            font-family: 'Apple Garamond Light', serif;
-            font-size: 4em;
-            margin: 0.5em 0;
-            color: #e63946;
-            text-shadow: 0 0 5px #e63946, 0 0 10px #e63946;
-        }
-
-        .content p {
-            font-size: 1.4em;
-            color: #f8f9fa;
-            line-height: 1.6;
-        }
-
-        /* Dark Mode Button Styling */
-        .button {
-            background-color: #00A1D8;
-            border: none;
-            padding: 15px 30px;
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin: 1em;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
-        }
-
-        .button:hover {
-            background-color: #007bb5;
-        }
-
         /* Orbiting Donut Styling */
         .orbit {
             width: 600px;
@@ -122,9 +64,9 @@
             position: absolute;
             font-size: 2.2em;
             color: #ff7700;
-            transform-origin: 300px 300px; /* Origin at the center of the orbit */
-            animation: orbit 10s linear infinite;
             text-shadow: 0 0 10px #ff7700, 0 0 20px #ff7700, 0 0 30px #ff7700; /* Jewel glow effect */
+            transform-origin: 300px 0; /* Set origin for orbiting */
+            animation: orbit 20s linear infinite; /* Default orbit speed */
         }
 
         /* Adjust different speeds for different texts */
@@ -143,10 +85,10 @@
         /* Orbiting Animation */
         @keyframes orbit {
             0% {
-                transform: rotate(0deg) translateX(300px); /* Circle path around the center */
+                transform: rotate(0deg) translateX(300px) rotate(0deg); /* Orbit around center */
             }
             100% {
-                transform: rotate(360deg) translateX(300px); /* Complete rotation */
+                transform: rotate(360deg) translateX(300px) rotate(-360deg); /* Complete rotation */
             }
         }
 
@@ -175,8 +117,7 @@
             }
 
             .floating-text {
-                transform-origin: 200px 200px;
-                animation: orbit 10s linear infinite;
+                transform-origin: 200px 0; /* Adjust for smaller screens */
             }
 
             #counter {
@@ -193,19 +134,12 @@
             }
 
             .floating-text {
-                transform-origin: 150px 150px;
+                transform-origin: 150px 0; /* Adjust for smaller screens */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Dark Navigation Bar -->
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </div>
-
     <!-- Fallback image -->
     <img id="fallback-image" class="fallback-image" src="images/san.jpg" alt="Fallback Image">
 
