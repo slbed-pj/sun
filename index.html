@@ -7,225 +7,250 @@
     <title>Birth of September</title>
     <style>
         @font-face {
-            font-family: 'Apple Garamond Light';
-            src: url('fonts/AppleGaramond-Light.ttf') format('truetype');
+            font-family: 'Apple Garamond';
+            src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
             font-weight: normal;
             font-style: italic;
         }
 
+        /* Apply font to html and body for inheritance */
+        html, body {
+            font-family: 'Apple Garamond', serif;
+        }
+
+        /* Dark Mode Styling */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Apple Garamond Light', serif;
-            color: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            overflow: hidden;
+        }
+
+        /* Top Bar Styling */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            text-align: center;
-            background: url('images/fallback-image.jpg') no-repeat center center;
-            background-size: cover; /* Ensure fallback image covers the entire background */
+            z-index: 100;
+            color: #fff;
+        }
+
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
         }
 
         /* Video background and fallback image styles */
         .video-background, .fallback-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            transform: translate(-50%, -50%) scale(0.42); /* Center the video or image and apply scaling */
-            border-radius: 50%; /* Create a circular mask */
-            z-index: -1; /* Place behind other content */
-        }
-
-        .video-background {
-            /* Disable mask-image for troubleshooting */
-            /* mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
-            /* -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%); */
+            z-index: -1;
         }
 
         .fallback-image {
-            display: none; /* Hide the fallback image by default */
+            display: none;
         }
 
-        /* Full page clickable area */
-        .clickable-area {
+        /* Centered Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1000px;
+            background: rgba(18, 18, 18, 0.9);
+            padding: 50px;
+            border-radius: 15px;
+        }
+
+        /* Contact Info Styling */
+        .contact-info {
+            display: none;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 5;
-            display: block;
+            z-index: 20; /* Higher than main content */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            background: rgba(255, 255, 255, 0.1); /* Transparent white background */
         }
 
-        .content {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        /* Ruby Text Styling */
+        .ruby-text {
+            font-size: 5em; /* Default size */
+            color: #b22222; /* Dark red */
+            text-shadow: 0 0 10px #b22222, 0 0 20px #b22222, 0 0 30px #ff4500; /* Glowing ruby effect */
+            margin: 20px 0;
         }
 
-        /* Orbiting donut */
+        /* Emerald Text Styling */
+        .emerald-text {
+            font-size: 2.2em; /* Adjust size as needed */
+            color: #50C878; /* Emerald green color */
+            text-shadow: 0 0 10px #50C878, 0 0 20px #50C878, 0 0 30px #50C878; /* Glowing emerald effect */
+            text-decoration: none; /* Remove underline */
+            margin-top: 20px; /* Space between texts */
+        }
+
+        /* Orbiting Donut Styling */
         .orbit {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 800px; /* Adjust the size of the donut */
-            height: 800px; /* Adjust the size of the donut */
-            border: .000001px solid rgba(255, 255, 255, 0.3); /* Transparent donut */
+            width: 600px;
+            height: 600px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            transform: translate(-50%, -50%); /* Center the donut */
-            z-index: 5;
-        }
-
-        /* Positioning for orbiting elements */
-        #price, #moving-text {
             position: absolute;
-            font-size: calc(2em + 1vw);
-            color: #fff;
-            z-index: 15;
-            animation: orbit-text 10s linear infinite; /* Orbit text animation */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        /* Positioning the price and moving text around the donut */
+        /* Floating Text Styling */
+        .floating-text {
+            position: absolute;
+            font-size: 2.2em;
+            color: #006400; /* Dark emerald green */
+            text-shadow: 0 0 10px #006400, 0 0 20px #006400, 0 0 30px #50C878; /* Glowing effect */
+            transform-origin: 300px 0; /* Set origin for orbiting */
+            animation: orbit 20s linear infinite; /* Default orbit speed */
+        }
+
+        /* Adjust different speeds for different texts */
         #price {
-            top: 50%;
-            left: 50%;
-            transform: translate(-70%, -70%) rotate(0deg) translateX(300px) rotate(0deg); /* Increased radius */
-            animation: orbit-text 23s linear infinite;
+            animation-duration: 20s; /* Slower orbit */
         }
 
-        #moving-text {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg); /* Increased radius */
-            animation: orbit-text 7s linear infinite;
+        #custom {
+            animation-duration: 15s; /* Medium-speed orbit */
         }
 
-        /* Text orbit animation */
-        @keyframes orbit-text {
+        #whats-next {
+            animation-duration: 25s; /* Slowest orbit */
+        }
+
+        /* Orbiting Animation */
+        @keyframes orbit {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); /* Adjusted for increased radius */
+                transform: rotate(0deg) translateX(300px) rotate(0deg); /* Orbit around center */
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); /* Adjusted for increased radius */
+                transform: rotate(360deg) translateX(300px) rotate(-360deg); /* Complete rotation */
             }
         }
 
-        /* Styling for the link */
-        a {
-            text-decoration: none;
-            color: #00A1D8;
-            font-weight: bold;
-            display: inline-block;
-            position: relative;
-            z-index: 20;
-            transition: color 0.3s, text-shadow 0.3s;
-            font-size: 3em; /* Increased size */
-            text-shadow: 0 0 3px #00A1D8, 0 0 6px #00A1D8, 0 0 9px #00A1D8;
-        }
-
-        a:hover {
-            text-shadow: 0 0 6px #00A1D8, 0 0 12px #00A1D8, 0 0 18px #00A1D8;
-        }
-
-        /* Counter Style */
+        /* Counter Styling */
         #counter {
             position: fixed;
             bottom: 10px;
-            left: 10px;
+            right: 10px;
             font-family: 'Courier New', monospace;
             font-size: 1.5em;
-            color: #6c757d;
-            background: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             border-radius: 10px;
+            color: white;
         }
 
-        /* Ruby text styles */
-        .ruby-text {
-            font-size: 5em; /* Default size for computers */
-            color: #4a0d0d; /* Darker ruby red color */
-            text-shadow: 0 0 5px #4a0d0d, 0 0 10px #4a0d0d, 0 0 15px #4a0d0d; /* Enhanced ruby red effect */
-        }
-
-        /* Ensure 'SAN·KIN·CHU' stays in one line on mobile devices */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em; /* Slightly smaller on mobile devices */
+                font-size: 3em; /* Adjust size for mobile */
             }
 
-            .text-moving {
-                font-size: calc(1em + 2vw);
+            .emerald-text {
+                font-size: 1.5em; /* Adjust size for mobile */
             }
 
-            .clickable-area {
-                padding: 20px;
+            .orbit {
+                width: 400px;
+                height: 400px;
+            }
+
+            .floating-text {
+                transform-origin: 200px 0; /* Adjust for smaller screens */
             }
 
             #counter {
                 font-size: 1em;
-                bottom: 5px;
-                left: 5px;
             }
         }
 
-        @media (max-width: 888px) {
-            .ruby-text {
-                font-size: 4em; /* Adjust as needed */
-            }
-
-            .text-moving {
-                font-size: calc(0.8em + 2vw);
-            }
-
-            #counter {
-                font-size: 0.8em;
-            }
-
-            /* Mobile-specific styles for circular fallback image and video background */
+        /* Ensure video/image works on mobile */
+        @media (max-width: 480px) {
             .video-background, .fallback-image {
                 width: 100vw;
-                height: 100vw; /* Ensure height is equal to width for circular shape */
-                border-radius: 50%; /* Circular shape */
-                transform: translate(-50%, -50%); /* Center the element */
+                height: 100vh;
+                object-fit: cover;
+            }
+
+            .floating-text {
+                transform-origin: 150px 0; /* Adjust for smaller screens */
             }
         }
     </style>
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <a href="#" id="home-link">Home</a>
+        <a href="#" id="contact-link">Contact</a>
+    </div>
+
     <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/fallback-image.jpg" alt="Fallback Image">
+    <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
 
     <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background" poster="images/fallback-image.jpg">
+    <video id="video-background" autoplay muted loop playsinline class="video-background">
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Full page clickable link -->
-    <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu" class="clickable-area"></a>
-
-    <div class="content">
-        <div id="price">$22.99</div> <!-- Price at the top -->
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
-        <a href="https://posh.vip/e/king-of-the-hill-showcase?t=sankinchu">TICKETS HERE</a>
-        <p id="moving-text" class="text-moving">click ti^ckets here</p> <!-- Text at the bottom -->
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
+        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?????????</a> <!-- Glowing emerald Link -->
     </div>
 
-    <div class="orbit"></div> <!-- Transparent donut for orbiting effect -->
+    <!-- Contact Information -->
+    <div class="contact-info" id="contact-info">
+        <div class="content">
+            <div class="ruby-text">Contact Info</div>
+            <div style="margin-top: 20px;">
+                <a href="https://www.instagram.com/sankinchu/" class="emerald-text">INSTAGRAM HERE</a>
+                <br>
+                <a href="https://twitter.com/sankinchu" class="emerald-text">TWITTER HERE</a>
+            </div>
+        </div>
+    </div>
 
-    <p id="counter">0.058</p>
+    <!-- Orbiting Donut -->
+    <div class="orbit"></div>
+
+    <!-- Orbiting Text with Dark Emerald Glow -->
+    <div id="price" class="floating-text">S$A&N</div>
+    <div id="custom" class="floating-text">$%5#@0&!0*^</div>
+    <div id="whats-next" class="floating-text">WHAT'S NEXT?</div>
+
+    <!-- Counter -->
+    <p id="counter">0.059</p>
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
@@ -238,18 +263,65 @@
             const fallbackImage = document.getElementById('fallback-image');
 
             // Check if the video can play
-            video.onerror = function() {
-                video.style.display = 'none'; // Hide the video if it cannot play
-                fallbackImage.style.display = 'block'; // Show fallback image
-            };
+            const canPlayVideo = !!video.canPlayType('video/mp4');
 
-            // If the video loads, hide the fallback image
-            video.oncanplay = function() {
-                fallbackImage.style.display = 'none'; // Hide fallback image when video is ready
-            };
+            if (!canPlayVideo || window.innerWidth < 768) {
+                // Hide the video and show the fallback image
+                video.style.display = 'none';
+                fallbackImage.style.display = 'block';
+            } else {
+                // Show the video and hide the fallback image
+                video.style.display = 'block';
+                fallbackImage.style.display = 'none';
+            }
         }
 
-        checkVideoSupport();
+        // Run the check on page load
+        document.addEventListener('DOMContentLoaded', checkVideoSupport);
+        window.addEventListener('resize', checkVideoSupport);
+    </script>
+
+    <!-- Counter Script -->
+    <script>
+        let counterValue = 0.059;
+        const counterElement = document.getElementById('counter');
+
+        function updateCounter() {
+            counterValue += 0.001;
+            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
+        }
+
+        setInterval(updateCounter, 200); // Update every 200 milliseconds
+    </script>
+
+    <!-- Navigation Script -->
+    <script>
+        const contactLink = document.getElementById('contact-link');
+        const homeLink = document.getElementById('home-link');
+        const mainContent = document.getElementById('main-content');
+        const contactInfo = document.getElementById('contact-info');
+
+        // Check local storage to set initial page
+        if (localStorage.getItem('currentPage') === 'contact') {
+            mainContent.style.display = 'none';
+            contactInfo.style.display = 'flex'; // Use flex display for centering
+        } else {
+            contactInfo.style.display = 'none';
+        }
+
+        contactLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            mainContent.style.display = 'none'; // Hide main content
+            contactInfo.style.display = 'flex'; // Show contact info
+            localStorage.setItem('currentPage', 'contact'); // Store current page
+        });
+
+        homeLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            contactInfo.style.display = 'none'; // Hide contact info
+            mainContent.style.display = 'block'; // Show main content
+            localStorage.removeItem('currentPage'); // Clear stored page
+        });
     </script>
 </body>
 </html>
