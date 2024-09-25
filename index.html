@@ -218,7 +218,7 @@
     <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
 
     <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background">
+    <video id="video-background" muted loop playsinline class="video-background">
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -292,6 +292,30 @@
         }
 
         setInterval(updateCounter, 200); // Update every 200 milliseconds
+    </script>
+
+    <!-- Video Movement Based on Mouse Movement -->
+    <script>
+        const videoBackground = document.getElementById('video-background');
+
+        // Start video paused and control with mouse movement
+        videoBackground.pause();
+
+        document.addEventListener('mousemove', (e) => {
+            // Calculate horizontal movement percentage
+            const movePercent = e.clientX / window.innerWidth;
+            
+            // Adjust video playback speed based on mouse movement (0.5x to 2x)
+            videoBackground.playbackRate = 0.5 + movePercent * 1.5;
+
+            if (videoBackground.paused) {
+                videoBackground.play(); // Play the video when the mouse starts moving
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            videoBackground.pause(); // Pause the video when the mouse leaves the window
+        });
     </script>
 
     <!-- Navigation Script -->
