@@ -256,7 +256,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
 
-    <!-- Check for video support -->
+    <!-- Check for video support and fallback -->
     <script>
         function checkVideoSupport() {
             const video = document.getElementById('video-background');
@@ -275,27 +275,25 @@
     <script>
         const videoBackground = document.getElementById('video-background');
 
-        // Start video paused and control with mouse movement
-        videoBackground.pause();
-
         let lastMouseX = 0; // Track the last mouse position
+        const videoSpeedFactor = 0.05; // Control video speed by adjusting this
 
         document.addEventListener('mousemove', (e) => {
             const currentMouseX = e.clientX;
 
             if (currentMouseX > lastMouseX) {
-                // Mouse moved to the right, play video forward
-                videoBackground.playbackRate = 1; // Normal forward speed
+                // Mouse moved to the right, move the video forward
+                videoBackground.currentTime += videoSpeedFactor;
             } else if (currentMouseX < lastMouseX) {
-                // Mouse moved to the left, play video backward
-                videoBackground.playbackRate = -1; // Reverse playback
+                // Mouse moved to the left, move the video backward
+                videoBackground.currentTime -= videoSpeedFactor;
             }
 
             if (videoBackground.paused) {
-                videoBackground.play(); // Play the video when the mouse starts moving
+                videoBackground.play(); // Start the video if it is paused
             }
 
-            lastMouseX = currentMouseX; // Update last mouse position
+            lastMouseX = currentMouseX; // Update the last mouse position
         });
 
         document.addEventListener('mouseleave', () => {
