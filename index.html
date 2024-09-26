@@ -68,29 +68,29 @@
             display: none;
         }
 
-        /* Centered Content */
+        /* Centered Content (SAN·KIN·CHU) */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
-            max-width: 1000px;
+            width: 300px; /* Make width and height equal for circle */
+            height: 300px;
             background: rgba(18, 18, 18, 0.9);
             padding: 50px;
-            border-radius: 15px;
+            border-radius: 50%; /* Make it circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Contact Info Styling */
-        .contact-info {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 20; /* Higher than main content */
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+        .contact-info .content {
+            width: 300px; /* Adjust width */
+            height: 300px; /* Adjust height */
+            border-radius: 50%; /* Make it circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: rgba(255, 255, 255, 0.1); /* Transparent white background */
         }
 
@@ -262,66 +262,14 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            // Check if the video can play
-            const canPlayVideo = !!video.canPlayType('video/mp4');
-
-            if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
+            if (!video.canPlayType('video/mp4')) {
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
-            } else {
-                // Show the video and hide the fallback image
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
             }
         }
 
-        // Run the check on page load
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
-    </script>
-
-    <!-- Counter Script -->
-    <script>
-        let counterValue = 0.055;
-        const counterElement = document.getElementById('counter');
-
-        function updateCounter() {
-            counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
-        }
-
-        setInterval(updateCounter, 200); // Update every 200 milliseconds
-    </script>
-
-    <!-- Navigation Script -->
-    <script>
-        const contactLink = document.getElementById('contact-link');
-        const homeLink = document.getElementById('home-link');
-        const mainContent = document.getElementById('main-content');
-        const contactInfo = document.getElementById('contact-info');
-
-        // Check local storage to set initial page
-        if (localStorage.getItem('currentPage') === 'contact') {
-            mainContent.style.display = 'none';
-            contactInfo.style.display = 'flex'; // Use flex display for centering
-        } else {
-            contactInfo.style.display = 'none';
-        }
-
-        contactLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            mainContent.style.display = 'none'; // Hide main content
-            contactInfo.style.display = 'flex'; // Show contact info
-            localStorage.setItem('currentPage', 'contact'); // Store current page
-        });
-
-        homeLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            contactInfo.style.display = 'none'; // Hide contact info
-            mainContent.style.display = 'block'; // Show main content
-            localStorage.removeItem('currentPage'); // Clear stored page
-        });
+        // Check video support on page load
+        window.onload = checkVideoSupport;
     </script>
 </body>
 </html>
