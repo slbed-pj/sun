@@ -73,25 +73,35 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            width: 300px; /* Make width and height equal for circle */
+            width: 300px; /* Circle size */
             height: 300px;
             background: rgba(18, 18, 18, 0.9);
             padding: 50px;
-            border-radius: 50%; /* Make it circular */
+            border-radius: 50%; /* Circular */
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Contact Info Styling */
+        /* Contact Info Page */
+        .contact-info {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+            display: none; /* Hidden initially, will appear later */
+        }
+
         .contact-info .content {
-            width: 300px; /* Adjust width */
-            height: 300px; /* Adjust height */
-            border-radius: 50%; /* Make it circular */
+            width: 300px;
+            height: 300px;
+            border-radius: 50%; /* Circular */
+            background: rgba(255, 255, 255, 0.1); /* Transparent white background */
             display: flex;
             justify-content: center;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1); /* Transparent white background */
         }
 
         /* Ruby Text Styling */
@@ -229,7 +239,7 @@
         <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?C?L?I?C?K?</a> <!-- Glowing emerald Link -->
     </div>
 
-    <!-- Contact Information -->
+    <!-- Contact Information (Initially hidden) -->
     <div class="contact-info" id="contact-info">
         <div class="content">
             <div class="ruby-text">Contact Info</div>
@@ -254,14 +264,25 @@
 
     <!-- Include GSAP and Matter.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.3/matter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 
-    <!-- Check for video support -->
+    <!-- JavaScript for video fallback and interactivity -->
     <script>
-        function checkVideoSupport() {
-            const video = document.getElementById('video-background');
-            const fallbackImage = document.getElementById('fallback-image');
+        const video = document.getElementById('video-background');
+        const fallbackImage = document.getElementById('fallback-image');
+        const contactLink = document.getElementById('contact-link');
+        const contactInfo = document.getElementById('contact-info');
+        const mainContent = document.getElementById('main-content');
 
+        // Show contact info when clicking the "Contact" link
+        contactLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            mainContent.style.display = 'none'; // Hide main content
+            contactInfo.style.display = 'block'; // Show contact info
+        });
+
+        // Check if video is supported, if not, use fallback image
+        function checkVideoSupport() {
             if (!video.canPlayType('video/mp4')) {
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
