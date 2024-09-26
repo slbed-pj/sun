@@ -51,6 +51,7 @@
             color: #fff;
             text-decoration: none;
             margin: 0 20px;
+            cursor: pointer;
         }
 
         /* Video background and fallback image styles */
@@ -75,15 +76,21 @@
             text-align: center;
             background: rgba(18, 18, 18, 0.9);
             padding: 50px;
-            border-radius: 50%; /* Circular background */
+            width: 300px;
+            height: 300px;
+            border-radius: 50%; /* Perfect Circular background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         /* Contact Info Page */
         .contact-info {
             position: absolute;
-            bottom: 10%;
+            top: 50%; /* Ensure it's vertically centered */
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             z-index: 10;
             text-align: center;
             display: none; /* Hidden initially, will appear later */
@@ -97,6 +104,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
 
         /* Ruby Text Styling */
@@ -251,14 +259,14 @@
 
     <!-- Orbiting Text with Dark Emerald Glow -->
     <div id="price" class="floating-text">AC</div>
-    <div id="custom" class="floating-text">$%5#@0&!0*^</div>
-    <div id="whats-next" class="floating-text">11/02</div>
+    <div id="custom" class="floating-text">$</div>
+    <div id="whats-next" class="floating-text">BIRTH</div>
 
     <!-- Counter -->
-    <p id="counter">0.055</p>
+    <div id="counter">Count: 0</div>
 
-    <!-- Include GSAP and Matter.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- GSAP & Matter.js Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 
     <!-- JavaScript for interactivity -->
@@ -266,6 +274,7 @@
         const video = document.getElementById('video-background');
         const fallbackImage = document.getElementById('fallback-image');
         const contactLink = document.getElementById('contact-link');
+        const homeLink = document.getElementById('home-link');
         const contactInfo = document.getElementById('contact-info');
         const mainContent = document.getElementById('main-content');
 
@@ -274,6 +283,13 @@
             event.preventDefault();
             mainContent.style.display = 'none'; // Hide main content
             contactInfo.style.display = 'block'; // Show contact info
+        });
+
+        // Show main content when clicking "Home" link
+        homeLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            contactInfo.style.display = 'none'; // Hide contact info
+            mainContent.style.display = 'flex'; // Show main content
         });
 
         // Check if video is supported, if not, use fallback image
