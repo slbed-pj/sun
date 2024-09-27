@@ -13,7 +13,6 @@
             font-style: italic;
         }
 
-        /* Apply font to html and body for inheritance */
         html, body {
             font-family: 'Apple Garamond', serif;
             margin: 0;
@@ -28,7 +27,6 @@
             overflow: hidden;
         }
 
-        /* Top Bar Styling */
         .top-bar {
             position: fixed;
             top: 0;
@@ -50,7 +48,6 @@
             cursor: pointer;
         }
 
-        /* Video background and fallback image styles */
         .video-background, .fallback-image {
             position: fixed;
             top: 0;
@@ -65,14 +62,14 @@
             display: none;
         }
 
-        /* Centered Content (SAN·KIN·CHU) */
+        /* Main Content (for SAN·KIN·CHU) */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
             background: rgba(18, 18, 18, 0.9);
-            width: 300px; /* Fixed width for circular shape */
-            height: 300px; /* Fixed height for circular shape */
+            width: 250px; /* Fixed width for circular shape */
+            height: 250px; /* Fixed height for circular shape */
             border-radius: 50%; /* Perfect Circular background */
             display: flex;
             justify-content: center;
@@ -80,10 +77,9 @@
             flex-direction: column;
         }
 
-        /* Contact Info Page */
         .contact-info {
             position: absolute;
-            top: 50%; /* Ensure it's vertically centered */
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
@@ -92,8 +88,8 @@
         }
 
         .contact-info .content {
-            width: 300px;
-            height: 300px;
+            width: 250px;
+            height: 250px;
             border-radius: 50%; /* Circular */
             background: rgba(255, 255, 255, 0.1); /* Transparent white background */
             display: flex;
@@ -102,7 +98,6 @@
             flex-direction: column;
         }
 
-        /* Ruby Text Styling */
         .ruby-text {
             font-size: 5em; /* Default size */
             color: #b22222; /* Dark red */
@@ -110,7 +105,6 @@
             margin: 20px 0;
         }
 
-        /* Emerald Text Styling */
         .emerald-text {
             font-size: 2.2em; /* Adjust size as needed */
             color: #50C878; /* Emerald green color */
@@ -119,7 +113,6 @@
             margin-top: 20px; /* Space between texts */
         }
 
-        /* Orbiting Donut Styling */
         .orbit {
             width: 600px;
             height: 600px;
@@ -131,7 +124,6 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Floating Text Styling */
         .floating-text {
             position: absolute;
             font-size: 2.2em;
@@ -141,7 +133,6 @@
             animation: orbit 10s linear infinite; /* Default orbit speed */
         }
 
-        /* Adjust different speeds for different texts */
         #price {
             animation-duration: 10s; /* Slower orbit */
         }
@@ -154,7 +145,6 @@
             animation-duration: 30s; /* Slowest orbit */
         }
 
-        /* Orbiting Animation */
         @keyframes orbit {
             0% {
                 transform: rotate(0deg) translateX(300px) rotate(0deg); /* Orbit around center */
@@ -164,7 +154,6 @@
             }
         }
 
-        /* Counter Styling */
         #counter {
             position: fixed;
             bottom: 10px;
@@ -177,7 +166,6 @@
             color: white;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .ruby-text {
                 font-size: 3em; /* Adjust size for mobile */
@@ -201,14 +189,13 @@
             }
 
             .content {
-                width: 250px;
-                height: 250px;
-                padding: 30px;
+                width: 200px; /* Smaller for mobile */
+                height: 200px; /* Smaller for mobile */
             }
 
             .contact-info .content {
-                width: 250px;
-                height: 250px;
+                width: 200px;
+                height: 200px;
             }
         }
 
@@ -234,28 +221,23 @@
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
     <div class="top-bar">
         <a href="#" id="home-link">Home</a>
         <a href="#" id="contact-link">Contact</a>
     </div>
 
-    <!-- Fallback image -->
     <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
 
-    <!-- Video background -->
     <video id="video-background" autoplay muted loop playsinline class="video-background">
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
-    <!-- Main Content -->
     <div class="content" id="main-content">
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
-        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?C?L?I?C?K?</a> <!-- Glowing emerald Link -->
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
+        <a href="https://on.soundcloud.com/ZbHopmN1ukD1eTvM8" class="emerald-text">?C?L?I?C?K?</a>
     </div>
 
-    <!-- Contact Information (Initially hidden) -->
     <div class="contact-info" id="contact-info">
         <div class="content">
             <div class="ruby-text">Contact Info</div>
@@ -267,15 +249,10 @@
         </div>
     </div>
 
-    <!-- Orbiting Donut -->
     <div class="orbit"></div>
-
-    <!-- Orbiting Text with Dark Emerald Glow -->
     <div id="price" class="floating-text">AC</div>
     <div id="custom" class="floating-text">?C?L?I?C?K?</div>
     <div id="whats-next" class="floating-text">?</div>
-
-    <!-- Counter -->
     <div id="counter">Counter: <span id="count">0</span></div>
 
     <script>
@@ -283,14 +260,12 @@
         document.getElementById('home-link').onclick = function() {
             document.getElementById('contact-info').style.display = 'none';
             document.getElementById('main-content').style.display = 'flex';
-            // Save the current page to sessionStorage
             sessionStorage.setItem('currentPage', 'home');
         };
 
         document.getElementById('contact-link').onclick = function() {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('contact-info').style.display = 'block';
-            // Save the current page to sessionStorage
             sessionStorage.setItem('currentPage', 'contact');
         };
 
