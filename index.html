@@ -13,12 +13,10 @@
             font-style: italic;
         }
 
-        /* Apply font to html and body for inheritance */
         html, body {
             font-family: 'Apple Garamond', serif;
         }
 
-        /* Dark Mode Styling */
         body {
             margin: 0;
             padding: 0;
@@ -32,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Top Bar Styling */
         .top-bar {
             position: fixed;
             top: 0;
@@ -53,7 +50,6 @@
             margin: 0 20px;
         }
 
-        /* Video background and fallback image styles */
         .video-background, .fallback-image {
             position: fixed;
             top: 0;
@@ -68,7 +64,6 @@
             display: none;
         }
 
-        /* Centered Content */
         .content {
             position: relative;
             z-index: 10;
@@ -79,39 +74,35 @@
             border-radius: 15px;
         }
 
-        /* Contact Info Styling */
-        .contact-info {
+        .info-page {
             display: none;
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 20; /* Higher than main content */
-            display: flex; /* Use flexbox for centering */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            background: rgba(255, 255, 255, 0.1); /* Transparent white background */
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Ruby Text Styling */
         .ruby-text {
-            font-size: 5em; /* Default size */
-            color: #b22222; /* Dark red */
-            text-shadow: 0 0 10px #b22222, 0 0 20px #b22222, 0 0 30px #ff4500; /* Glowing ruby effect */
+            font-size: 5em;
+            color: #b22222;
+            text-shadow: 0 0 10px #b22222, 0 0 20px #b22222, 0 0 30px #ff4500;
             margin: 20px 0;
         }
 
-        /* Emerald Text Styling */
         .emerald-text {
-            font-size: 2.2em; /* Adjust size as needed */
-            color: #50C878; /* Emerald green color */
-            text-shadow: 0 0 10px #50C878, 0 0 20px #50C878, 0 0 30px #50C878; /* Glowing emerald effect */
-            text-decoration: none; /* Remove underline */
-            margin-top: 20px; /* Space between texts */
+            font-size: 2.2em;
+            color: #50C878;
+            text-shadow: 0 0 10px #50C878, 0 0 20px #50C878, 0 0 30px #50C878;
+            text-decoration: none;
+            margin-top: 20px;
         }
 
-        /* Orbiting Donut Styling */
         .orbit {
             width: 600px;
             height: 600px;
@@ -123,40 +114,36 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Floating Text Styling */
         .floating-text {
             position: absolute;
             font-size: 2.2em;
-            color: #006400; /* Dark emerald green */
-            text-shadow: 0 0 10px #006400, 0 0 20px #006400, 0 0 30px #50C878; /* Glowing effect */
-            transform-origin: 300px 0; /* Set origin for orbiting */
-            animation: orbit 10s linear infinite; /* Default orbit speed */
+            color: #006400;
+            text-shadow: 0 0 10px #006400, 0 0 20px #006400, 0 0 30px #50C878;
+            transform-origin: 300px 0;
+            animation: orbit 10s linear infinite;
         }
 
-        /* Adjust different speeds for different texts */
         #price {
-            animation-duration: 10s; /* Slower orbit */
+            animation-duration: 10s;
         }
 
         #custom {
-            animation-duration: 20s; /* Medium-speed orbit */
+            animation-duration: 20s;
         }
 
         #whats-next {
-            animation-duration: 30s; /* Slowest orbit */
+            animation-duration: 30s;
         }
 
-        /* Orbiting Animation */
         @keyframes orbit {
             0% {
-                transform: rotate(0deg) translateX(300px) rotate(0deg); /* Orbit around center */
+                transform: rotate(0deg) translateX(300px) rotate(0deg);
             }
             100% {
-                transform: rotate(360deg) translateX(300px) rotate(-360deg); /* Complete rotation */
+                transform: rotate(360deg) translateX(300px) rotate(-360deg);
             }
         }
 
-        /* Counter Styling */
         #counter {
             position: fixed;
             bottom: 10px;
@@ -169,14 +156,13 @@
             color: white;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .ruby-text {
-                font-size: 3em; /* Adjust size for mobile */
+                font-size: 3em;
             }
 
             .emerald-text {
-                font-size: 1.5em; /* Adjust size for mobile */
+                font-size: 1.5em;
             }
 
             .orbit {
@@ -185,7 +171,7 @@
             }
 
             .floating-text {
-                transform-origin: 200px 0; /* Adjust for smaller screens */
+                transform-origin: 200px 0;
             }
 
             #counter {
@@ -193,7 +179,6 @@
             }
         }
 
-        /* Ensure video/image works on mobile */
         @media (max-width: 480px) {
             .video-background, .fallback-image {
                 width: 100vw;
@@ -202,7 +187,7 @@
             }
 
             .floating-text {
-                transform-origin: 150px 0; /* Adjust for smaller screens */
+                transform-origin: 150px 0;
             }
         }
     </style>
@@ -212,6 +197,7 @@
     <div class="top-bar">
         <a href="#" id="home-link">Home</a>
         <a href="#" id="contact-link">Contact</a>
+        <a href="#" id="essentials-link">Essentials</a> <!-- New Essentials Link -->
     </div>
 
     <!-- Fallback image -->
@@ -225,18 +211,30 @@
 
     <!-- Main Content -->
     <div class="content" id="main-content">
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div> <!-- Ruby Text -->
-        <a href="https://posh.vip/e/saturday-night-at-austins" class="emerald-text">?C?L?I?C?K?</a> <!-- Glowing emerald Link -->
+        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
+        <a href="https://posh.vip/e/saturday-night-at-austins" class="emerald-text">?C?L?I?C?K?</a>
     </div>
 
     <!-- Contact Information -->
-    <div class="contact-info" id="contact-info">
+    <div class="info-page" id="contact-info">
         <div class="content">
             <div class="ruby-text">Contact Info</div>
             <div style="margin-top: 20px;">
                 <a href="https://www.instagram.com/sankinchu/" class="emerald-text">INSTAGRAM HERE</a>
                 <br>
                 <a href="https://twitter.com/sankinchu" class="emerald-text">TWITTER HERE</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Essentials Information -->
+    <div class="info-page" id="essentials-info">
+        <div class="content">
+            <div class="ruby-text">Essentials</div>
+            <div style="margin-top: 20px;">
+                <a href="https://example.com/essential1" class="emerald-text">Essential Link 1</a>
+                <br>
+                <a href="https://example.com/essential2" class="emerald-text">Essential Link 2</a>
             </div>
         </div>
     </div>
@@ -262,21 +260,17 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            // Check if the video can play
             const canPlayVideo = !!video.canPlayType('video/mp4');
 
             if (!canPlayVideo || window.innerWidth < 768) {
-                // Hide the video and show the fallback image
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
             } else {
-                // Show the video and hide the fallback image
                 video.style.display = 'block';
                 fallbackImage.style.display = 'none';
             }
         }
 
-        // Run the check on page load
         document.addEventListener('DOMContentLoaded', checkVideoSupport);
         window.addEventListener('resize', checkVideoSupport);
     </script>
@@ -288,39 +282,37 @@
 
         function updateCounter() {
             counterValue += 0.001;
-            counterElement.textContent = counterValue.toFixed(3); // Keep three decimal places
+            counterElement.textContent = counterValue.toFixed(3);
         }
 
-        setInterval(updateCounter, 200); // Update every 200 milliseconds
+        setInterval(updateCounter, 1000);
     </script>
 
     <!-- Navigation Script -->
     <script>
-        const contactLink = document.getElementById('contact-link');
         const homeLink = document.getElementById('home-link');
+        const contactLink = document.getElementById('contact-link');
+        const essentialsLink = document.getElementById('essentials-link');
         const mainContent = document.getElementById('main-content');
         const contactInfo = document.getElementById('contact-info');
+        const essentialsInfo = document.getElementById('essentials-info');
 
-        // Check local storage to set initial page
-        if (localStorage.getItem('currentPage') === 'contact') {
-            mainContent.style.display = 'none';
-            contactInfo.style.display = 'flex'; // Use flex display for centering
-        } else {
+        homeLink.addEventListener('click', () => {
+            mainContent.style.display = 'block';
             contactInfo.style.display = 'none';
-        }
-
-        contactLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            mainContent.style.display = 'none'; // Hide main content
-            contactInfo.style.display = 'flex'; // Show contact info
-            localStorage.setItem('currentPage', 'contact'); // Store current page
+            essentialsInfo.style.display = 'none';
         });
 
-        homeLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
-            contactInfo.style.display = 'none'; // Hide contact info
-            mainContent.style.display = 'block'; // Show main content
-            localStorage.removeItem('currentPage'); // Clear stored page
+        contactLink.addEventListener('click', () => {
+            mainContent.style.display = 'none';
+            contactInfo.style.display = 'flex';
+            essentialsInfo.style.display = 'none';
+        });
+
+        essentialsLink.addEventListener('click', () => {
+            mainContent.style.display = 'none';
+            contactInfo.style.display = 'none';
+            essentialsInfo.style.display = 'flex';
         });
     </script>
 </body>
