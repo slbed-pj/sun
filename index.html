@@ -260,25 +260,21 @@
             const video = document.getElementById('video-background');
             const fallbackImage = document.getElementById('fallback-image');
 
-            const canPlayVideo = !!video.canPlayType('video/mp4');
+            const canPlayVideo = !!video.canPlayType && video.canPlayType('video/mp4') !== '';
 
-            if (!canPlayVideo || window.innerWidth < 768) {
+            if (!canPlayVideo) {
                 video.style.display = 'none';
                 fallbackImage.style.display = 'block';
-            } else {
-                video.style.display = 'block';
-                fallbackImage.style.display = 'none';
             }
         }
 
-        document.addEventListener('DOMContentLoaded', checkVideoSupport);
-        window.addEventListener('resize', checkVideoSupport);
+        window.addEventListener('load', checkVideoSupport);
     </script>
 
     <!-- Counter Script -->
     <script>
-        let counterValue = 0.055;
         const counterElement = document.getElementById('counter');
+        let counterValue = 0.055;
 
         function updateCounter() {
             counterValue += 0.001;
@@ -297,23 +293,47 @@
         const contactInfo = document.getElementById('contact-info');
         const essentialsInfo = document.getElementById('essentials-info');
 
-        homeLink.addEventListener('click', () => {
+        // Function to load the saved tab from localStorage
+        function loadTab() {
+            const savedTab = localStorage.getItem('activeTab');
+            if (savedTab === 'contact') {
+                showContact();
+            } else if (savedTab === 'essentials') {
+                showEssentials();
+            } else {
+                showHome(); // Default to home
+            }
+        }
+
+        // Functions to show different sections and save active tab
+        function showHome() {
             mainContent.style.display = 'block';
             contactInfo.style.display = 'none';
             essentialsInfo.style.display = 'none';
-        });
+            localStorage.setItem('activeTab', 'home');
+        }
 
-        contactLink.addEventListener('click', () => {
+        function showContact() {
             mainContent.style.display = 'none';
             contactInfo.style.display = 'flex';
             essentialsInfo.style.display = 'none';
-        });
+            localStorage.setItem('activeTab', 'contact');
+        }
 
-        essentialsLink.addEventListener('click', () => {
+        function showEssentials() {
             mainContent.style.display = 'none';
             contactInfo.style.display = 'none';
             essentialsInfo.style.display = 'flex';
-        });
+            localStorage.setItem('activeTab', 'essentials');
+        }
+
+        // Event listeners for navigation links
+        homeLink.addEventListener('click', showHome);
+        contactLink.addEventListener('click', showContact);
+        essentialsLink.addEventListener('click', showEssentials);
+
+        // Load the saved tab on page load
+        window.addEventListener('load', loadTab);
     </script>
 </body>
 </html>
