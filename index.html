@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birth of September</title>
     <style>
-        /* Font Import and Global Styles */
+        /* Global Font Import and Styling */
         @font-face {
             font-family: 'Apple Garamond';
             src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
@@ -22,6 +22,19 @@
             background-color: #1A1A1A;
             overflow: hidden;
             min-height: 100vh;
+        }
+
+        /* Video Background Styling */
+        #video-background, #fallback-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            display: none; /* Hide both by default */
+            filter: brightness(0.7);
         }
 
         /* Top Navigation Bar */
@@ -47,18 +60,6 @@
 
         .header a:hover {
             color: #4CAF50;
-        }
-
-        /* Full-Screen Video Background */
-        #video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(0.7);
         }
 
         /* Content Sections */
@@ -109,6 +110,7 @@
             color: #F5F5F5;
         }
 
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             h1 { font-size: 2em; }
             h2 { font-size: 1.5em; }
@@ -124,11 +126,12 @@
         <a href="#" onclick="showSection('essentials')">Essentials</a>
     </div>
 
-    <!-- Video Background -->
+    <!-- Video Background and Fallback Image -->
     <video id="video-background" autoplay muted loop playsinline>
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+    <img id="fallback-image" src="images/BLINKER.png" alt="Fallback Background Image">
 
     <!-- Main Content Sections -->
     <div id="home" class="section">
@@ -164,6 +167,24 @@
             localStorage.setItem('visit-count', count);
             document.getElementById('visit-count').textContent = count;
         });
+
+        // Display Video or Fallback Image Based on Screen Width
+        function setVideoOrImageBackground() {
+            const video = document.getElementById('video-background');
+            const image = document.getElementById('fallback-image');
+            
+            if (window.innerWidth > 768) {
+                video.style.display = 'block';
+                image.style.display = 'none';
+            } else {
+                video.style.display = 'none';
+                image.style.display = 'block';
+            }
+        }
+
+        // Initialize Background on Page Load and Window Resize
+        window.addEventListener('load', setVideoOrImageBackground);
+        window.addEventListener('resize', setVideoOrImageBackground);
 
         // Toggle Content Sections
         function showSection(sectionId) {
