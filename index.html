@@ -49,7 +49,7 @@
             color: #4CAF50;
         }
 
-        /* Background Styling */
+        /* Background Styling with Movement */
         .background-image {
             position: fixed;
             top: 0;
@@ -59,6 +59,14 @@
             object-fit: cover;
             opacity: 0.6;
             z-index: -1;
+            animation: backgroundMove 40s infinite linear;
+        }
+
+        /* Background movement keyframes */
+        @keyframes backgroundMove {
+            0% { transform: scale(1.05) translate(0, 0); }
+            50% { transform: scale(1.1) translate(-10px, -10px); }
+            100% { transform: scale(1.05) translate(0, 0); }
         }
 
         /* Content Sections */
@@ -123,7 +131,7 @@
         <a href="#" onclick="showSection('essentials')">Essentials</a>
     </div>
 
-    <!-- Background Image -->
+    <!-- Background Image with animation effect -->
     <img src="images/BLINKER.png" alt="Background Image" class="background-image">
 
     <!-- Main Content Sections -->
