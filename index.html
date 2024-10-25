@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birth of September</title>
     <style>
-        /* Global Font Import and Styling */
+        /* Font Import and Global Styles */
         @font-face {
             font-family: 'Apple Garamond';
             src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
@@ -22,19 +22,6 @@
             background-color: #1A1A1A;
             overflow: hidden;
             min-height: 100vh;
-        }
-
-        /* Video Background Styling */
-        #video-background, #fallback-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-            display: none; /* Hide both by default */
-            filter: brightness(0.7);
         }
 
         /* Top Navigation Bar */
@@ -60,6 +47,24 @@
 
         .header a:hover {
             color: #4CAF50;
+        }
+
+        /* Full-Screen Background (Video or Image) */
+        #video-background,
+        #background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            /* Set brightness to full */
+            filter: brightness(1);
+        }
+
+        #background-image {
+            display: none;
         }
 
         /* Content Sections */
@@ -110,7 +115,6 @@
             color: #F5F5F5;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             h1 { font-size: 2em; }
             h2 { font-size: 1.5em; }
@@ -126,12 +130,12 @@
         <a href="#" onclick="showSection('essentials')">Essentials</a>
     </div>
 
-    <!-- Video Background and Fallback Image -->
+    <!-- Video Background for Desktop, Image for Mobile -->
     <video id="video-background" autoplay muted loop playsinline>
         <source src="images/BLINK.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <img id="fallback-image" src="images/BLINKER.png" alt="Fallback Background Image">
+    <img id="background-image" src="images/BLINKER.png" alt="Static Background">
 
     <!-- Main Content Sections -->
     <div id="home" class="section">
@@ -168,24 +172,6 @@
             document.getElementById('visit-count').textContent = count;
         });
 
-        // Display Video or Fallback Image Based on Screen Width
-        function setVideoOrImageBackground() {
-            const video = document.getElementById('video-background');
-            const image = document.getElementById('fallback-image');
-            
-            if (window.innerWidth > 768) {
-                video.style.display = 'block';
-                image.style.display = 'none';
-            } else {
-                video.style.display = 'none';
-                image.style.display = 'block';
-            }
-        }
-
-        // Initialize Background on Page Load and Window Resize
-        window.addEventListener('load', setVideoOrImageBackground);
-        window.addEventListener('resize', setVideoOrImageBackground);
-
         // Toggle Content Sections
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
@@ -193,6 +179,24 @@
             });
             document.getElementById(sectionId).style.display = 'block';
         }
+
+        // Show video on desktop, image on mobile
+        function toggleBackground() {
+            const videoBackground = document.getElementById('video-background');
+            const imageBackground = document.getElementById('background-image');
+
+            if (window.innerWidth <= 768) { // Mobile screen
+                videoBackground.style.display = 'none';
+                imageBackground.style.display = 'block';
+            } else { // Desktop screen
+                videoBackground.style.display = 'block';
+                imageBackground.style.display = 'none';
+            }
+        }
+
+        // Initial check and update on window resize
+        toggleBackground();
+        window.addEventListener('resize', toggleBackground);
     </script>
 </body>
 </html>
