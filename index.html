@@ -48,6 +48,7 @@
             font-size: 1.5em; /* Font size for the title */
             font-weight: bold; /* Bold weight for emphasis */
             margin-right: 50px; /* Adjusted space between title and links */
+            font-family: 'TerorHantu', sans-serif; /* Applied new font */
         }
 
         .nav-links {
@@ -125,7 +126,6 @@
             color: #FF6347;
             margin: 10px 0;
             font-weight: bold;
-            font-family: 'TerorHantu', sans-serif; /* Applied new font */
         }
 
         h2 {
@@ -191,7 +191,7 @@
 <body>
     <!-- Top Navigation Bar -->
     <div class="header">
-        <div class="header-title">SSV</div> <!-- Added title -->
+        <div class="header-title">SSV</div> <!-- Title with new font -->
         <div class="nav-links"> <!-- Navigation links container -->
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('contact')">Contact</a>
@@ -262,15 +262,14 @@
             if (window.innerWidth <= 768) { // Mobile screen
                 videoBackground.style.display = 'none';
                 imageBackground.style.display = 'block';
-            } else { // Desktop screen
+            } else { // Desktop
                 videoBackground.style.display = 'block';
                 imageBackground.style.display = 'none';
             }
         }
 
-        // Initial check and update on window resize
-        toggleBackground();
         window.addEventListener('resize', toggleBackground);
+        window.addEventListener('load', toggleBackground);
     </script>
 </body>
 </html>
