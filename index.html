@@ -32,9 +32,17 @@
             padding: 15px 0;
             background-color: rgba(0, 0, 0, 0.8);
             display: flex;
-            justify-content: center;
+            justify-content: space-between; /* Updated for title and links */
+            align-items: center; /* Vertically center the items */
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            padding: 15px 20px; /* Added padding for better spacing */
+        }
+
+        .header-title {
+            color: #FF6347; /* Color for the title */
+            font-size: 1.8em; /* Font size for the title */
+            font-weight: bold; /* Bold weight for emphasis */
         }
 
         .header a {
@@ -166,9 +174,12 @@
 <body>
     <!-- Top Navigation Bar -->
     <div class="header">
-        <a href="#" onclick="showSection('home')">Home</a>
-        <a href="#" onclick="showSection('contact')">Contact</a>
-        <a href="#" onclick="showSection('essentials')">Essentials</a>
+        <div class="header-title">SSV</div> <!-- Added title -->
+        <div>
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('contact')">Contact</a>
+            <a href="#" onclick="showSection('essentials')">Essentials</a>
+        </div>
     </div>
 
     <!-- Video Background for Desktop, Image for Mobile -->
