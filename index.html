@@ -36,6 +36,7 @@
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
             padding: 15px 20px; /* Added padding for better spacing */
+            justify-content: space-between; /* Distribute space between items */
         }
 
         .header-title {
@@ -43,6 +44,11 @@
             font-size: 1.5em; /* Font size for the title */
             font-weight: bold; /* Bold weight for emphasis */
             margin-right: 20px; /* Space between title and links */
+        }
+
+        .nav-links {
+            display: flex;
+            margin-left: auto; /* Pushes links to the right */
         }
 
         .header a {
@@ -175,7 +181,7 @@
     <!-- Top Navigation Bar -->
     <div class="header">
         <div class="header-title">SSV</div> <!-- Added title -->
-        <div>
+        <div class="nav-links"> <!-- Navigation links container -->
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('contact')">Contact</a>
             <a href="#" onclick="showSection('essentials')">Essentials</a>
