@@ -3,273 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The Future">
     <title>Birth of September</title>
     <style>
+        /* Font import and global styles */
         @font-face {
             font-family: 'Apple Garamond';
             src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        html, body {
-            font-family: 'Apple Garamond', serif;
         }
 
         body {
+            font-family: 'Apple Garamond', serif;
             margin: 0;
-            padding: 0;
-            color: #f5f5f5;
+            background-color: #1A1A1A;
+            color: #F0F0F0;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #1e1e1e, #121212);
+            justify-content: center;
+            min-height: 100vh;
             overflow: hidden;
         }
 
-        .top-bar {
+        /* Header Bar */
+        .header {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.85);
+            padding: 15px 0;
+            background-color: #222;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: center;
-            align-items: center;
             z-index: 100;
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .top-bar a {
-            color: #f5f5f5;
+        .header a {
+            color: #FFFFFF;
             text-decoration: none;
             margin: 0 20px;
-            padding: 10px 15px;
-            transition: color 0.3s ease;
+            padding: 10px;
+            transition: color 0.3s;
         }
 
-        .top-bar a:hover {
-            color: #50C878;
+        .header a:hover {
+            color: #4CAF50;
         }
 
-        .video-background, .fallback-image {
+        /* Background Styling */
+        .background-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
+            opacity: 0.6;
             z-index: -1;
-            opacity: 0.8;
         }
 
-        .fallback-image {
-            display: none;
-        }
-
-        .content {
-            position: relative;
-            z-index: 10;
+        /* Content Sections */
+        .section {
+            margin-top: 100px;
+            padding: 20px;
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             max-width: 800px;
-            background: rgba(18, 18, 18, 0.95);
-            padding: 50px 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            width: 90%;
         }
 
-        .info-page {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 20;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.85);
-        }
-
-        .ruby-text {
-            font-size: 4.5em;
+        h1, h2 {
             color: #FF6347;
-            text-shadow: 0 0 10px #FF6347, 0 0 20px #FF6347, 0 0 30px #FF4500;
-            margin: 20px 0;
+            margin: 15px 0;
         }
 
-        .emerald-text {
-            font-size: 2em;
+        .button-link {
             color: #50C878;
-            text-shadow: 0 0 10px #50C878, 0 0 20px #50C878, 0 0 30px #50C878;
             text-decoration: none;
-            margin-top: 20px;
+            font-size: 1.2em;
             padding: 10px 20px;
+            border: 2px solid #50C878;
             border-radius: 5px;
-            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .emerald-text:hover {
-            background: rgba(80, 200, 120, 0.15);
-            transform: scale(1.05);
+        .button-link:hover {
+            background: #50C878;
+            color: #1A1A1A;
         }
 
-        .orbit {
-            width: 500px;
-            height: 500px;
-            border: 4px solid rgba(255, 69, 0, 0.3);
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .floating-text {
-            position: absolute;
-            font-size: 2em;
-            color: #00FA9A;
-            text-shadow: 0 0 10px #00FA9A, 0 0 20px #00FA9A, 0 0 30px #50C878;
-            transform-origin: 250px 0;
-            animation: orbit 12s linear infinite;
-        }
-
-        #price { animation-duration: 12s; }
-        #custom { animation-duration: 20s; }
-        #whats-next { animation-duration: 28s; }
-
-        @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(250px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(250px) rotate(-360deg); }
-        }
-
-        #counter {
+        /* Footer Counter */
+        .footer {
             position: fixed;
             bottom: 10px;
             right: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.4em;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 10px;
-            color: white;
+            font-family: monospace;
+            font-size: 1.1em;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: #F5F5F5;
         }
 
         @media (max-width: 768px) {
-            .ruby-text { font-size: 3em; }
-            .emerald-text { font-size: 1.3em; }
-            .orbit { width: 350px; height: 350px; }
-            .floating-text { transform-origin: 180px 0; }
-            #counter { font-size: 1em; }
-        }
-
-        @media (max-width: 480px) {
-            .video-background, .fallback-image {
-                width: 100vw;
-                height: 100vh;
-                object-fit: cover;
-            }
-
-            .floating-text {
-                transform-origin: 140px 0;
-                font-size: 1.5em;
-            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            .button-link { font-size: 1em; }
         }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <a href="#" id="home-link">Home</a>
-        <a href="#" id="contact-link">Contact</a>
-        <a href="#" id="essentials-link">Essentials</a>
+    <!-- Header Links -->
+    <div class="header">
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('contact')">Contact</a>
+        <a href="#" onclick="showSection('essentials')">Essentials</a>
     </div>
 
-    <!-- Fallback image -->
-    <img id="fallback-image" class="fallback-image" src="images/BLINKER.png" alt="Fallback Image">
+    <!-- Background Image -->
+    <img src="images/BLINKER.png" alt="Background Image" class="background-image">
 
-    <!-- Video background -->
-    <video id="video-background" autoplay muted loop playsinline class="video-background">
-        <source src="images/BLINK.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Main Content -->
-    <div class="content" id="main-content">
-        <div class="ruby-text" id="san-kin-chu">SAN·KIN·CHU</div>
-        <a href="https://posh.vip/e/saturday-night-at-austins" class="emerald-text">New Show Click Here</a>
+    <!-- Main Content Sections -->
+    <div id="home" class="section">
+        <h1>SAN·KIN·CHU</h1>
+        <a href="https://posh.vip/e/saturday-night-at-austins" class="button-link">New Show Click Here</a>
     </div>
 
-    <!-- Contact Information -->
-    <div class="info-page" id="contact-info">
-        <div class="content">
-            <div class="ruby-text">Contact Info</div>
-            <div style="margin-top: 20px;">
-                <a href="https://www.instagram.com/sankinchu/" class="emerald-text">- INSTAGRAM HERE</a>
-                <br>
-                <a href="https://twitter.com/sankinchu" class="emerald-text">- TWITTER HERE</a>
-            </div>
-        </div>
+    <div id="contact" class="section" style="display: none;">
+        <h2>Contact Info</h2>
+        <a href="https://www.instagram.com/sankinchu/" class="button-link">Instagram</a>
+        <br>
+        <a href="https://twitter.com/sankinchu" class="button-link">Twitter</a>
     </div>
 
-    <!-- Essentials Information -->
-    <div class="info-page" id="essentials-info">
-        <div class="content">
-            <div class="ruby-text">Essentials</div>
-            <div style="margin-top: 20px;">
-                <a href="https://on.soundcloud.com/HLf7X5fzf4hKRkVDA" class="emerald-text">- Soundcloud</a>
-                <br>
-            </div>
-        </div>
+    <div id="essentials" class="section" style="display: none;">
+        <h2>Essentials</h2>
+        <a href="https://on.soundcloud.com/HLf7X5fzf4hKRkVDA" class="button-link">Soundcloud</a>
     </div>
 
-    <!-- Orbiting Donut -->
-    <div class="orbit"></div>
+    <!-- Visitor Counter -->
+    <div class="footer">
+        Visitors: <span id="visit-count">0</span>
+    </div>
 
-    <!-- Orbiting Text with Dark Emerald Glow -->
-    <div id="price" class="floating-text">AS</div>
-    <div id="custom" class="floating-text">MR.MAKEITHAPPEN</div>
-    <div id="whats-next" class="floating-text">DA KID</div>
-
-    <!-- Counter -->
-    <div id="counter">Visitors: <span id="visit-count">0</span></div>
-
+    <!-- JavaScript -->
     <script>
+        // Track Visits
         let count = localStorage.getItem('visit-count') || 0;
         document.getElementById('visit-count').textContent = count;
-
-        document.addEventListener('click', event => {
-            if (event.target.id === 'contact-link') {
-                togglePage('contact-info');
-            } else if (event.target.id === 'home-link') {
-                showPage('main-content');
-            } else if (event.target.id === 'essentials-link') {
-                togglePage('essentials-info');
-            }
-        });
-
-        function showPage(id) {
-            document.getElementById('contact-info').style.display = 'none';
-            document.getElementById('essentials-info').style.display = 'none';
-            document.getElementById('main-content').style.display = 'flex';
-        }
-
-        function togglePage(id) {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById(id).style.display = 'flex';
-        }
 
         document.addEventListener('DOMContentLoaded', () => {
             count++;
             localStorage.setItem('visit-count', count);
             document.getElementById('visit-count').textContent = count;
         });
+
+        // Toggle Sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
     </script>
 </body>
 </html>
