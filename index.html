@@ -152,20 +152,6 @@
             transform: translateY(-2px);
         }
 
-        /* Footer Visitor Counter */
-        .footer {
-            position: fixed;
-            bottom: 50px;
-            right: 10px;
-            font-family: monospace;
-            font-size: 1.1em;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: #F5F5F5;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
         /* Copyright Bar */
         .copyright {
             position: fixed;
@@ -184,14 +170,13 @@
             h1 { font-size: 2em; }
             h2 { font-size: 1.5em; }
             .button-link { font-size: 1em; }
-            .footer { bottom: 20px; }
         }
     </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
     <div class="header">
-        <div class="header-title">S S V</div> <!-- Title with new font -->
+        <div class="header-title">SSV</div> <!-- Title with new font -->
         <div class="nav-links"> <!-- Navigation links container -->
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('contact')">Contact</a>
@@ -224,11 +209,6 @@
         <a href="https://on.soundcloud.com/HLf7X5fzf4hKRkVDA" class="button-link">Soundcloud</a>
     </div>
 
-    <!-- Footer Visitor Counter -->
-    <div class="footer">
-        Visitors: <span id="visit-count">0</span>
-    </div>
-
     <!-- Copyright Bar -->
     <div class="copyright">
         © 2024
@@ -236,16 +216,6 @@
 
     <!-- JavaScript -->
     <script>
-        // Visitor Counter Logic
-        let count = localStorage.getItem('visit-count') || 0;
-        document.getElementById('visit-count').textContent = count;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            count++;
-            localStorage.setItem('visit-count', count);
-            document.getElementById('visit-count').textContent = count;
-        });
-
         // Toggle Content Sections
         function showSection(sectionId) {
             document.querySelectorAll('.section').forEach(section => {
