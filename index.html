@@ -34,7 +34,7 @@
             display: flex;
             justify-content: center;
             z-index: 100;
-            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
         }
 
         .header a {
@@ -43,10 +43,29 @@
             margin: 0 15px;
             padding: 10px;
             transition: color 0.3s;
+            font-size: 1.1em;
+            position: relative;
         }
 
         .header a:hover {
             color: #4CAF50;
+        }
+
+        /* Underline Effect on Hover */
+        .header a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            bottom: -3px;
+            height: 2px;
+            background: #4CAF50;
+            transition: left 0.3s, right 0.3s;
+        }
+
+        .header a:hover::after {
+            left: 0;
+            right: 0;
         }
 
         /* Full-Screen Background (Video or Image) */
@@ -59,7 +78,6 @@
             height: 100vh;
             object-fit: cover;
             z-index: -1;
-            /* Set brightness to full */
             filter: brightness(1);
         }
 
@@ -78,11 +96,17 @@
             max-width: 800px;
             width: 90%;
             color: #F5F5F5;
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
         }
 
         h1, h2 {
             color: #FF6347;
             margin: 10px 0;
+            font-weight: bold;
         }
 
         .button-link {
@@ -94,18 +118,19 @@
             border-radius: 5px;
             display: inline-block;
             margin-top: 15px;
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
         }
 
         .button-link:hover {
             background: #50C878;
             color: #1A1A1A;
+            transform: translateY(-2px);
         }
 
         /* Footer Visitor Counter */
         .footer {
             position: fixed;
-            bottom: 10px;
+            bottom: 50px;
             right: 10px;
             font-family: monospace;
             font-size: 1.1em;
@@ -113,6 +138,7 @@
             padding: 8px 12px;
             border-radius: 6px;
             color: #F5F5F5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         /* Copyright Bar */
@@ -126,12 +152,14 @@
             padding: 10px 0;
             font-size: 0.9em;
             z-index: 100;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2em; }
             h2 { font-size: 1.5em; }
             .button-link { font-size: 1em; }
+            .footer { bottom: 20px; }
         }
     </style>
 </head>
