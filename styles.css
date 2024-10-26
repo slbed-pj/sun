@@ -145,20 +145,15 @@ h2 {
     transform: translateY(-2px);
 }
 
-/* Contact Box Styles */
-.contact-box {
+/* Contact Info Styles */
+.contact-info {
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1); /* Light background */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Border color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Box shadow for depth */
-    margin-top: 20px; /* Space between boxes */
-    color: #F5F5F5; /* Text color */
+    margin-top: 20px; /* Space between the two sets of contact info */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Bottom border for separation */
 }
 
-.san-kin-chu h2,
-.mads-lab h2 {
-    color: #FF6347; /* Title color for both boxes */
+.contact-info:last-child {
+    border-bottom: none; /* Remove border from last item */
 }
 
 /* Copyright Bar */
