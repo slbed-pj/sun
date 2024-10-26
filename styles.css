@@ -146,7 +146,7 @@ h2 {
 }
 
 /* Contact Info Styles */
-.contact-info, .core-info {
+.contact-info {
     padding: 20px;
     margin-top: 20px; /* Space between the boxes */
     background-color: rgba(255, 255, 255, 0.1); /* Transparent background color */
