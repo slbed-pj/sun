@@ -5,8 +5,8 @@
 }
 
 @font-face {
-    font-family: '._LEDLIGHT';
-    src: url('fonts/LEDLIGHT.otf') format('opentype');
+    font-family: 'TerorHantu';
+    src: url('fonts/TerorHantuDemoRegular.ttf') format('truetype'); /* Updated font name */
 }
 
 body {
@@ -146,13 +146,13 @@ h2 {
 }
 
 /* Contact Info Styles */
-.contact-info {
+.contact-info, .core-info {
     padding: 20px;
-    margin-top: 20px; /* Space between the two sets of contact info */
+    margin-top: 20px; /* Space between the boxes */
     background-color: rgba(255, 255, 255, 0.1); /* Transparent background color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
-    max-width: 400px; /* Width of individual contact boxes */
+    max-width: 400px; /* Width of individual boxes */
     margin-left: auto; /* Center each box */
     margin-right: auto; /* Center each box */
 }
@@ -166,13 +166,4 @@ h2 {
     color: #FFF;
     text-align: center;
     padding: 10px 0;
-    font-size: 0.9em;
-    z-index: 100;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.6);
-}
-
-@media (max-width: 768px) {
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.5em; }
-    .button-link { font-size: 1em; }
 }
