@@ -152,10 +152,9 @@ h2 {
     background-color: rgba(0, 0, 0, 0.7); /* Separate background color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
-}
-
-.contact-info h2 {
-    margin-bottom: 10px; /* Spacing below the heading */
+    max-width: 400px; /* Width of individual contact boxes */
+    margin-left: auto; /* Center each box */
+    margin-right: auto; /* Center each box */
 }
 
 /* Copyright Bar */
