@@ -149,7 +149,7 @@ h2 {
 .contact-info {
     padding: 20px;
     margin-top: 20px; /* Space between the two sets of contact info */
-    background-color: rgba(0, 0, 0, 0.7); /* Separate background color */
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
     max-width: 400px; /* Width of individual contact boxes */
