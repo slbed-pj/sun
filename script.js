@@ -22,3 +22,4 @@ function toggleBackground() {
 
 window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', toggleBackground);
+ 
