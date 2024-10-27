@@ -151,6 +151,26 @@ h1, h2 {
     margin-right: auto;
 }
 
+/* Grid Container for Art Section */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; /* Adjust the gap between squares */
+    padding: 20px;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item video {
+    display: none; /* Hide video by default */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Copyright Bar */
 .copyright {
     position: fixed;
