@@ -20,7 +20,6 @@ function toggleBackground() {
     }
 }
 
-// Initial load and resizing events
 window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', toggleBackground);
 
