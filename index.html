@@ -14,7 +14,7 @@
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('contact')">Contact</a>
             <a href="#" onclick="showSection('CORE')">CORE</a>
-            <a href="#" onclick="showSection('videoGrid')">View MADSLAB Videos</a> <!-- New button to navigate to the video grid -->
+            <a href="#" onclick="showSection('videos')">Art</a> <!-- Added Art link to the nav -->
         </div>
     </div>
 
@@ -56,78 +56,66 @@
         <div class="contact-info">
             <h2>MADSLAB</h2>
             <a href="https://on.soundcloud.com/ZSX4uhzCM7j8dxxZ9" class="button-link">SOUNDCLOUD</a>
-            <a href="#" onclick="showSection('videoGrid')" class="button-link">View MADSLAB Videos</a> <!-- New button to navigate to the video grid -->
         </div>
     </div>
 
-    <!-- Video Grid Section -->
-    <div id="videoGrid" class="section" style="display: none;">
+    <div id="videos" class="section" style="display: none;"> <!-- Videos Section -->
+        <h1>MADSLAB Videos</h1>
         <div class="grid-container">
-            <div class="grid-item" data-title="Video 1" data-video="videos/video1.mp4" data-link="https://link-to-video1.com">
+            <div class="grid-item" onclick="playVideo('video1.mp4')">
                 <video muted>
                     <source src="videos/video1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="title">Video 1 Title</div>
+                <div class="title">Video Title 1</div>
             </div>
-            <div class="grid-item" data-title="Video 2" data-video="videos/video2.mp4" data-link="https://link-to-video2.com">
+            <div class="grid-item" onclick="playVideo('video2.mp4')">
                 <video muted>
                     <source src="videos/video2.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="title">Video 2 Title</div>
+                <div class="title">Video Title 2</div>
             </div>
-            <div class="grid-item" data-title="Video 3" data-video="videos/video3.mp4" data-link="https://link-to-video3.com">
+            <div class="grid-item" onclick="playVideo('video3.mp4')">
                 <video muted>
                     <source src="videos/video3.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="title">Video 3 Title</div>
+                <div class="title">Video Title 3</div>
             </div>
-            <div class="grid-item" data-title="Video 4" data-video="videos/video4.mp4" data-link="https://link-to-video4.com">
+            <div class="grid-item" onclick="playVideo('video4.mp4')">
                 <video muted>
                     <source src="videos/video4.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <div class="title">Video 4 Title</div>
-            </div>
-            <div class="grid-item" data-title="Video 5" data-video="videos/video5.mp4" data-link="https://link-to-video5.com">
-                <video muted>
-                    <source src="videos/video5.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="title">Video 5 Title</div>
-            </div>
-            <div class="grid-item" data-title="Video 6" data-video="videos/video6.mp4" data-link="https://link-to-video6.com">
-                <video muted>
-                    <source src="videos/video6.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="title">Video 6 Title</div>
-            </div>
-            <div class="grid-item" data-title="Video 7" data-video="videos/video7.mp4" data-link="https://link-to-video7.com">
-                <video muted>
-                    <source src="videos/video7.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="title">Video 7 Title</div>
-            </div>
-            <div class="grid-item" data-title="Video 8" data-video="videos/video8.mp4" data-link="https://link-to-video8.com">
-                <video muted>
-                    <source src="videos/video8.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="title">Video 8 Title</div>
+                <div class="title">Video Title 4</div>
             </div>
         </div>
     </div>
 
     <!-- Copyright Bar -->
     <div class="copyright">
-       SouthSideVillians © 2024
+        SouthSideVillians © 2024
     </div>
 
     <!-- JavaScript -->
     <script src="script.js"></script> <!-- Link to JavaScript file -->
+    <script>
+        // Play video on hover
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                const video = item.querySelector('video');
+                video.play();
+            });
+            item.addEventListener('mouseout', () => {
+                const video = item.querySelector('video');
+                video.pause();
+            });
+        });
+
+        function playVideo(videoName) {
+            window.open(`videos/${videoName}`, '_blank'); // Open video in new tab
+        }
+    </script>
 </body>
 </html>
