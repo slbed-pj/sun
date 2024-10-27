@@ -22,3 +22,14 @@ function toggleBackground() {
 
 window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', toggleBackground);
+
+// Video hover functionality
+document.querySelectorAll('.grid-item video').forEach(video => {
+    video.addEventListener('mouseover', () => {
+        video.play();
+    });
+    video.addEventListener('mouseout', () => {
+        video.pause();
+        video.currentTime = 0;
+    });
+});
