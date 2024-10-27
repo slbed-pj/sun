@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'TerorHantu';
-    src: url('fonts/TerorHantuDemoRegular.ttf') format('truetype'); /* Updated font name */
+    src: url('fonts/TerorHantuDemoRegular.ttf') format('truetype');
 }
 
 body {
@@ -30,23 +30,23 @@ body {
     padding: 15px 0;
     background-color: rgba(0, 0, 0, 0.8);
     display: flex;
-    align-items: center; /* Vertically center the items */
+    align-items: center;
     z-index: 100;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    justify-content: center; /* Center all items horizontally */
+    justify-content: center;
 }
 
 .header-title {
-    color: #FF6347; /* Color for the title */
-    font-size: 1.5em; /* Font size for the title */
-    font-weight: bold; /* Bold weight for emphasis */
-    margin-right: 50px; /* Adjusted space between title and links */
-    font-family: 'TerorHantu', sans-serif; /* Applied new font */
+    color: #FF6347;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 50px;
+    font-family: 'TerorHantu', sans-serif;
 }
 
 .nav-links {
     display: flex;
-    justify-content: center; /* Center the links */
+    justify-content: center;
 }
 
 .header a {
@@ -94,7 +94,7 @@ body {
 }
 
 #background-image {
-    display: none;
+    display: none; /* Initially hidden; toggled in JS */
 }
 
 /* Content Sections */
@@ -115,13 +115,7 @@ body {
     transform: scale(1.02);
 }
 
-h1 {
-    color: #FF6347;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-h2 {
+h1, h2 {
     color: #FF6347;
     margin: 10px 0;
     font-weight: bold;
@@ -148,13 +142,13 @@ h2 {
 /* Contact Info Styles */
 .contact-info {
     padding: 20px;
-    margin-top: 20px; /* Space between the boxes */
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent background color */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
-    max-width: 400px; /* Width of individual boxes */
-    margin-left: auto; /* Center each box */
-    margin-right: auto; /* Center each box */
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Copyright Bar */
