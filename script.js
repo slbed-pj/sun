@@ -20,6 +20,7 @@ function toggleBackground() {
     }
 }
 
+// Initial load and resizing events
 window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', toggleBackground);
 
@@ -29,4 +30,3 @@ document.querySelectorAll('.grid-item').forEach(item => {
     item.addEventListener('mouseenter', () => video.play());
     item.addEventListener('mouseleave', () => video.pause());
 });
- 
