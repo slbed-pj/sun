@@ -145,6 +145,34 @@ h2 {
     transform: translateY(-2px);
 }
 
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 10px; /* Space between grid items */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Grid Item */
+.grid-item {
+    position: relative;
+    overflow: hidden; /* Hide overflow for video */
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.grid-item video {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Title under each video */
+.title {
+    text-align: center;
+    color: #FFFFFF; /* Title color */
+    margin-top: 5px;
+}
+
 /* Contact Info Styles */
 .contact-info {
     padding: 20px;
