@@ -79,6 +79,7 @@ body {
     right: 0;
 }
 
+/* Backgrounds */
 #video-background,
 #background-image {
     position: fixed;
@@ -91,6 +92,16 @@ body {
     filter: brightness(0.4);
 }
 
+@media (max-width: 768px) {
+    #video-background {
+        display: none;
+    }
+    #background-image {
+        display: block;
+    }
+}
+
+/* Section Styling */
 .section {
     margin-top: 100px;
     padding: 20px;
