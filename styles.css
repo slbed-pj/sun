@@ -1,196 +1,147 @@
-/* Font Import and Global Styles */
-@font-face {
-    font-family: 'Apple Garamond';
-    src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birth of September</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="header">
+        <div class="header-title">S S V</div> <!-- Title with new font -->
+        <div class="nav-links"> <!-- Navigation links container -->
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('contact')">Contact</a>
+            <a href="#" onclick="showSection('CORE')">CORE</a>
+        </div>
+    </div>
 
-@font-face {
-    font-family: 'TerorHantu';
-    src: url('fonts/TerorHantuDemoRegular.ttf') format('truetype'); /* Updated font name */
-}
+    <!-- Video Background for Desktop, Image for Mobile -->
+    <video id="video-background" autoplay muted loop playsinline>
+        <source src="images/outmydome.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <img id="background-image" src="images/outmydome.jpg" alt="Static Background"> <!-- Changed to .jpg for static image -->
 
-body {
-    font-family: 'Apple Garamond', serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    background-color: #1A1A1A;
-    overflow: hidden;
-    min-height: 100vh;
-}
+    <!-- Main Content Sections -->
+    <div id="home" class="section">
+        <h1>SAN·KIN·CHU</h1>
+        <a href="https://posh.vip/e/saturday-night-at-austins" class="button-link">New Show At Austins Coffee</a>
+    </div>
 
-/* Top Navigation Bar */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 15px 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center; /* Vertically center the items */
-    z-index: 100;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    justify-content: center; /* Center all items horizontally */
-}
+    <div id="contact" class="section" style="display: none;">
+        <div class="contact-info">
+            <h2>Contact Info for SAN·KIN·CHU</h2>
+            <a href="https://www.instagram.com/sankinchu/" class="button-link">Instagram</a>
+            <br>
+            <a href="https://twitter.com/sankinchu" class="button-link">Twitter</a>
+        </div>
 
-.header-title {
-    color: #FF6347; /* Color for the title */
-    font-size: 1.5em; /* Font size for the title */
-    font-weight: bold; /* Bold weight for emphasis */
-    margin-right: 50px; /* Adjusted space between title and links */
-    font-family: 'TerorHantu', sans-serif; /* Applied new font */
-}
+        <div class="contact-info">
+            <h2>Contact Info for MADSLAB</h2>
+            <a href="https://www.instagram.com/madslab1/" class="button-link">Instagram</a>
+            <br>
+            <a href="https://twitter.com/kaisehattr" class="button-link">Twitter</a>
+        </div>
+    </div>
 
-.nav-links {
-    display: flex;
-    justify-content: center; /* Center the links */
-}
+    <div id="CORE" class="section" style="display: none;">
+        <div class="contact-info">
+            <h2>SAN·KIN·CHU</h2>
+            <a href="https://on.soundcloud.com/aY8eHYDe5LNMLUf97" class="button-link">SOUNDCLOUD</a>
+        </div>
 
-.header a {
-    color: #FFFFFF;
-    text-decoration: none;
-    margin: 0 15px;
-    padding: 10px;
-    transition: color 0.3s;
-    font-size: 1.1em;
-    position: relative;
-}
+        <div class="contact-info">
+            <h2>MADSLAB</h2>
+            <a href="https://on.soundcloud.com/ZSX4uhzCM7j8dxxZ9" class="button-link">SOUNDCLOUD</a>
+            <br>
+            <a href="#" onclick="showSection('videos')" class="button-link">View MADSLAB Videos</a> <!-- Added MADSLAB Videos link -->
+        </div>
+    </div>
 
-.header a:hover {
-    color: #4CAF50;
-}
+    <div id="videos" class="section" style="display: none;"> <!-- Videos Section -->
+        <h1>MADSLAB Videos</h1>
+        <div class="grid-container">
+            <div class="grid-item" onclick="playVideo('video1.mp4')">
+                <video muted>
+                    <source src="videos/video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="title">Video Title 1</div>
+            </div>
+            <div class="grid-item" onclick="playVideo('video2.mp4')">
+                <video muted>
+                    <source src="videos/video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="title">Video Title 2</div>
+            </div>
+            <div class="grid-item" onclick="playVideo('video3.mp4')">
+                <video muted>
+                    <source src="videos/video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="title">Video Title 3</div>
+            </div>
+            <div class="grid-item" onclick="playVideo('video4.mp4')">
+                <video muted>
+                    <source src="videos/video4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="title">Video Title 4</div>
+            </div>
+        </div>
+    </div>
 
-/* Underline Effect on Hover */
-.header a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    bottom: -3px;
-    height: 2px;
-    background: #4CAF50;
-    transition: left 0.3s, right 0.3s;
-}
+    <!-- Copyright Bar -->
+    <div class="copyright">
+        SouthSideVillians © 2024
+    </div>
 
-.header a:hover::after {
-    left: 0;
-    right: 0;
-}
+    <!-- JavaScript -->
+    <script src="script.js"></script> <!-- Link to JavaScript file -->
+    <script>
+        // Play video on hover
+        document.querySelectorAll('.grid-item').forEach(item => {
+            item.addEventListener('mouseover', () => {
+                const video = item.querySelector('video');
+                video.play();
+            });
+            item.addEventListener('mouseout', () => {
+                const video = item.querySelector('video');
+                video.pause();
+            });
+        });
 
-/* Full-Screen Background (Video or Image) */
-#video-background,
-#background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.4);
-}
+        function playVideo(videoName) {
+            window.open(`videos/${videoName}`, '_blank'); // Open video in new tab
+        }
 
-#background-image {
-    display: none;
-}
+        // Toggle Content Sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
 
-/* Content Sections */
-.section {
-    margin-top: 100px;
-    padding: 20px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    max-width: 800px;
-    width: 90%;
-    color: #F5F5F5;
-    transition: transform 0.3s;
-}
+        // Show video on desktop, image on mobile
+        function toggleBackground() {
+            const videoBackground = document.getElementById('video-background');
+            const imageBackground = document.getElementById('background-image');
 
-.section:hover {
-    transform: scale(1.02);
-}
+            if (window.innerWidth <= 768) { // Mobile screen
+                videoBackground.style.display = 'none';
+                imageBackground.style.display = 'block';
+            } else { // Desktop
+                videoBackground.style.display = 'block';
+                imageBackground.style.display = 'none';
+            }
+        }
 
-h1 {
-    color: #FF6347;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-h2 {
-    color: #FF6347;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-.button-link {
-    color: #50C878;
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: 8px 16px;
-    border: 2px solid #50C878;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 15px;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-.button-link:hover {
-    background: #50C878;
-    color: #1A1A1A;
-    transform: translateY(-2px);
-}
-
-/* Contact Info Styles */
-.contact-info {
-    padding: 20px;
-    margin-top: 20px; /* Space between the boxes */
-    background-color: rgba(255, 255, 255, 0.1); /* Transparent background color */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Shadow effect */
-    max-width: 400px; /* Width of individual boxes */
-    margin-left: auto; /* Center each box */
-    margin-right: auto; /* Center each box */
-}
-
-/* Video Grid Layout */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px; /* Space between grid items */
-    padding: 20px;
-    margin-top: 100px;
-    max-width: 800px;
-    width: 90%;
-}
-
-.grid-item {
-    position: relative;
-    overflow: hidden; /* Hide overflow for video */
-}
-
-.grid-item video {
-    width: 100%;
-    height: auto;
-}
-
-.title {
-    color: #FFFFFF;
-    text-align: center;
-    margin-top: 8px;
-}
-
-/* Copyright Bar */
-.copyright {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #000;
-    color: #FFF;
-    text-align: center;
-    padding: 10px 0;
-}
+        window.addEventListener('resize', toggleBackground);
+        window.addEventListener('load', toggleBackground);
+    </script>
+</body>
+</html>
