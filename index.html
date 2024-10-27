@@ -5,24 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birth of September</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file -->
-    <style>
-        /* Font Import for LEDLIGHT */
-        @font-face {
-            font-family: 'LEDLIGHT';
-            src: url('fonts/LEDLIGHT.otf') format('opentype');
-        }
-
-        /* Other CSS styles here... */
-    </style>
 </head>
 <body>
     <!-- Top Navigation Bar -->
     <div class="header">
-        <div class="header-title" style="font-family: 'LEDLIGHT', sans-serif;">S S V</div> <!-- Title with new font -->
+        <div class="header-title">S S V</div> <!-- Title with new font -->
         <div class="nav-links"> <!-- Navigation links container -->
             <a href="#" onclick="showSection('home')">Home</a>
             <a href="#" onclick="showSection('contact')">Contact</a>
             <a href="#" onclick="showSection('CORE')">CORE</a>
+            <a href="#" onclick="showSection('videos')">Art</a> <!-- Added Art link to the nav -->
         </div>
     </div>
 
@@ -64,8 +56,6 @@
         <div class="contact-info">
             <h2>MADSLAB</h2>
             <a href="https://on.soundcloud.com/ZSX4uhzCM7j8dxxZ9" class="button-link">SOUNDCLOUD</a>
-            <br>
-            <a href="#" onclick="showSection('videos')" class="button-link">View MADSLAB Videos</a> <!-- Added MADSLAB Videos link -->
         </div>
     </div>
 
@@ -126,31 +116,6 @@
         function playVideo(videoName) {
             window.open(`videos/${videoName}`, '_blank'); // Open video in new tab
         }
-
-        // Toggle Content Sections
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
-        }
-
-        // Show video on desktop, image on mobile
-        function toggleBackground() {
-            const videoBackground = document.getElementById('video-background');
-            const imageBackground = document.getElementById('background-image');
-
-            if (window.innerWidth <= 768) { // Mobile screen
-                videoBackground.style.display = 'none';
-                imageBackground.style.display = 'block';
-            } else { // Desktop
-                videoBackground.style.display = 'block';
-                imageBackground.style.display = 'none';
-            }
-        }
-
-        window.addEventListener('resize', toggleBackground);
-        window.addEventListener('load', toggleBackground);
     </script>
 </body>
 </html>
