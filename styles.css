@@ -5,8 +5,8 @@
 }
 
 @font-face {
-    font-family: 'TerorHantu';
-    src: url('fonts/TerorHantuDemoRegular.ttf') format('truetype');
+    font-family: '._LEDLIGHT';
+    src: url('fonts/._LEDLIGHT.otf') format('opentype');
 }
 
 body {
@@ -41,7 +41,7 @@ body {
     font-size: 1.5em;
     font-weight: bold;
     margin-right: 50px;
-    font-family: 'TerorHantu', sans-serif;
+    font-family: '._LEDLIGHT', sans-serif;
 }
 
 .nav-links {
