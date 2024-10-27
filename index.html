@@ -57,25 +57,32 @@
             <h2>MADSLAB</h2>
             <a href="https://on.soundcloud.com/ZSX4uhzCM7j8dxxZ9" class="button-link">SOUNDCLOUD</a>
         </div>
+
+        <!-- Added ART Button under MADSLAB -->
+        <a href="#" onclick="showSection('art')" class="button-link">ART</a>
     </div>
 
     <!-- New ART Section -->
     <div id="art" class="section" style="display: none;">
         <h1>Art Gallery</h1>
         <div class="grid-container">
-            <div class="grid-item" onclick="window.open('https://link-to-video1.com', '_blank')">
-                <video src="path/to/video1.mp4" onmouseover="this.style.display='block'; this.play();" onmouseout="this.pause(); this.currentTime = 0; this.style.display='none';"></video>
+            <div class="grid-item">
+                <video src="path/to/video1.mp4" muted loop></video>
+                <a href="https://link-to-video1.com" class="video-link"></a>
             </div>
-            <div class="grid-item" onclick="window.open('https://link-to-video2.com', '_blank')">
-                <video src="path/to/video2.mp4" onmouseover="this.style.display='block'; this.play();" onmouseout="this.pause(); this.currentTime = 0; this.style.display='none';"></video>
+            <div class="grid-item">
+                <video src="path/to/video2.mp4" muted loop></video>
+                <a href="https://link-to-video2.com" class="video-link"></a>
             </div>
-            <div class="grid-item" onclick="window.open('https://link-to-video3.com', '_blank')">
-                <video src="path/to/video3.mp4" onmouseover="this.style.display='block'; this.play();" onmouseout="this.pause(); this.currentTime = 0; this.style.display='none';"></video>
+            <div class="grid-item">
+                <video src="path/to/video3.mp4" muted loop></video>
+                <a href="https://link-to-video3.com" class="video-link"></a>
             </div>
-            <div class="grid-item" onclick="window.open('https://link-to-video4.com', '_blank')">
-                <video src="path/to/video4.mp4" onmouseover="this.style.display='block'; this.play();" onmouseout="this.pause(); this.currentTime = 0; this.style.display='none';"></video>
+            <div class="grid-item">
+                <video src="path/to/video4.mp4" muted loop></video>
+                <a href="https://link-to-video4.com" class="video-link"></a>
             </div>
-            <!-- Add more squares as needed -->
+            <!-- Repeat for more squares as necessary -->
         </div>
     </div>
 
