@@ -162,6 +162,7 @@ h1, h2 {
 .grid-item {
     position: relative;
     overflow: hidden;
+    cursor: pointer; /* Change cursor to indicate clickable */
 }
 
 .grid-item video {
