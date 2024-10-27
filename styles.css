@@ -79,7 +79,6 @@ body {
     right: 0;
 }
 
-/* Video and Image Backgrounds */
 #video-background,
 #background-image {
     position: fixed;
@@ -90,20 +89,6 @@ body {
     object-fit: cover;
     z-index: -1;
     filter: brightness(0.4);
-}
-
-#background-image {
-    display: none; /* Initially hidden to show video on desktop */
-}
-
-/* Mobile Specific Styles */
-@media (max-width: 768px) {
-    #video-background {
-        display: none;
-    }
-    #background-image {
-        display: block;
-    }
 }
 
 .section {
@@ -138,12 +123,12 @@ h1, h2 {
     border-radius: 5px;
     display: inline-block;
     margin-top: 15px;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 
 .button-link:hover {
     background: #50C878;
-    color: #FFFFFF;
+    color: #1A1A1A;
 }
 
 /* Grid Styles for ART Section */
@@ -151,25 +136,23 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    padding: 10px;
+    padding: 20px;
 }
 
 .grid-item {
     position: relative;
+    overflow: hidden;
     cursor: pointer;
 }
 
 .grid-item video {
     width: 100%;
     height: auto;
-    border-radius: 8px;
 }
 
 .copyright {
     position: fixed;
     bottom: 10px;
-    text-align: center;
-    width: 100%;
-    color: #FFFFFF;
     font-size: 0.8em;
+    color: #FFFFFF;
 }
