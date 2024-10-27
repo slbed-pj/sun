@@ -23,13 +23,9 @@ function toggleBackground() {
 window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', toggleBackground);
 
-// Video hover functionality
-document.querySelectorAll('.grid-item video').forEach(video => {
-    video.addEventListener('mouseover', () => {
-        video.play();
-    });
-    video.addEventListener('mouseout', () => {
-        video.pause();
-        video.currentTime = 0;
-    });
+// Play video on hover in ART section
+document.querySelectorAll('.grid-item').forEach(item => {
+    const video = item.querySelector('video');
+    item.addEventListener('mouseenter', () => video.play());
+    item.addEventListener('mouseleave', () => video.pause());
 });
