@@ -29,3 +29,4 @@ document.querySelectorAll('.grid-item').forEach(item => {
     item.addEventListener('mouseenter', () => video.play());
     item.addEventListener('mouseleave', () => video.pause());
 });
+ 
