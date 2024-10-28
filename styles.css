@@ -139,26 +139,42 @@ h1, h2 {
     z-index: 1;
 }
 
-/* Adjusting ART Section Grid Layout */
+/* ART Section Grid Layout */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px;
-    height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
+    height: calc(100vh - 200px); /* Adjust height for spacing */
 }
 
-/* Place each video in a specific corner */
-.grid-item:nth-child(1) { grid-area: 1 / 1; } /* Top-left */
-.grid-item:nth-child(2) { grid-area: 1 / 3; } /* Top-right */
-.grid-item:nth-child(3) { grid-area: 3 / 1; } /* Bottom-left */
-.grid-item:nth-child(4) { grid-area: 3 / 3; } /* Bottom-right */
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.grid-item:hover video {
+    transform: scale(1.05);
+}
+
+/* Positioning Videos in Corners */
+.grid-item:nth-child(1) { grid-area: 1 / 1; }
+.grid-item:nth-child(2) { grid-area: 1 / 2; }
+.grid-item:nth-child(3) { grid-area: 2 / 1; }
+.grid-item:nth-child(4) { grid-area: 2 / 2; }
 
 /* Center Text Box */
 .center-text {
-    grid-area: 2 / 2;
+    grid-area: 1 / 1 / span 2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,10 +187,16 @@ h1, h2 {
     border-radius: 10px;
 }
 
-.video-title {
-    color: #FFFFFF;
-    text-align: center;
-    margin-top: 5px;
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .center-text {
+        font-size: 1.5em;
+    }
 }
 
 /* Copyright Bar */
