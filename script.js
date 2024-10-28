@@ -7,6 +7,9 @@ function showSection(sectionId) {
     
     // Update the URL hash
     window.location.hash = sectionId;
+
+    // Adjust video background visibility
+    toggleBackground();
 }
 
 // Show video on desktop, image on mobile
@@ -14,11 +17,16 @@ function toggleBackground() {
     const videoBackground = document.getElementById('video-background');
     const imageBackground = document.getElementById('background-image');
 
+    const artSection = document.getElementById('ART');
     if (window.innerWidth <= 768) { // Mobile screen
         videoBackground.style.display = 'none';
         imageBackground.style.display = 'block';
     } else { // Desktop
-        videoBackground.style.display = 'block';
+        if (artSection.style.display === 'block') {
+            videoBackground.style.display = 'none'; // Hide video for ART section
+        } else {
+            videoBackground.style.display = 'block'; // Show video for other sections
+        }
         imageBackground.style.display = 'none';
     }
 }
