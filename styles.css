@@ -123,12 +123,12 @@ h1, h2 {
     border-radius: 5px;
     display: inline-block;
     margin-top: 15px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
 }
 
 .button-link:hover {
-    background-color: #50C878;
-    color: #FFFFFF;
+    background: #50C878;
+    color: #1A1A1A;
 }
 
 /* ART Section Styles */
