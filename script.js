@@ -1,65 +1,75 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to show different sections and toggle background based on section
-    function showSection(section) {
-        const sections = document.querySelectorAll(".section");
-        sections.forEach(sec => sec.style.display = "none");
+// Toggle Content Sections
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
+    
+    // Update the URL hash
+    window.location.hash = sectionId;
 
-        // Display only the selected section
-        const selectedSection = document.getElementById(section);
-        if (selectedSection) selectedSection.style.display = "block";
+    // Adjust video background visibility
+    toggleBackground(sectionId);
+}
 
-        // Change background for ART section
-        if (section === "ART") {
-            document.getElementById("video-background").style.display = "none";
-            document.getElementById("background-image").style.display = "none";
-            document.body.style.backgroundColor = "#C8D9ED";
+// Show video on desktop, image on mobile
+function toggleBackground(sectionId) {
+    const videoBackground = document.getElementById('video-background');
+    const imageBackground = document.getElementById('background-image');
+
+    if (window.innerWidth <= 768) { // Mobile screen
+        videoBackground.style.display = 'none';
+        imageBackground.style.display = 'block';
+    } else { // Desktop
+        if (sectionId === 'ART') {
+            videoBackground.style.display = 'none'; // Hide video for ART section
+            document.body.style.backgroundColor = '#C8D9ED'; // Set ART background color
         } else {
-            document.getElementById("video-background").style.display = "block";
-            document.getElementById("background-image").style.display = "block";
-            document.body.style.backgroundColor = "#1A1A1A";
+            videoBackground.style.display = 'block'; // Show video for other sections
+            document.body.style.backgroundColor = ''; // Reset background color for other sections
         }
+        imageBackground.style.display = 'none';
     }
+}
 
-    // Event listeners for navigation links
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            const targetSection = this.getAttribute("href").substring(1);
-            showSection(targetSection);
-        });
-    });
+window.addEventListener('resize', () => toggleBackground(window.location.hash.substring(1) || 'home'));
+window.addEventListener('load', () => {
+    const hash = window.location.hash.substring(1); // Remove the '#' character
+    showSection(hash || 'home'); // Show the appropriate section
+});
 
-    // Add event listeners for video hover/click functionality in ART section
-    const videoItems = document.querySelectorAll(".grid-item");
-    videoItems.forEach(item => {
-        const video = item.querySelector("video");
-        const link = item.getAttribute("data-link");
+// Initialize video elements and add interactivity
+document.querySelectorAll('.grid-item').forEach(item => {
+    const video = item.querySelector('video');
+    const videoSource = item.dataset.video;
+    const link = item.dataset.link;
 
-        // Autoplay on hover for desktop
-        item.addEventListener("mouseenter", () => {
-            video.src = item.getAttribute("data-video");
+    // Set video source
+    video.src = videoSource;
+
+    // Desktop interaction: play on hover
+    item.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768) { // Desktop
             video.play();
-        });
-        item.addEventListener("mouseleave", () => {
-            video.pause();
-            video.currentTime = 0; // Reset to beginning on mouse leave
-        });
-
-        // Autoplay on click and navigate on second click for mobile
-        let clickCount = 0;
-        item.addEventListener("click", () => {
-            clickCount++;
-            video.src = item.getAttribute("data-video");
-
-            if (clickCount === 1) {
-                video.play();
-            } else if (clickCount === 2) {
-                window.location.href = link;
-                clickCount = 0; // Reset click count after navigation
-            }
-        });
+        }
     });
 
-    // Set the default section to display
-    showSection("home");
+    item.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 768) { // Desktop
+            video.pause();
+        }
+    });
+
+    // Mobile interaction: click to play and then navigate
+    item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) { // Mobile
+            if (video.paused) {
+                video.play(); // Play video on first click
+            } else {
+                window.location.href = link; // Navigate on second click
+            }
+        } else {
+            window.location.href = link; // For desktop, navigate on click
+        }
+    });
 });
