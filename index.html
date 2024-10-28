@@ -22,12 +22,12 @@
         <source src="images/outmydome.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <img id="background-image" src="images/outmydome.png" alt="Static Background" style="display: none;">
+    <img id="background-image" src="images/outmydome.mp4" alt="Static Background" style="display: none;"> <!-- Corrected image source -->
 
     <!-- Main Content Sections -->
     <div id="home" class="section">
         <h1>SAN·KIN·CHU</h1>
-        <a href="https://posh.vip/e/saturday-night-at-austins" class="button-link">New Show At Austins Coffee (free entry)</a>
+        <a href="https://posh.vip/e/saturday-night-at-austins" class="button-link">New Show At Austins Coffee(free entry)</a>
     </div>
 
     <div id="contact" class="section" style="display: none;">
@@ -56,34 +56,29 @@
             <h2>MADSLAB</h2>
             <a href="https://on.soundcloud.com/ZSX4uhzCM7j8dxxZ9" class="button-link">SOUNDCLOUD</a>
             <br>
-            <a href="#ART" onclick="showSection('ART')" class="button-link">ART</a>
+            <a href="#ART" onclick="showSection('ART')" class="button-link">ART</a> <!-- Updated ART button -->
         </div>
     </div>
 
     <!-- ART Section -->
     <div id="ART" class="section" style="display: none;">
         <div class="grid-container">
-            <div class="grid-item top-left" data-video="videos/OutmydoME2.mov" data-link="https://youtu.be/q0-GGrMTB44?si=pbH2KWkXzeCHYuqk">
+            <div class="grid-item" data-video="videos/OutmydoME2.mov" data-link="https://youtu.be/q0-GGrMTB44?si=pbH2KWkXzeCHYuqk">
                 <video muted></video>
                 <div class="video-title">Sankinchu - OutmydoME2</div>
             </div>
-            <div class="grid-item top-right" data-video="path/to/video2.mp4" data-link="https://example.com/video2">
+            <div class="grid-item" data-video="path/to/video2.mp4" data-link="https://example.com/video2">
                 <video muted></video>
                 <div class="video-title">NEW VIDEO SOON</div>
             </div>
-            <div class="grid-item bottom-left" data-video="path/to/video3.mp4" data-link="https://example.com/video3">
+            <div class="grid-item" data-video="path/to/video3.mp4" data-link="https://example.com/video3">
                 <video muted></video>
                 <div class="video-title">NEW VIDEO SOON</div>
             </div>
-            <div class="grid-item bottom-right" data-video="videos/Dead2me.mp4" data-link="https://youtu.be/QZImpPJkOKM?si=C1ZnArJx60wGrb-D">
+            <div class="grid-item" data-video="videos/Dead2me.mp4" data-link="https://youtu.be/QZImpPJkOKM?si=C1ZnArJx60wGrb-D">
                 <video muted></video>
                 <div class="video-title">Witness - Dead2me ft.Kaise</div>
             </div>
-        </div>
-        
-        <!-- Centered Resizable Text Box -->
-        <div class="center-text-box">
-            <p>Enter your text here</p>
         </div>
     </div>
 
