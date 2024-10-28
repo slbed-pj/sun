@@ -9,37 +9,33 @@ function showSection(sectionId) {
     window.location.hash = sectionId;
 
     // Adjust video background visibility
-    toggleBackground();
+    toggleBackground(sectionId);
 }
 
 // Show video on desktop, image on mobile
-function toggleBackground() {
+function toggleBackground(sectionId) {
     const videoBackground = document.getElementById('video-background');
     const imageBackground = document.getElementById('background-image');
 
-    const artSection = document.getElementById('ART');
     if (window.innerWidth <= 768) { // Mobile screen
         videoBackground.style.display = 'none';
         imageBackground.style.display = 'block';
     } else { // Desktop
-        if (artSection.style.display === 'block') {
+        if (sectionId === 'ART') {
             videoBackground.style.display = 'none'; // Hide video for ART section
+            document.body.style.backgroundColor = '#C8D9ED'; // Set ART background color
         } else {
             videoBackground.style.display = 'block'; // Show video for other sections
+            document.body.style.backgroundColor = ''; // Reset background color for other sections
         }
         imageBackground.style.display = 'none';
     }
 }
 
-window.addEventListener('resize', toggleBackground);
+window.addEventListener('resize', () => toggleBackground(window.location.hash.substring(1) || 'home'));
 window.addEventListener('load', () => {
-    toggleBackground();
     const hash = window.location.hash.substring(1); // Remove the '#' character
-    if (hash) {
-        showSection(hash); // Show the section corresponding to the hash
-    } else {
-        showSection('home'); // Default to home section
-    }
+    showSection(hash || 'home'); // Show the appropriate section
 });
 
 // Initialize video elements and add interactivity
