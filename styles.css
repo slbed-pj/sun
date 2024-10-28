@@ -144,7 +144,7 @@ h1, h2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 20px; /* Increased gap between videos */
+    gap: 40px; /* Increased gap between videos */
     margin: 20px 0;
     height: 400px; /* Set a specific height for the grid */
 }
