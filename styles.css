@@ -10,188 +10,7 @@
 }
 
 body {
-    font-family: 'App/* Font Import and Global Styles */
-@font-face {
-    font-family: 'Apple Garamond';
-    src: url('fonts/AppleGaramond-LightItalic.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: '._LEDLIGHT';
-    src: url('fonts/._LEDLIGHT.otf') format('opentype');
-}
-
-body {
     font-family: 'Apple Garamond', serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #FFFFFF;
-    background-color: #1A1A1A; /* Default background color for non-ART sections */
-    overflow: hidden;
-    min-height: 100vh;
-}
-
-/* Top Navigation Bar */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 15px 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    z-index: 100;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    justify-content: center;
-}
-
-.header-title {
-    color: #FF6347;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-right: 50px;
-    font-family: '._LEDLIGHT', sans-serif;
-}
-
-.nav-links {
-    display: flex;
-    justify-content: center;
-}
-
-.header a {
-    color: #FFFFFF;
-    text-decoration: none;
-    margin: 0 15px;
-    padding: 10px;
-    transition: color 0.3s;
-    font-size: 1.1em;
-    position: relative;
-}
-
-.header a:hover {
-    color: #4CAF50;
-}
-
-.header a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    right: 50%;
-    bottom: -3px;
-    height: 2px;
-    background: #4CAF50;
-    transition: left 0.3s, right 0.3s;
-}
-
-.header a:hover::after {
-    left: 0;
-    right: 0;
-}
-
-#video-background,
-#background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.4);
-}
-
-/* Section Styling */
-.section {
-    margin-top: 100px;
-    padding: 20px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-    max-width: 800px;
-    width: 90%;
-    color: #F5F5F5;
-    transition: transform 0.3s;
-}
-
-.section:hover {
-    transform: scale(1.02);
-}
-
-h1, h2 {
-    color: #FF6347;
-    margin: 10px 0;
-    font-weight: bold;
-}
-
-.button-link {
-    color: #50C878;
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: 8px 16px;
-    border: 2px solid #50C878;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 15px;
-    transition: background 0.3s, color 0.3s, transform 0.3s;
-}
-
-.button-link:hover {
-    background: #50C878;
-    color: #1A1A1A;
-}
-
-/* ART Section Background */
-#ART {
-    background-color: #C8D9ED; /* Background color specifically for ART section */
-    color: #000000; /* Adjust text color for readability */
-}
-
-/* Grid Layout for ART Section */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin: 20px 0;
-}
-
-.grid-item {
-    position: relative;
-    overflow: hidden;
-}
-
-.grid-item video {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.grid-item:hover video {
-    transform: scale(1.05);
-}
-
-.video-title {
-    color: #FFFFFF;
-    text-align: center;
-    margin-top: 5px;
-}
-
-/* Copyright Bar */
-.copyright {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #FFFFFF;
-    font-size: 0.9em;
-    z-index: 100;
-}le Garamond', serif;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -312,73 +131,52 @@ h1, h2 {
     color: #1A1A1A;
 }
 
-/* ART Section Styling */
+/* ART Section Styles */
 #ART {
-    background-color: #C8D9ED; /* ART section background */
-    color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: 100vh;
-    font-family: '._LEDLIGHT', sans-serif;
+    background-color: #000000; /* Main background color for ART section */
+    padding: 20px; /* Optional padding */
+    position: relative; /* To keep it above the video background */
+    z-index: 1; /* Ensure it appears above the video background */
 }
 
-/* Positioning videos in each corner */
 .grid-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .grid-item {
-    position: absolute;
-    width: 30%;
-    height: 30%;
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .grid-item video {
     width: 100%;
     height: auto;
+    object-fit: cover;
+    transition: transform 0.3s;
 }
 
-.grid-item.top-left {
-    top: 10px;
-    left: 10px;
+.grid-item:hover video {
+    transform: scale(1.05);
 }
 
-.grid-item.top-right {
-    top: 10px;
-    right: 10px;
-}
-
-.grid-item.bottom-left {
-    bottom: 10px;
-    left: 10px;
-}
-
-.grid-item.bottom-right {
-    bottom: 10px;
-    right: 10px;
-}
-
-/* Centered Resizable Text Box */
-.center-text-box {
-    position: absolute;
-    width: 40%;
-    height: auto;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+.video-title {
     color: #FFFFFF;
-    font-size: 1.2em;
     text-align: center;
-    font-family: '._LEDLIGHT', sans-serif;
+    margin-top: 5px;
+}
+
+/* Copyright Bar */
+.copyright {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFFFFF;
+    font-size: 0.9em;
+    z-index: 100;
 }
