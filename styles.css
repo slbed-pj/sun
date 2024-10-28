@@ -17,7 +17,7 @@ body {
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-    background-color: #1A1A1A;
+    background-color: #1A1A1A; /* Default background color for non-ART sections */
     overflow: hidden;
     min-height: 100vh;
 }
@@ -91,6 +91,7 @@ body {
     filter: brightness(0.4);
 }
 
+/* Section Styling */
 .section {
     margin-top: 100px;
     padding: 20px;
@@ -131,14 +132,13 @@ h1, h2 {
     color: #1A1A1A;
 }
 
-/* ART Section Styles */
+/* ART Section Background */
 #ART {
-    background-color: #000000; /* Main background color for ART section */
-    padding: 20px; /* Optional padding */
-    position: relative; /* To keep it above the video background */
-    z-index: 1; /* Ensure it appears above the video background */
+    background-color: #C8D9ED; /* Background color specifically for ART section */
+    color: #000000; /* Adjust text color for readability */
 }
 
+/* Grid Layout for ART Section */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
