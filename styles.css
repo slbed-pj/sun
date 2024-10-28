@@ -132,6 +132,10 @@ h1, h2 {
 }
 
 /* ART Section Styles */
+#ART {
+    background-color: #F47E6D; /* Solid background color for ART section */
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -173,4 +177,3 @@ h1, h2 {
     font-size: 0.9em;
     z-index: 100;
 }
- 
