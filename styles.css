@@ -146,9 +146,10 @@ h1, h2 {
     grid-template-rows: repeat(2, 1fr);
     gap: 20px; /* Increased gap between videos */
     margin: 20px 0;
-    height: 400px; /* Ensure there's enough height to center text */
+    height: 400px; /* Set a specific height for the grid */
 }
 
+/* Grid Item Style */
 .grid-item {
     position: relative;
     overflow: hidden;
@@ -174,7 +175,8 @@ h1, h2 {
 
 /* Center Text Box */
 .center-text {
-    grid-area: 1 / 1 / span 2; /* Center the text in the grid */
+    grid-column: 1 / 3; /* Center the text in the grid */
+    grid-row: 1 / 3; /* Cover two rows */
     display: flex;
     align-items: center;
     justify-content: center;
