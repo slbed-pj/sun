@@ -134,7 +134,9 @@ h1, h2 {
 /* ART Section Styles */
 #ART {
     background-color: #F47E6D; /* Main background color for ART section */
-    padding: 20px; /* Padding to match other sections */
+    padding: 20px; /* Optional padding */
+    position: relative; /* To keep it above the video background */
+    z-index: 1; /* Ensure it appears above the video background */
 }
 
 .grid-container {
