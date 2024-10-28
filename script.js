@@ -4,6 +4,9 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     document.getElementById(sectionId).style.display = 'block';
+    
+    // Update the URL hash
+    window.location.hash = sectionId;
 }
 
 // Show video on desktop, image on mobile
@@ -21,7 +24,15 @@ function toggleBackground() {
 }
 
 window.addEventListener('resize', toggleBackground);
-window.addEventListener('load', toggleBackground);
+window.addEventListener('load', () => {
+    toggleBackground();
+    const hash = window.location.hash.substring(1); // Remove the '#' character
+    if (hash) {
+        showSection(hash); // Show the section corresponding to the hash
+    } else {
+        showSection('home'); // Default to home section
+    }
+});
 
 // Initialize video elements and add interactivity
 document.querySelectorAll('.grid-item').forEach(item => {
