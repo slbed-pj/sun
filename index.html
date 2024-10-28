@@ -22,7 +22,7 @@
         <source src="images/outmydome.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <img id="background-image" src="images/outmydome.mp4" alt="Static Background" style="display: none;">
+    <img id="background-image" src="images/outmydome.png" alt="Static Background" style="display: none;">
 
     <!-- Main Content Sections -->
     <div id="home" class="section">
@@ -63,20 +63,20 @@
     <!-- ART Section -->
     <div id="ART" class="section" style="display: none;">
         <div class="grid-container">
-            <div class="grid-item" onclick="window.location.href='https://example.com/video1'">
-                <video src="path/to/video1.mp4" muted></video>
+            <div class="grid-item" data-video="path/to/video1.mp4" data-link="https://example.com/video1">
+                <video muted></video>
                 <div class="video-title">Video Title 1</div>
             </div>
-            <div class="grid-item" onclick="window.location.href='https://example.com/video2'">
-                <video src="path/to/video2.mp4" muted></video>
+            <div class="grid-item" data-video="path/to/video2.mp4" data-link="https://example.com/video2">
+                <video muted></video>
                 <div class="video-title">Video Title 2</div>
             </div>
-            <div class="grid-item" onclick="window.location.href='https://example.com/video3'">
-                <video src="path/to/video3.mp4" muted></video>
+            <div class="grid-item" data-video="path/to/video3.mp4" data-link="https://example.com/video3">
+                <video muted></video>
                 <div class="video-title">Video Title 3</div>
             </div>
-            <div class="grid-item" onclick="window.location.href='https://example.com/video4'">
-                <video src="path/to/video4.mp4" muted></video>
+            <div class="grid-item" data-video="path/to/video4.mp4" data-link="https://example.com/video4">
+                <video muted></video>
                 <div class="video-title">Video Title 4</div>
             </div>
         </div>
