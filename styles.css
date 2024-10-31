@@ -146,7 +146,6 @@ h1, h2 {
     grid-template-rows: repeat(2, 1fr);
     gap: 40px; /* Increased gap between videos */
     margin: 20px 0;
-    height: auto; /* Allow height to adjust based on content */
 }
 
 /* Grid Item Style */
@@ -158,13 +157,8 @@ h1, h2 {
 
 .grid-item video {
     width: 100%;
-    height: auto; /* Ensure the video takes up full width and height adjusts accordingly */
+    height: 100%; /* Ensure the video takes up full space */
     object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.grid-item:hover video {
-    transform: scale(1.05);
 }
 
 .video-title {
@@ -198,9 +192,6 @@ h1, h2 {
     }
     .center-text {
         font-size: 1.5em;
-    }
-    .grid-item {
-        width: 100%; /* Ensure grid items take full width */
     }
 }
 
