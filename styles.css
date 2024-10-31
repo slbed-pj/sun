@@ -130,7 +130,6 @@ h1, h2 {
 .button-link:hover {
     background: #50C878;
     color: #1A1A1A;
-    cursor: default; /* Change cursor on hover */
 }
 
 /* ART Section Styles */
