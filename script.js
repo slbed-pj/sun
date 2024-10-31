@@ -42,7 +42,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// Initialize video elements and add interactivity
+// Initialize video elements and add interactivity for mobile
 document.querySelectorAll('.grid-item').forEach(item => {
     const video = item.querySelector('video');
     const videoSource = item.dataset.video;
@@ -50,6 +50,9 @@ document.querySelectorAll('.grid-item').forEach(item => {
 
     // Set video source
     video.src = videoSource;
+    video.autoplay = true; // Autoplay videos on mobile
+    video.muted = true; // Mute videos for autoplay
+    video.load(); // Load the video
 
     // Desktop interaction: play on hover
     item.addEventListener('mouseenter', () => {
@@ -58,23 +61,8 @@ document.querySelectorAll('.grid-item').forEach(item => {
         }
     });
 
-    item.addEventListener('mouseleave', () => {
-        if (window.innerWidth > 768) { // Desktop
-            video.pause();
-        }
-    });
-
-    // Mobile interaction: click to play without fullscreen
-    item.addEventListener('click', (event) => {
-        if (window.innerWidth <= 768) { // Mobile
-            event.stopPropagation(); // Prevents event bubbling
-            if (video.paused) {
-                video.play(); // Play video on first click
-            } else {
-                video.pause(); // Pause video on second click
-            }
-        } else {
-            window.location.href = link; // For desktop, navigate on click
-        }
+    // Mobile interaction: click to navigate
+    item.addEventListener('click', () => {
+        window.location.href = link; // For both mobile and desktop, navigate on click
     });
 });
