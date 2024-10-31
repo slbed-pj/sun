@@ -51,7 +51,20 @@ document.querySelectorAll('.grid-item').forEach(item => {
     // Set video source
     video.src = videoSource;
 
-    // Set the video to display a single frame
+    // Desktop interaction: play on hover
+    item.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 768) { // Desktop
+            video.play();
+        }
+    });
+
+    item.addEventListener('mouseleave', () => {
+        if (window.innerWidth > 768) { // Desktop
+            video.pause();
+        }
+    });
+
+    // Set the video to display a single frame for mobile
     video.addEventListener('loadeddata', () => {
         if (window.innerWidth <= 768) {
             video.pause(); // Pause the video
