@@ -64,13 +64,14 @@ document.querySelectorAll('.grid-item').forEach(item => {
         }
     });
 
-    // Mobile interaction: click to play and then navigate
-    item.addEventListener('click', () => {
+    // Mobile interaction: click to play without fullscreen
+    item.addEventListener('click', (event) => {
         if (window.innerWidth <= 768) { // Mobile
+            event.stopPropagation(); // Prevents event bubbling
             if (video.paused) {
                 video.play(); // Play video on first click
             } else {
-                window.location.href = link; // Navigate on second click
+                video.pause(); // Pause video on second click
             }
         } else {
             window.location.href = link; // For desktop, navigate on click
