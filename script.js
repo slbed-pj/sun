@@ -1,21 +1,10 @@
-function setMobileBackgrounds() {
-    if (window.innerWidth <= 768) { // Mobile only
-        document.querySelectorAll('.grid-item').forEach(item => {
-            const stillImage = item.getAttribute('data-still');
-            if (stillImage) {
-                item.style.backgroundImage = `url(${stillImage})`;
-            }
-        });
-    }
-}
-
 // Toggle Content Sections
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
         section.style.display = 'none';
     });
     document.getElementById(sectionId).style.display = 'block';
-    
+
     // Update the URL hash
     window.location.hash = sectionId;
 
@@ -42,7 +31,21 @@ function toggleBackground() {
     }
 }
 
-// Call the function initially and on window resize
+// Set mobile backgrounds from video posters
+function setMobileBackgrounds() {
+    if (window.innerWidth <= 768) { // Mobile only
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const video = item.querySelector('video');
+            const poster = video.getAttribute('poster');
+
+            // Set poster image as background on mobile
+            if (poster) {
+                item.style.backgroundImage = `url(${poster})`;
+            }
+        });
+    }
+}
+
 window.addEventListener('load', () => {
     toggleBackground();
     setMobileBackgrounds();
@@ -53,6 +56,7 @@ window.addEventListener('load', () => {
         showSection('home'); // Default to home section
     }
 });
+
 window.addEventListener('resize', () => {
     toggleBackground();
     setMobileBackgrounds();
@@ -67,6 +71,9 @@ document.querySelectorAll('.grid-item').forEach(item => {
     // Set video source
     video.src = videoSource;
 
+    // Set the video poster attribute
+    video.setAttribute('poster', videoSource.replace('.mp4', '-poster.jpg')); // Adjust as necessary for your image naming
+
     // Desktop interaction: play on hover
     item.addEventListener('mouseenter', () => {
         if (window.innerWidth > 768) { // Desktop
@@ -80,7 +87,7 @@ document.querySelectorAll('.grid-item').forEach(item => {
         }
     });
 
-    // Set the video to display a single frame for mobile
+    // Pause the video on mobile
     video.addEventListener('loadeddata', () => {
         if (window.innerWidth <= 768) {
             video.pause(); // Pause the video
@@ -90,6 +97,8 @@ document.querySelectorAll('.grid-item').forEach(item => {
 
     // Mobile interaction: click to navigate
     item.addEventListener('click', () => {
-        window.location.href = link; // Navigate to the specific video
+        if (window.innerWidth <= 768) { // Mobile
+            window.location.href = link; // Navigate to the specific video
+        }
     });
 });
