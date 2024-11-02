@@ -4,7 +4,7 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     document.getElementById(sectionId).style.display = 'block';
-    
+
     // Update the URL hash
     window.location.hash = sectionId;
 
@@ -31,15 +31,35 @@ function toggleBackground() {
     }
 }
 
-window.addEventListener('resize', toggleBackground);
+// Set mobile backgrounds from video posters
+function setMobileBackgrounds() {
+    if (window.innerWidth <= 768) { // Mobile only
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const video = item.querySelector('video');
+            const poster = video.getAttribute('poster');
+
+            // Set poster image as background on mobile
+            if (poster) {
+                item.style.backgroundImage = `url(${poster})`;
+            }
+        });
+    }
+}
+
 window.addEventListener('load', () => {
     toggleBackground();
+    setMobileBackgrounds();
     const hash = window.location.hash.substring(1); // Remove the '#' character
     if (hash) {
         showSection(hash); // Show the section corresponding to the hash
     } else {
         showSection('home'); // Default to home section
     }
+});
+
+window.addEventListener('resize', () => {
+    toggleBackground();
+    setMobileBackgrounds();
 });
 
 // Initialize video elements and add interactivity
@@ -53,12 +73,6 @@ document.querySelectorAll('.grid-item').forEach(item => {
 
     // Set the video poster attribute
     video.setAttribute('poster', videoSource.replace('.mp4', '-poster.jpg')); // Adjust as necessary for your image naming
-
-    // Create an image element for mobile display
-    const img = document.createElement('img');
-    img.src = videoSource.replace('.mp4', '-poster.jpg'); // Adjust according to your file naming
-    img.alt = 'Video Thumbnail'; // Add alt text for accessibility
-    item.appendChild(img); // Append image to the grid item
 
     // Desktop interaction: play on hover
     item.addEventListener('mouseenter', () => {
