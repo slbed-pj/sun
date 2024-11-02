@@ -4,7 +4,7 @@ function showSection(sectionId) {
         section.style.display = 'none';
     });
     document.getElementById(sectionId).style.display = 'block';
-
+    
     // Update the URL hash
     window.location.hash = sectionId;
 
@@ -31,35 +31,15 @@ function toggleBackground() {
     }
 }
 
-// Set mobile backgrounds from video posters
-function setMobileBackgrounds() {
-    if (window.innerWidth <= 768) { // Mobile only
-        document.querySelectorAll('.grid-item').forEach(item => {
-            const video = item.querySelector('video');
-            const poster = video.getAttribute('poster');
-
-            // Set poster image as background on mobile
-            if (poster) {
-                item.style.backgroundImage = `url(${poster})`;
-            }
-        });
-    }
-}
-
+window.addEventListener('resize', toggleBackground);
 window.addEventListener('load', () => {
     toggleBackground();
-    setMobileBackgrounds();
     const hash = window.location.hash.substring(1); // Remove the '#' character
     if (hash) {
         showSection(hash); // Show the section corresponding to the hash
     } else {
         showSection('home'); // Default to home section
     }
-});
-
-window.addEventListener('resize', () => {
-    toggleBackground();
-    setMobileBackgrounds();
 });
 
 // Initialize video elements and add interactivity
@@ -70,9 +50,6 @@ document.querySelectorAll('.grid-item').forEach(item => {
 
     // Set video source
     video.src = videoSource;
-
-    // Set the video poster attribute
-    video.setAttribute('poster', videoSource.replace('.mp4', '-poster.jpg')); // Adjust as necessary for your image naming
 
     // Desktop interaction: play on hover
     item.addEventListener('mouseenter', () => {
@@ -87,7 +64,7 @@ document.querySelectorAll('.grid-item').forEach(item => {
         }
     });
 
-    // Pause the video on mobile
+    // Set the video to display a single frame for mobile
     video.addEventListener('loadeddata', () => {
         if (window.innerWidth <= 768) {
             video.pause(); // Pause the video
@@ -97,8 +74,6 @@ document.querySelectorAll('.grid-item').forEach(item => {
 
     // Mobile interaction: click to navigate
     item.addEventListener('click', () => {
-        if (window.innerWidth <= 768) { // Mobile
-            window.location.href = link; // Navigate to the specific video
-        }
+        window.location.href = link; // Navigate to the specific video
     });
 });
