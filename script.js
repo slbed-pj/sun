@@ -1,3 +1,14 @@
+function setMobileBackgrounds() {
+    if (window.innerWidth <= 768) { // Mobile only
+        document.querySelectorAll('.grid-item').forEach(item => {
+            const stillImage = item.getAttribute('data-still');
+            if (stillImage) {
+                item.style.backgroundImage = `url(${stillImage})`;
+            }
+        });
+    }
+}
+
 // Toggle Content Sections
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
@@ -31,15 +42,20 @@ function toggleBackground() {
     }
 }
 
-window.addEventListener('resize', toggleBackground);
+// Call the function initially and on window resize
 window.addEventListener('load', () => {
     toggleBackground();
+    setMobileBackgrounds();
     const hash = window.location.hash.substring(1); // Remove the '#' character
     if (hash) {
         showSection(hash); // Show the section corresponding to the hash
     } else {
         showSection('home'); // Default to home section
     }
+});
+window.addEventListener('resize', () => {
+    toggleBackground();
+    setMobileBackgrounds();
 });
 
 // Initialize video elements and add interactivity
