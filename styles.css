@@ -18,8 +18,7 @@ body {
     justify-content: center;
     color: #FFFFFF;
     background-color: #1A1A1A;
-    overflow-y: auto;
-    height: auto;
+    overflow: hidden;
     min-height: 100vh;
 }
 
@@ -138,9 +137,7 @@ h1, h2 {
     padding: 20px; /* Optional padding */
     position: relative; /* To keep it above the video background */
     z-index: 1; /* Ensure it appears above the video background */
-    overflow-y: auto; /* Ensure scrollable content on mobile */
-    height: auto;
-    min-height: 100vh; /* Ensure it takes up full viewport height */
+    overflow: auto; /* Allow scrolling on mobile */
 }
 
 /* ART Section Grid Layout */
@@ -181,10 +178,6 @@ h1, h2 {
 
     .grid-item video {
         display: none; /* Hide videos on mobile */
-    }
-
-    .grid-item[data-still] {
-        background-image: url(attr(data-still)); /* Use data attribute to load still image */
     }
 
     .video-title {
