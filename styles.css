@@ -133,18 +133,18 @@ h1, h2 {
 
 /* ART Section Styles */
 #ART {
-    background-color: #000000; /* Main background color for ART section */
-    padding: 20px; /* Optional padding */
-    position: relative; /* To keep it above the video background */
-    z-index: 1; /* Ensure it appears above the video background */
-    overflow: auto; /* Allow scrolling on mobile */
+    background-color: #000000;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    overflow: auto;
 }
 
 /* ART Section Grid Layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px; /* Increased gap between videos */
+    gap: 40px;
     margin: 20px 0;
 }
 
@@ -152,12 +152,12 @@ h1, h2 {
 .grid-item {
     position: relative;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.1); /* Optional background for better visibility */
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .grid-item video {
     width: 100%;
-    height: auto; /* Ensure the video takes up full width */
+    height: auto;
     object-fit: cover;
 }
 
@@ -170,20 +170,14 @@ h1, h2 {
     }
 
     .grid-item {
-        height: 200px; /* Set a specific height for mobile grid items */
+        height: 200px;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
 
     .grid-item video {
-        display: none; /* Hide videos on mobile */
-    }
-
-    .video-title {
-        color: #FFFFFF;
-        text-align: center;
-        margin-top: 5px;
+        display: none; /* Hide video on mobile */
     }
 }
 
