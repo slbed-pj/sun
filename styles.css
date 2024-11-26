@@ -33,7 +33,7 @@ body {
     object-fit: cover;
     z-index: -1;
     display: block;
-    filter: brightness(0.4);
+    filter: brightness(0.9);
 }
 
 /* Top Navigation Bar */
