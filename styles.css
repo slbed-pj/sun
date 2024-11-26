@@ -23,6 +23,19 @@ body {
     min-height: 100vh;
 }
 
+/* Background Image */
+#background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    display: block;
+    filter: brightness(0.4);
+}
+
 /* Top Navigation Bar */
 .header {
     position: fixed;
@@ -80,18 +93,7 @@ body {
     right: 0;
 }
 
-#video-background,
-#background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    filter: brightness(0.4);
-}
-
+/* Section Styling */
 .section {
     margin-top: 100px;
     padding: 20px;
@@ -115,6 +117,7 @@ h1, h2 {
     font-weight: bold;
 }
 
+/* Button Link Styling */
 .button-link {
     color: #50C878;
     text-decoration: none;
@@ -132,26 +135,26 @@ h1, h2 {
     color: #1A1A1A;
 }
 
-/* ART Section Styles */
+/* ART Section Styling */
 #ART {
     background-color: #000000; /* Main background color for ART section */
-    padding: 20px; /* Optional padding */
-    position: relative; /* To keep it above the video background */
-    z-index: 1; /* Ensure it appears above the video background */
+    padding: 20px;
+    position: relative;
+    z-index: 1;
     overflow-y: auto; /* Ensure scrollable content on mobile */
     height: auto;
-    min-height: 100vh; /* Ensure it takes up full viewport height */
+    min-height: 100vh;
 }
 
 /* ART Section Grid Layout */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px; /* Increased gap between videos */
+    gap: 40px; /* Gap between videos */
     margin: 20px 0;
 }
 
-/* Grid Item Style */
+/* Grid Item Styling */
 .grid-item {
     position: relative;
     overflow: hidden;
@@ -160,8 +163,26 @@ h1, h2 {
 
 .grid-item video {
     width: 100%;
-    height: auto; /* Ensure the video takes up full width */
+    height: auto;
     object-fit: cover;
+}
+
+/* Video Title */
+.video-title {
+    text-align: center;
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* Center Text in ART Section */
+.center-text {
+    text-align: center;
+    color: #FFFFFF;
+    font-family: '._LEDLIGHT', sans-serif;
+    font-size: 1.5em;
+    margin-top: 30px;
 }
 
 /* Mobile Adjustments */
@@ -173,13 +194,7 @@ h1, h2 {
     }
 
     .grid-item {
-        height: 200px; /* Set a specific height for mobile grid items */
-    }
-
-    .video-title {
-        color: #FFFFFF;
-        text-align: center;
-        margin-top: 5px;
+        height: 200px;
     }
 }
 
