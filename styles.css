@@ -210,3 +210,8 @@ h1, h2 {
     font-size: 0.9em;
     z-index: 100;
 }
+/* Non-clickable but copyable email */
+.static-email {
+    cursor: text;
+    user-select: text;
+}
